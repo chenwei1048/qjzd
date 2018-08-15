@@ -15,4 +15,8 @@ import org.springframework.stereotype.Service;
 public class BasInformationService {
     @Autowired
     private BasInformationMapper basInformationMapper;
+
+    public void list(){
+
+    }
 }
