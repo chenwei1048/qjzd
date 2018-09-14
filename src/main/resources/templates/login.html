@@ -30,7 +30,7 @@
        	<div class="row">
 	       	<label class="form-label col-md-4">请输入手机号码</label>
 	        <div class="col-md-5">
-	        	<input id="mobile" name = "mobile" class="form-control" type="text" placeholder="手机号码" required="true"  minlength="11" maxlength="11" />
+	        	<input id="username" name = "username" class="form-control" type="text" placeholder="手机号码" required="true"  minlength="11" maxlength="11" />
 	    	</div>
 	    	<div class="col-md-1">
 	    	</div>
@@ -77,14 +77,14 @@ function doLogin(){
 		url: "/login/do_login",
 	    type: "POST",
 	    data:{
-	    	mobile:$("#mobile").val(),
+            username:$("#username").val(),
 	    	password: password
 	    },
 	    success:function(data){
 	    	layer.closeAll();
-	    	if(data.code == 0){
+	    	if(data.code == 1){
 	    		layer.msg("成功");
-	    		window.location.href="/goods/to_list";
+	    		window.location.href="/home/index";
 	    	}else{
 	    		layer.msg(data.msg);
 	    	}
