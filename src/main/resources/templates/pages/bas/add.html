@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/wangEditor-3.1.1/release/wangEditor.css}"/>
+
+</head>
+<body>
+<form th:action="@{/admin/addUser}" method="post" onsubmit="modifyContent()">
+    <div>
+        <textarea rows="5" cols="35" name="usIntroduce" style="display:none;" id="introduce"></textarea>
+        <div id="editor">
+                    <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+        </div>
+    </div>
+</form>
+</body>
+<script type="text/javascript" th:src="@{/wangEditor-3.1.1/release/wangEditor.js}"></script>
+  <script type="text/javascript">
+//    var E = window.wangEditor
+//    var editor = new E('#editor')
+//    /* 处理上传图片的controller路径 */
+//    editor.customConfig.uploadImgServer = '/commodity/upload'
+//    /* 定义上传图片的默认名字 */
+//    editor.customConfig.uploadFileName = 'myFileName'
+//    // 或者 var editor = new E( document.getElementById('editor') )
+//    editor.create()
+//    //初始化全屏插件
+//    E.fullscreen.init('#editor');
+var editor = new wangEditor('#editor');
+editor.customConfig.uploadImgServer = '/commodity/uploadImg';
+editor.customConfig.uploadImgShowBase64 = true;
+editor.customConfig.uploadFileName = 'myFileName';
+editor.customConfig.showLinkImg = false;
+/*	editor.customConfig.debug=true;*/
+editor.customConfig.uploadImgHooks = {
+    success: function (xhr, editor, result) {
+
+    }
+}
+editor.create();
+</script>
+</html>
