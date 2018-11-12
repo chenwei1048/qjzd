@@ -39,10 +39,8 @@ public class ProductController {
         if(!CommonUtils.isNull(title)){
             param.put("title",title);
         }
-
         List<Product> list = productService.list(param,pageNum,pageSize);
         return Result.success(list);
-
     }
 
 

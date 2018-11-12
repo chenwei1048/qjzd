@@ -5,19 +5,25 @@
     <title>introduce</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/wangEditor-3.1.1/release/wangEditor.css}"/>
+    <link rel="icon"  th:href="@{/favicon.ico}" />
+    <link rel="stylesheet"  th:href="@{/assets/css/main.css}"  />
 
 </head>
 <body>
+<input th:value="${data}" type="hidden" id="context"/>
 <form th:action="@{/admin/addUser}" method="post" onsubmit="modifyContent()">
+    <input type="hidden" th:value="${type}" id="type" />
     <div>
-        <textarea rows="5" cols="35" name="usIntroduce" style="display:none;" id="introduce"></textarea>
-        <div id="editor">
-                    <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+        <!--<textarea rows="5" cols="35" name="usIntroduce" style="display:none;" id="introduce"></textarea>-->
+        <div id="editor"   >
         </div>
     </div>
-    <input type="submit">
+
+    <input type="button" onclick="save()" value="保存" class="layui-btn layui-btn-normal layui-btn-mini" />
 </form>
 </body>
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"  ></script>
+<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
 <script type="text/javascript" th:src="@{/wangEditor-3.1.1/release/wangEditor.js}"></script>
   <script type="text/javascript">
 //    var E = window.wangEditor
@@ -38,9 +44,34 @@ editor.customConfig.showLinkImg = false;
 /*	editor.customConfig.debug=true;*/
 editor.customConfig.uploadImgHooks = {
     success: function (xhr, editor, result) {
-
     }
 }
 editor.create();
+editor.txt.html($("#context").val());
+</script>
+<script>
+    function save(){
+        var type = $("#type").val();
+        var context = editor.txt.html();
+        $.ajax({
+            url: "/bas/update",
+            type: "POST",
+            data:{
+                type:type,
+                context: context
+            },
+            success:function(data){
+                layer.closeAll();
+                if(data.code == 1){
+                    layer.msg("成功");
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(){
+                layer.closeAll();
+            }
+        });
+    }
 </script>
 </html>

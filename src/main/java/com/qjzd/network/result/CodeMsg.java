@@ -7,6 +7,7 @@ public class CodeMsg {
 	
 	//通用的错误码
 	public static CodeMsg SUCCESS = new CodeMsg(1, "success");
+	public static CodeMsg NODATA = new CodeMsg(-1, "无数据");
 	public static CodeMsg SERVER_ERROR = new CodeMsg(500100, "服务端异常");
 	public static CodeMsg BIND_ERROR = new CodeMsg(500101, "参数校验异常：%s");
 	//登录模块 5002XX
@@ -17,6 +18,10 @@ public class CodeMsg {
 	public static CodeMsg MOBILE_ERROR = new CodeMsg(500213, "手机号格式错误");
 	public static CodeMsg USERNAME_NOT_EXIST = new CodeMsg(500214, "用户名不存在");
 	public static CodeMsg PASSWORD_ERROR = new CodeMsg(500215, "密码错误");
+
+	//基本信息模块
+	public static CodeMsg TYPE_ERROR = new CodeMsg(500216, "类型不能为空或不正确");
+	public static CodeMsg CONTEXT_ERROR = new CodeMsg(500216, "内容不能为空");
 	
 	//商品模块 5003XX
 	

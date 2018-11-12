@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+
+</head>
+<body>
+<div style="width: 864px;background-color: #fff;margin-left: 100px;margin-top: 50px">
+     <div th:if="${code==1}" th:utext="${data}">无数据，请编辑!</div>
+    <a class="layui-btn layui-btn-normal layui-btn-mini" th:href="'/bas/to_update?type='+${type}"   style="margin-top: 50px">编辑</a>
+</div>
+
+</body>
+
+</html>
