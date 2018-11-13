@@ -23,8 +23,8 @@ public class CodeMsg {
 	public static CodeMsg TYPE_ERROR = new CodeMsg(500216, "类型不能为空或不正确");
 	public static CodeMsg CONTEXT_ERROR = new CodeMsg(500216, "内容不能为空");
 	
-	//商品模块 5003XX
-	
+	//产品模块 5003XX
+	public static CodeMsg TYPENAME_ALREADY_EXISTED = new CodeMsg(500310, "名称已存在");
 	//订单模块 5004XX
 	
 	//秒杀模块 5005XX

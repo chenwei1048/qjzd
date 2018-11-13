@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>introduce</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" th:href="@{/wangEditor-3.1.1/release/wangEditor.css}"/>
+	<link rel="stylesheet" th:href="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.css}"/>
+	<link rel="icon"  th:href="@{/favicon.ico}" />
+	<link rel="stylesheet"  th:href="@{/assets/css/main.css}"  />
+
+</head>
+
+<body>
+
+<div class="x-body" id="app">
+
+	<div class="layui-row">
+		<form class="layui-form layui-col-md12 x-so">
+			<div class="layui-inline">
+				<div class="layui-input-inline">
+					<input class="layui-input" id="typeName" />
+				</div>
+				<button class="layui-btn layui-btn-sm" type="button" onclick="add()">添加</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="layui-form table-responsive">
+		<table class="layui-table">
+			<thead>
+				<th>ID</th>
+				<th>名称</th>
+				<th>操作</th>
+			</thead>
+			<tbody>
+			<tr th:each="pro,Stat : ${data}" th:id="${pro.id}">
+				<td th:text="${pro.id}"></td>
+				<td th:text="${pro.name}"></td>
+				<td class="td-manage">
+					<button class="layui-btn layui-btn-default layui-btn-xs"  th:onclick="|edit(${pro.id})|">编辑</button>
+					<button class="layui-btn layui-btn-danger layui-btn-xs" th:onclick="|remove(${pro.id})|">删除</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div v-if="items.length==0" class="text-center layui-bg-gray no-records">对不起，暂无记录.</div>
+	<!-- 分页组件 -->
+	<div id="pagination" class="layui-box"></div>
+
+</div>
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"  ></script>
+<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/vue/vue.js}"  ></script>
+<script type="text/javascript" th:src="@{/js/libs/main.js}"  ></script>
+<script type="text/javascript" th:src="@{/js/libs/utils.js}"  ></script>
+
+<script>
+	function add(){
+		var name =$("#typeName").val();
+		if(name==null||name==''){
+            layer.msg("名称不能为空");
+            return;
+        }
+        $.ajax({
+            url: "/product/type/add",
+            type: "POST",
+            data:{
+                name:name
+            },
+            success:function(data){
+                layer.closeAll();
+                if(data.code == 1){
+                    layer.msg("成功");
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(){
+                layer.closeAll();
+            }
+        });
+    }
+    
+    function remove(id) {
+        var index = top.layer.confirm('确认要删除吗？', function () {
+            top.layer.close(index);
+            //发异步删除数据
+            $.ajax({
+                url: "/product/type/del",
+                type: "POST",
+                data:{
+                    id: id
+                },
+                success:function(data){
+                    layer.closeAll();
+                    if(data.code == 1){
+                        layer.msg("成功");
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                },
+                error:function(){
+                    layer.closeAll();
+                }
+            });
+        });
+    }
+
+//    function edit(id) {
+//        layer.open({
+//            type: 1,
+//            closeBtn: false,
+//            shift: 7,
+//            shadeClose: true,
+//            content: "<div style='width:350px;'><div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入奖项名称</p><input id='awardName' class='form-control' type='text' name='awardName' /></div>" +
+//            "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入奖项描述</p><input id='awardDescription' class='form-control' type='text' name='awardDescription'  /></div>"+
+//            "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入获奖人数</p><input id='awardUserCount' class='form-control' type='number' name='awardUserCount'  /></div>"+
+//            "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入奖项类别</p><input id='awardKind' class='form-control' type='text' name='awardKind'  />" +
+//            "<button style='margin-top:5%;' type='button' class='btn btn-block btn-success btn-lg'  >提交</button></div>"
+//        });
+//    }
+</script>
+</body>
+
+</html>

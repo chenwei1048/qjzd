@@ -45,6 +45,8 @@ public class BasController {
         return "pages/bas/about";
     }
 
+
+
     @RequestMapping("/to_update")
     public String to_update(Long type,Model model){
         JSONObject param = new JSONObject();

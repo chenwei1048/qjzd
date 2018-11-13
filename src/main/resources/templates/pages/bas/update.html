@@ -5,19 +5,18 @@
     <title>introduce</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/wangEditor-3.1.1/release/wangEditor.css}"/>
+    <link rel="stylesheet" th:href="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.css}"/>
     <link rel="icon"  th:href="@{/favicon.ico}" />
     <link rel="stylesheet"  th:href="@{/assets/css/main.css}"  />
 
 </head>
 <body>
 <input th:value="${data}" type="hidden" id="context"/>
-<form th:action="@{/admin/addUser}" method="post" onsubmit="modifyContent()">
+<form  method="post" >
     <input type="hidden" th:value="${type}" id="type" />
-    <div>
         <!--<textarea rows="5" cols="35" name="usIntroduce" style="display:none;" id="introduce"></textarea>-->
-        <div id="editor"   >
+        <div id="editor" >
         </div>
-    </div>
 
     <input type="button" onclick="save()" value="保存" class="layui-btn layui-btn-normal layui-btn-mini" />
 </form>
@@ -25,6 +24,7 @@
 <script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"  ></script>
 <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
 <script type="text/javascript" th:src="@{/wangEditor-3.1.1/release/wangEditor.js}"></script>
+<script type="text/javascript" th:src="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.js}"></script>
   <script type="text/javascript">
 //    var E = window.wangEditor
 //    var editor = new E('#editor')
@@ -36,7 +36,8 @@
 //    editor.create()
 //    //初始化全屏插件
 //    E.fullscreen.init('#editor');
-var editor = new wangEditor('#editor');
+var E = window.wangEditor
+var editor = new E('#editor');
 editor.customConfig.uploadImgServer = '/commodity/uploadImg';
 editor.customConfig.uploadImgShowBase64 = true;
 editor.customConfig.uploadFileName = 'myFileName';
@@ -47,6 +48,7 @@ editor.customConfig.uploadImgHooks = {
     }
 }
 editor.create();
+E.fullscreen.init('#editor');
 editor.txt.html($("#context").val());
 </script>
 <script>
