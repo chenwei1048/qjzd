@@ -17,6 +17,8 @@ public class Constant {
 
     public final static Constant GYWM = new Constant(1,"关于我们");
 
+    public final static Constant QJZD = new Constant(1,"前景传动ID");
+
     public static Map<Long,String> type = new HashMap<>();
 
     static {

@@ -4,8 +4,6 @@
 <head>
 	<title>introduce</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="stylesheet" th:href="@{/wangEditor-3.1.1/release/wangEditor.css}"/>
-	<link rel="stylesheet" th:href="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.css}"/>
 	<link rel="icon"  th:href="@{/favicon.ico}" />
 	<link rel="stylesheet"  th:href="@{/assets/css/main.css}"  />
 
@@ -46,7 +44,7 @@
 		</table>
 	</div>
 	
-	<div v-if="items.length==0" class="text-center layui-bg-gray no-records">对不起，暂无记录.</div>
+	<div th:if="${data.size()==0}" class="text-center layui-bg-gray no-records">对不起，暂无记录.</div>
 	<!-- 分页组件 -->
 	<div id="pagination" class="layui-box"></div>
 
@@ -54,8 +52,8 @@
 <script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"  ></script>
 <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
 <script type="text/javascript" th:src="@{/js/libs/vue/vue.js}"  ></script>
-<script type="text/javascript" th:src="@{/js/libs/main.js}"  ></script>
-<script type="text/javascript" th:src="@{/js/libs/utils.js}"  ></script>
+<script type="text/javascript" th:src="@{/js/main.js}"  ></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"  ></script>
 
 <script>
 	function add(){
@@ -74,6 +72,7 @@
                 layer.closeAll();
                 if(data.code == 1){
                     layer.msg("成功");
+                    window.location.reload();
                 }else{
                     layer.msg(data.msg);
                 }
@@ -98,6 +97,7 @@
                     layer.closeAll();
                     if(data.code == 1){
                         layer.msg("成功");
+                        $("#"+id).remove();
                     }else{
                         layer.msg(data.msg);
                     }
@@ -109,19 +109,10 @@
         });
     }
 
-//    function edit(id) {
-//        layer.open({
-//            type: 1,
-//            closeBtn: false,
-//            shift: 7,
-//            shadeClose: true,
-//            content: "<div style='width:350px;'><div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入奖项名称</p><input id='awardName' class='form-control' type='text' name='awardName' /></div>" +
-//            "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入奖项描述</p><input id='awardDescription' class='form-control' type='text' name='awardDescription'  /></div>"+
-//            "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入获奖人数</p><input id='awardUserCount' class='form-control' type='number' name='awardUserCount'  /></div>"+
-//            "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入奖项类别</p><input id='awardKind' class='form-control' type='text' name='awardKind'  />" +
-//            "<button style='margin-top:5%;' type='button' class='btn btn-block btn-success btn-lg'  >提交</button></div>"
-//        });
-//    }
+    function edit(id) {
+        x_open_full('编辑用户','/product/type/edit?id='+id);
+
+    }
 </script>
 </body>
 

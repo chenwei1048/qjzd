@@ -1,5 +1,6 @@
 package com.qjzd.network.service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.qjzd.network.dao.ProductMapper;
@@ -30,18 +31,24 @@ public class ProductService {
     @Autowired
     private ProductTypeMapper productTypeMapper;
 
-    public List<Product> list(Map<String,Object> param, int pageNum, int pageSize) {
+    public List<Product> selectList(JSONObject param, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         ProductExample example = new ProductExample();
         ProductExample.Criteria criteria = example.createCriteria();
         if(param.containsKey("type")){
-            criteria.andTypeEqualTo(Long.parseLong(param.get("type").toString()));
+            criteria.andTypeEqualTo(param.getLong("type"));
         }
         if(param.containsKey("title")){
-            criteria.andTitleLike("%"+param.get("title").toString()+"%");
+            criteria.andTitleLike("%"+param.getString("title")+"%");
         }
         return productMapper.selectByExample(example);
     }
+
+    public int insert(Product product){
+        return productMapper.insert(product);
+    }
+
+
 
     public List<ProductType> selectTypes(JSONObject param){
         ProductTypeExample example = new ProductTypeExample();
@@ -52,11 +59,19 @@ public class ProductService {
         return productTypeMapper.selectByExample(example);
     }
 
+    public ProductType selectTypeById(Long id){
+        return productTypeMapper.selectByPrimaryKey(id);
+    }
+
     public int addType(ProductType productType){
         return productTypeMapper.insert(productType);
     }
 
     public int delType(long id){
         return productTypeMapper.deleteByPrimaryKey(id);
+    }
+
+    public int updateType(ProductType productType){
+        return productTypeMapper.updateByPrimaryKey(productType);
     }
 }

@@ -2,9 +2,11 @@ package com.qjzd.network.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjzd.network.domain.BasInformation;
+import com.qjzd.network.domain.BasOrganization;
 import com.qjzd.network.result.CodeMsg;
 import com.qjzd.network.result.Result;
 import com.qjzd.network.service.BasInformationService;
+import com.qjzd.network.service.BasOrganizationService;
 import com.qjzd.network.util.CommonUtils;
 import com.qjzd.network.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class BasController {
     @Autowired
     private BasInformationService basInformationService;
 
+    @Autowired
+    private BasOrganizationService organizationService;
+
     //关于我们
     @RequestMapping("/introduce")
     public String introduce(Model model){
@@ -44,6 +49,40 @@ public class BasController {
         model.addAttribute("type",Constant.GYWM.getCode());
         return "pages/bas/about";
     }
+
+    //联系我们
+    @RequestMapping("/contact")
+    public String contacts(Model model){
+        model.addAttribute("data",organizationService.selectById(new Long(Constant.QJZD.getCode())));
+        return "pages/bas/contacts";
+
+    }
+
+    //修改联系我们
+    @ResponseBody
+    @RequestMapping("/update_contact")
+    public Result update_contact(BasOrganization basOrganization){
+        if(CommonUtils.isNull(basOrganization)){
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+        if(CommonUtils.isNull(basOrganization.getTitle())){
+            return Result.error(CodeMsg.TITLE_ERROR);
+        }
+        if(CommonUtils.isNull(basOrganization.getContacts())){
+            return Result.error(CodeMsg.CONTACTS_ERROR);
+        }if(CommonUtils.isNull(basOrganization.getPhone())){
+            return Result.error(CodeMsg.PHONE_ERROR);
+        }
+        if(CommonUtils.isNull(basOrganization.getAddress())){
+            return Result.error(CodeMsg.ADDRESS_ERROR);
+        }
+
+        basOrganization.setId(new Long(Constant.QJZD.getCode()));
+        int res = organizationService.updateById(basOrganization);
+        return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
+
+    }
+
 
 
 

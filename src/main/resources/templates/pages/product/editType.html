@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+
+</head>
+
+<body>
+<div class="x-body" id="app">
+    <div class="layui-form-item">
+        <label for="typeName" class="layui-form-label">
+            <span class="text-color-red">*</span>
+            产品名称
+        </label>
+        <div class="layui-input-inline">
+            <input type="text" id="typeName" th:value="${data.name}" required="" lay-verify="required"
+                   autocomplete="off" class="layui-input"/>
+        </div>
+
+    </div>
+
+    <input type="hidden" id="typeId" th:value="${data.id}"/>
+
+    <label class="layui-form-label">
+    </label>
+    <button class="layui-btn" onclick="updataType()">保存</button>
+    <button class="layui-btn layui-btn-normal" type="button" onclick="closeck()">取消</button>
+</div>
+
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/vue/vue.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"></script>
+
+
+<script>
+    function updataType() {
+        var id = $("#typeId").val();
+        var name = $("#typeName").val();
+        if ((id == null || id == '') || (name == null || name == '')) {
+            layer.msg("参数为空，修改失败！");
+            return;
+        }
+        $.ajax({
+            url: "/product/type/update",
+            type: "POST",
+            data: {
+                id: id,
+                name: name
+            },
+            success: function (data) {
+                layer.closeAll();
+                if (data.code == 1) {
+                    layer.msg("成功");
+                    setTimeout(closeck,"2000");
+                } else {
+                    layer.msg(data.msg);
+                }
+            },
+            error: function () {
+                layer.closeAll();
+            }
+        });
+    }
+
+
+    function closeck() {
+        x_admin_close("reload");
+    }
+</script>
+</body>
+
+</html>

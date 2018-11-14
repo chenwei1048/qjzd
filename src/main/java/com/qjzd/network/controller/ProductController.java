@@ -35,19 +35,23 @@ public class ProductController {
 
     @ResponseBody
     @RequestMapping("/list")
-    public Result<List> list(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                                @RequestParam(value = "pageSize",defaultValue = "10")int pageSize, long type,String title){
-        Map<String,Object> param = new HashMap<>();
+    public Result<List> list(@RequestParam(value = "page",defaultValue = "1")int page,
+                                @RequestParam(value = "pagesize",defaultValue = "10")int pagesize, Long type,String title){
+        JSONObject param = new JSONObject();
         if(!CommonUtils.isNull(type)){
             param.put("type",type);
         }
         if(!CommonUtils.isNull(title)){
             param.put("title",title);
         }
-        List<Product> list = productService.list(param,pageNum,pageSize);
+        List<Product> list = productService.selectList(param,page,pagesize);
         return Result.success(list);
     }
 
+    @RequestMapping("/product_view")
+    public String product_view(){
+        return "/pages/product/productList";
+    }
 
 
     @RequestMapping("/type")
@@ -81,7 +85,7 @@ public class ProductController {
 
     @ResponseBody
     @RequestMapping("/type/del")
-    public Result add_type(long id){
+    public Result add_type(Long id){
         if(CommonUtils.isNull(id)){
             return Result.error(CodeMsg.BIND_ERROR);
         }
@@ -93,5 +97,35 @@ public class ProductController {
         }
     }
 
+    @RequestMapping("/type/edit")
+    public String edit_type(Long id,Model model)throws Exception{
+        if(CommonUtils.isNull(id)){
+            id= new Long("2");
+        }
+        ProductType productType = productService.selectTypeById(id);
+        if(CommonUtils.isNull(productType)){
+            throw new Exception("未查到此ID的产品类型");
+        }
+        model.addAttribute("data",productType);
+        return "/pages/product/editType";
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/type/update")
+    public Result update_type(Long id,String name){
+        if(CommonUtils.isNull(id)||CommonUtils.isNull(name)){
+            return Result.error(CodeMsg.BIND_ERROR);
+        }
+        ProductType productType = productService.selectTypeById(id);
+        if(CommonUtils.isNull(productType)){
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+        productType.setName(name);
+        int res = productService.updateType(productType);
+        return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
+
+    }
 
 }

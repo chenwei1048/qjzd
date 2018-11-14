@@ -22,9 +22,14 @@ public class CodeMsg {
 	//基本信息模块
 	public static CodeMsg TYPE_ERROR = new CodeMsg(500216, "类型不能为空或不正确");
 	public static CodeMsg CONTEXT_ERROR = new CodeMsg(500216, "内容不能为空");
+	public static CodeMsg TITLE_ERROR = new CodeMsg(500216, "名称不能为空");
+	public static CodeMsg CONTACTS_ERROR = new CodeMsg(500216, "联系人不能为空");
+	public static CodeMsg PHONE_ERROR = new CodeMsg(500216, "手机号不能为空");
+	public static CodeMsg ADDRESS_ERROR = new CodeMsg(500216, "地址不能为空");
 	
 	//产品模块 5003XX
 	public static CodeMsg TYPENAME_ALREADY_EXISTED = new CodeMsg(500310, "名称已存在");
+	public static CodeMsg PRODUCT_EXISTED_TYPE = new CodeMsg(500310, "存在此类型的产品，无法删除!");
 	//订单模块 5004XX
 	
 	//秒杀模块 5005XX
