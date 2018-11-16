@@ -41,14 +41,21 @@ public class ProductService {
         if(param.containsKey("title")){
             criteria.andTitleLike("%"+param.getString("title")+"%");
         }
+
         return productMapper.selectByExample(example);
+    }
+
+    public Product selectById(Long id){
+        return productMapper.selectByPrimaryKey(id);
     }
 
     public int insert(Product product){
         return productMapper.insert(product);
     }
 
-
+    public int update(Product product){
+        return productMapper.updateByPrimaryKey(product);
+    }
 
     public List<ProductType> selectTypes(JSONObject param){
         ProductTypeExample example = new ProductTypeExample();
@@ -73,5 +80,9 @@ public class ProductService {
 
     public int updateType(ProductType productType){
         return productTypeMapper.updateByPrimaryKey(productType);
+    }
+
+    public int delProduct(Long id){
+        return productMapper.deleteByPrimaryKey(id);
     }
 }

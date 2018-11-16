@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/wangEditor-3.1.1/release/wangEditor.css}"/>
+    <link rel="stylesheet" th:href="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.css}"/>
+    <link rel="icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+
+</head>
+
+<body>
+<div class="x-body" id="app">
+    <form class="layui-form">
+        <input type="hidden" th:value="${data.id}" id="proId"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品分类</label>
+            <div class="layui-input-block" style="width: 190px" id="typeFa" >
+                <select name="type" id="type"   >
+                    <option th:each="type,stat:${types}" th:value="${type.id}" th:text="${type.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="title" class="layui-form-label">
+                <span class="text-color-red">*</span>
+                产品名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="title" th:value="${data.title}" lay-verify="required" name="title"  class="layui-input"/>
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label for="title" class="layui-form-label">
+                <span class="text-color-red">*</span>
+                图片展示
+            </label>
+            <fieldset class="layui-elem-field">
+                <div class="layui-field-box">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="test-upload-single">选择图片</button>
+                        <div class="layui-upload-list">
+                            <img class="img-thumbnail" id="test-upload-single-img" style="width: 385px; height: 244px;"
+                                 src="http://ow93rpra1.bkt.clouddn.com/image-15054658162330.jpg"
+                                 data-src="http://ow93rpra1.bkt.clouddn.com/image-15054658162330.jpg"/>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+
+
+
+
+        <div class="layui-form-item">
+                <div id="editor"  >
+                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <!-- placeholder -->
+            </label>
+            <button class="layui-btn" lay-filter="update" lay-submit="">保存</button>
+
+            <button class="layui-btn layui-btn-normal"  onclick="exit()">取消</button>
+
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/uploader/JUpload.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"></script>
+<script type="text/javascript" th:src="@{/wangEditor-3.1.1/release/wangEditor.js}"></script>
+<script type="text/javascript" th:src="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.js}"></script>
+<script  th:inline="javascript">
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    editor.customConfig.uploadImgServer = '/commodity/uploadImg';
+    editor.customConfig.uploadImgShowBase64 = true;
+    editor.customConfig.uploadFileName = 'myFileName';
+    editor.customConfig.showLinkImg = false;
+    /*	editor.customConfig.debug=true;*/
+    editor.customConfig.uploadImgHooks = {
+        success: function (xhr, editor, result) {
+        }
+    };
+    editor.create();
+    E.fullscreen.init('#editor');
+    editor.txt.html([[${data.context}]]);
+
+    //<![CDATA[
+    var G = {
+    	editUrl: "/product/update"
+    };
+
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form;
+        //监听提交
+        form.on('submit(update)', function (data) {
+            var context = editor.txt.html();
+            $.ajax({
+                url: G.editUrl,
+                type: "POST",
+                data:{
+                    id:$("#proId").val(),
+                    type: $("#type").val(),
+                    title:$("#title").val(),
+                    context:context
+                },
+                success:function(data){
+                    layer.closeAll();
+                    if(data.code == 1){
+                        var handler = top.layer.alert("数据更新成功", {
+                            icon: 6
+                        }, function () {
+                            top.layer.close(handler);
+                            //关闭弹出层
+                            x_admin_close("render");
+                        });
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                },
+                error:function(){
+                    layer.closeAll();
+                }
+            });
+            return false;
+        });
+
+    });
+    
+    function exit() {
+        x_admin_close("render");
+    }
+
+    //]]>
+</script>
+<script>
+
+    layui.use(["layer"], function(){
+        var $ = layui.jquery;
+        $("#test-upload-single").JUpload({
+            url : '/commodity/uploadImg',
+            src : "myFileName",
+            success : function(res) {
+                alert(res);
+                //save image url here
+                layer.msg("文件上传成功.");
+                $("#test-upload-single-img").attr("src", url);
+            },
+            error: function (message) {
+
+            }
+        });
+
+
+        // 初始化图片预览插件
+        $("img").jpreview();
+    });
+
+</script>
+</body>
+
+</html>

@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="type" property="type" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
     <result column="context" property="context" jdbcType="VARCHAR" />
     <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, type, title, context, createTime
+    id, type, title, picture, context, createTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qjzd.network.domain.ProductExample" >
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.qjzd.network.domain.Product" >
     insert into product (id, type, title, 
-      context, createTime)
+      picture, context, createTime
+      )
     values (#{id,jdbcType=BIGINT}, #{type,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
-      #{context,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+      #{picture,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.qjzd.network.domain.Product" >
     insert into product
@@ -116,6 +119,9 @@
       </if>
       <if test="title != null" >
         title,
+      </if>
+      <if test="picture != null" >
+        picture,
       </if>
       <if test="context != null" >
         context,
@@ -133,6 +139,9 @@
       </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
       </if>
       <if test="context != null" >
         #{context,jdbcType=VARCHAR},
@@ -160,6 +169,9 @@
       <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
       </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
       <if test="record.context != null" >
         context = #{record.context,jdbcType=VARCHAR},
       </if>
@@ -176,6 +188,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       type = #{record.type,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
       context = #{record.context,jdbcType=VARCHAR},
       createTime = #{record.createtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -191,6 +204,9 @@
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
       <if test="context != null" >
         context = #{context,jdbcType=VARCHAR},
       </if>
@@ -204,6 +220,7 @@
     update product
     set type = #{type,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
       context = #{context,jdbcType=VARCHAR},
       createTime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

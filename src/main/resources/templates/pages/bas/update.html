@@ -26,17 +26,7 @@
 <script type="text/javascript" th:src="@{/wangEditor-3.1.1/release/wangEditor.js}"></script>
 <script type="text/javascript" th:src="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.js}"></script>
   <script type="text/javascript">
-//    var E = window.wangEditor
-//    var editor = new E('#editor')
-//    /* 处理上传图片的controller路径 */
-//    editor.customConfig.uploadImgServer = '/commodity/upload'
-//    /* 定义上传图片的默认名字 */
-//    editor.customConfig.uploadFileName = 'myFileName'
-//    // 或者 var editor = new E( document.getElementById('editor') )
-//    editor.create()
-//    //初始化全屏插件
-//    E.fullscreen.init('#editor');
-var E = window.wangEditor
+var E = window.wangEditor;
 var editor = new E('#editor');
 editor.customConfig.uploadImgServer = '/commodity/uploadImg';
 editor.customConfig.uploadImgShowBase64 = true;
@@ -46,7 +36,7 @@ editor.customConfig.showLinkImg = false;
 editor.customConfig.uploadImgHooks = {
     success: function (xhr, editor, result) {
     }
-}
+};
 editor.create();
 E.fullscreen.init('#editor');
 editor.txt.html($("#context").val());

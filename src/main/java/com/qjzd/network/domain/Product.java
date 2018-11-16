@@ -9,6 +9,8 @@ public class Product {
 
     private String title;
 
+    private String picture;
+
     private String context;
 
     private Date createtime;
@@ -35,6 +37,14 @@ public class Product {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 
     public String getContext() {

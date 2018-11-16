@@ -1,0 +1,209 @@
+/*
+ * 清除浮动
+ */
+body {
+  overflow-x: hidden;
+}
+.media {
+  overflow: hidden;
+  zoom: 1;
+  margin-top: 15px;
+  color: #333;
+}
+.media .media__body,
+.media .media__left,
+.media .media__right {
+  display: table-cell;
+  vertical-align: top;
+}
+.media__body {
+  overflow: hidden;
+  zoom: 1;
+  width: 10000px;
+}
+.media__left {
+  padding-right: 10px;
+}
+.media__right {
+  padding-left: 10px;
+}
+.media-object {
+  display: block;
+  border: 1px solid #eee;
+  padding: 15px;
+}
+.media-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.media-content {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.banner-wrap {
+  width: 1920px;
+  margin-left: -960px;
+  text-align: center;
+  position: relative;
+  left: 50%;
+  clear: both;
+  overflow: hidden;
+}
+.slide-wrap {
+  width: 1200px;
+  margin: 20px auto;
+}
+.slide-wrap .slide-banner .media {
+  width: 262px;
+  float: left;
+  margin-left: 100px;
+  padding-bottom: 24px;
+  background: url(../images/xyxiaoyiny.png) no-repeat center bottom;
+}
+.slide-wrap .slide-banner .media img {
+  display: block;
+  max-height: 98px;
+}
+.about-wrap {
+  height: 520px;
+  background: url(../images/sybg1.png) no-repeat center center;
+}
+.about-wrap .wrap {
+  overflow: hidden;
+  padding-top: 100px;
+}
+.about-wrap .about-content {
+  float: left;
+  color: #fff;
+  height: 328px;
+  width: 633px;
+  background: rgba(62, 149, 190, 0.5);
+  padding: 30px;
+}
+.about-wrap .about-content h3 {
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+.about-wrap .about-content p {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-height: 1.8;
+}
+.about-wrap .about-content a {
+  display: inline-block;
+  margin-top: 20px;
+  width: 139px;
+  height: 38px;
+  background-color: #ff874c;
+  text-align: center;
+  line-height: 38px;
+  color: #fff;
+  font-size: 16px;
+}
+.product-wrap {
+  margin-top: 30px;
+}
+.product-wrap h2 {
+  color: #1e50ae;
+  text-align: center;
+  font-size: 24px;
+  padding: 10px 0;
+}
+.product-wrap .tip {
+  color: #666;
+  position: relative;
+  width: 62px;
+  margin: 0 auto;
+}
+.product-wrap .tip:before {
+  width: 40px;
+  height: 1px;
+  position: absolute;
+  right: -40px;
+  top: 10px;
+  content: "";
+  display: block;
+  background-color: #666;
+}
+.product-wrap .tip:after {
+  width: 40px;
+  height: 1px;
+  position: absolute;
+  left: -42px;
+  top: 10px;
+  content: "";
+  display: block;
+  background-color: #666;
+}
+.product-wrap .btn-group {
+  overflow: hidden;
+  margin: 40px 0 30px 0;
+  padding-left: 150px;
+}
+.product-wrap .btn-group .btn {
+  float: left;
+  margin-left: 20px;
+  padding: 10px 25px;
+  background: #fff;
+  border: 1px solid #d2d2d2;
+  color: #666;
+  cursor: pointer;
+}
+.product-wrap .btn-group .btn a{
+  }
+.product-wrap .btn-group .btn.active {
+  background: #1e50ae;
+  color: #fff;
+}
+.product-wrap .product-list {
+  overflow: hidden;
+  margin-left: -22px;
+}
+.product-wrap .product-list li {
+  float: left;
+  width: 385px;
+  margin-left: 22px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.product-wrap .product-list  li .aitem{display:block;width:385px;height:244px; overflow:hidden}
+.product-wrap .product-list li img {
+  display: block;
+  width: 385px;
+}
+.product-wrap .product-list li span {
+  color: #666;
+  line-height: 36px;
+}
+.product-wrap .more {
+  display: block;
+  margin: 30px auto;
+  width: 202px;
+  height: 55px;
+  background-color: #1e50ae;
+  border-radius: 20px;
+  line-height: 55px;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+}

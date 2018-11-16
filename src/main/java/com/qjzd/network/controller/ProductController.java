@@ -1,6 +1,7 @@
 package com.qjzd.network.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.qjzd.network.domain.Product;
 import com.qjzd.network.domain.ProductType;
 import com.qjzd.network.result.CodeMsg;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +37,8 @@ public class ProductController {
 
     @ResponseBody
     @RequestMapping("/list")
-    public Result<List> list(@RequestParam(value = "page",defaultValue = "1")int page,
-                                @RequestParam(value = "pagesize",defaultValue = "10")int pagesize, Long type,String title){
+    public Result list(@RequestParam(value = "page",defaultValue = "1",required = false)int page,
+                                @RequestParam(value = "pagesize",defaultValue = "10",required = false)int pagesize, Long type,String title){
         JSONObject param = new JSONObject();
         if(!CommonUtils.isNull(type)){
             param.put("type",type);
@@ -45,7 +47,47 @@ public class ProductController {
             param.put("title",title);
         }
         List<Product> list = productService.selectList(param,page,pagesize);
-        return Result.success(list);
+        PageInfo pageInfo = new PageInfo(list);
+        return Result.success(pageInfo);
+    }
+
+    @RequestMapping("/edit")
+    public String edit(Long id,Model model) throws Exception{
+        model.addAttribute("data",productService.selectById(id));
+        model.addAttribute("types",productService.selectTypes(new JSONObject()));
+        return "/pages/product/product-edit";
+    }
+
+    @ResponseBody
+    @RequestMapping("/update")
+    public Result update(Product product){
+        if(CommonUtils.isNull(product)||CommonUtils.isNull(product.getId())){
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+        if(CommonUtils.isNull(product.getTitle())){
+            return Result.error(CodeMsg.TITLE_ERROR);
+        }
+        if(CommonUtils.isNull(product.getType())){
+            return Result.error(CodeMsg.TYPE_ERROR);
+        }
+        if(CommonUtils.isNull(product.getContext())){
+            return Result.error(CodeMsg.CONTEXT_ERROR);
+        }
+        product.setCreatetime(new Date());
+        int res = productService.update(product);
+        return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/del")
+    public Result product_del(Long id){
+        if(CommonUtils.isNull(id)){
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+        int res = productService.delProduct(id);
+        return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
+
     }
 
     @RequestMapping("/product_view")
