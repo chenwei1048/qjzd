@@ -1,11 +1,15 @@
 package com.qjzd.network.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class Product {
     private Long id;
 
     private Long type;
+
+    private String typeName;
 
     private String title;
 
@@ -29,6 +33,14 @@ public class Product {
 
     public void setType(Long type) {
         this.type = type;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     public String getTitle() {

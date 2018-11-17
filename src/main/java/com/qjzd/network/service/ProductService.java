@@ -57,6 +57,8 @@ public class ProductService {
         return productMapper.updateByPrimaryKey(product);
     }
 
+
+
     public List<ProductType> selectTypes(JSONObject param){
         ProductTypeExample example = new ProductTypeExample();
         ProductTypeExample.Criteria criteria = example.createCriteria();

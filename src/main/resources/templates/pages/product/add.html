@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/wangEditor-3.1.1/release/wangEditor.css}"/>
+    <link rel="stylesheet" th:href="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.css}"/>
+    <link rel="icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+
+</head>
+
+<body>
+<div class="x-body" id="app">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品分类</label>
+            <div class="layui-input-block" style="width: 190px" id="typeFa" >
+                <select name="type" id="type"   >
+                    <option th:each="type,stat:${types}" th:value="${type.id}" th:text="${type.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="title" class="layui-form-label">
+                <span class="text-color-red">*</span>
+                产品名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="title"  lay-verify="required" name="title"  class="layui-input"/>
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label for="title" class="layui-form-label">
+                <span class="text-color-red">*</span>
+                图片展示
+            </label>
+            <fieldset class="layui-elem-field">
+                <div class="layui-field-box">
+                    <div class="layui-upload">
+                        <input  type="file"  name="oneFile" id="oneFile"  lay-verify="required"  onchange="ajaxImg()"  />
+                        <div class="layui-upload-list">
+                            <img class="img-thumbnail" id="img1" src="" style="width: 385px; height: 244px;" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+
+
+
+        <div class="layui-form-item">
+                <div id="editor"  >
+                </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <!-- placeholder -->
+            </label>
+            <button class="layui-btn" lay-filter="update" lay-submit="">添加</button>
+
+            <button class="layui-btn layui-btn-normal"  onclick="exit()">取消</button>
+
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/ajaxfileupload.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"></script>
+<script type="text/javascript" th:src="@{/wangEditor-3.1.1/release/wangEditor.js}"></script>
+<script type="text/javascript" th:src="@{/wangEditor-3.1.1/wangEditor-fullscreen-plugin.js}"></script>
+<script  th:inline="javascript">
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    editor.customConfig.uploadImgServer = '/commodity/uploadImg';
+    editor.customConfig.uploadImgShowBase64 = true;
+    editor.customConfig.uploadFileName = 'myFileName';
+    editor.customConfig.showLinkImg = false;
+    /*	editor.customConfig.debug=true;*/
+    editor.customConfig.uploadImgHooks = {
+        success: function (xhr, editor, result) {
+        }
+    };
+    editor.create();
+    E.fullscreen.init('#editor');
+
+    //<![CDATA[
+    var G = {
+    	editUrl: "/product/insert"
+    };
+
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form;
+        //监听提交
+        form.on('submit(update)', function (data) {
+            var context = editor.txt.html();
+            $.ajax({
+                url: G.editUrl,
+                type: "POST",
+                data:{
+                    type: $("#type").val(),
+                    title:$("#title").val(),
+                    picture:$("#img1").attr("src"),
+                    context:context
+                },
+                success:function(data){
+                    layer.closeAll();
+                    if(data.code == 1){
+                        var handler = top.layer.alert("数据更新成功", {
+                            icon: 6
+                        }, function () {
+                            top.layer.close(handler);
+                            //关闭弹出层
+                            x_admin_close("render");
+                        });
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                },
+                error:function(){
+                    layer.closeAll();
+                }
+            });
+            return false;
+        });
+
+    });
+
+    function exit() {
+        x_admin_close("render");
+    }
+
+    //]]>
+</script>
+<script>
+
+    function ajaxImg() {
+        $.ajaxFileUpload
+        (
+            {
+                url: '/commodity/upload', //用于文件上传的服务器端请求地址
+                secureuri: false, //是否需要安全协议，一般设置为false
+                fileElementId: 'oneFile', //文件上传域的ID
+                dataType: 'json', //返回值类型 一般设置为json
+                success: function (res, status)  //服务器成功响应处理函数
+                {
+                    if(res.code==1){
+                        $("#img1").attr("src", res.data);
+                    }else{
+                        layui.msg("文件上传失败");
+                    }
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
+                }
+            }
+        );
+        return false;
+    }
+
+
+</script>
+</body>
+
+</html>

@@ -14,12 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author:
@@ -47,6 +44,14 @@ public class ProductController {
             param.put("title",title);
         }
         List<Product> list = productService.selectList(param,page,pagesize);
+        List<ProductType> types = productService.selectTypes(new JSONObject());
+        for(Product product : list){
+            for(ProductType type1 : types){
+                if(product.getType().equals(type1.getId())){
+                    product.setTypeName(type1.getName());
+                }
+            }
+        }
         PageInfo pageInfo = new PageInfo(list);
         return Result.success(pageInfo);
     }
@@ -56,6 +61,33 @@ public class ProductController {
         model.addAttribute("data",productService.selectById(id));
         model.addAttribute("types",productService.selectTypes(new JSONObject()));
         return "/pages/product/product-edit";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/insert")
+    public Result insert(Product product){
+        if(CommonUtils.isNull(product)){
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+        if(CommonUtils.isNull(product.getTitle())){
+            return Result.error(CodeMsg.TITLE_ERROR);
+        }
+        if(CommonUtils.isNull(product.getType())){
+            return Result.error(CodeMsg.TYPE_ERROR);
+        }
+        if(CommonUtils.isNull(product.getContext())&&product.getContext().length()<30){
+            return Result.error(CodeMsg.CONTEXT_ERROR);
+        }
+        product.setCreatetime(new Date());
+        int res = productService.insert(product);
+        return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
+    }
+
+    @RequestMapping("/add_view")
+    public String add_view(Long id,Model model) throws Exception{
+        model.addAttribute("types",productService.selectTypes(new JSONObject()));
+        return "/pages/product/add";
     }
 
     @ResponseBody
@@ -91,8 +123,10 @@ public class ProductController {
     }
 
     @RequestMapping("/product_view")
-    public String product_view(){
-        return "/pages/product/productList";
+    public String product_view(Model model){
+        List<ProductType> list = productService.selectTypes(new JSONObject());
+        model.addAttribute("types",list);
+        return "pages/product/productList";
     }
 
 
