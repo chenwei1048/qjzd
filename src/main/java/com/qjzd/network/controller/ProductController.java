@@ -52,10 +52,10 @@ public class ProductController {
     }
 
     @RequestMapping("/edit")
-    public String edit(Long id,Model model) throws Exception{
+    public String edit(Long id,Model model) {
         model.addAttribute("data",productService.selectById(id));
         model.addAttribute("types",productService.selectTypes(new JSONObject()));
-        return "/pages/product/product-edit";
+        return "pages/product/product-edit";
     }
 
     @ResponseBody
@@ -92,7 +92,7 @@ public class ProductController {
 
     @RequestMapping("/product_view")
     public String product_view(){
-        return "/pages/product/productList";
+        return "pages/product/productList";
     }
 
 
@@ -149,7 +149,7 @@ public class ProductController {
             throw new Exception("未查到此ID的产品类型");
         }
         model.addAttribute("data",productType);
-        return "/pages/product/editType";
+        return "pages/product/editType";
 
     }
 

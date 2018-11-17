@@ -52,4 +52,12 @@ public class LoginController {
     }
 
 
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpSession session){
+        if(session.getAttribute("user")!=null){
+            session.removeAttribute("user");
+        }
+        return "login";
+    }
+
 }
