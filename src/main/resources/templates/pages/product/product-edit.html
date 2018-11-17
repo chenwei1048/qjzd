@@ -42,16 +42,13 @@
             <fieldset class="layui-elem-field">
                 <div class="layui-field-box">
                     <div class="layui-upload">
-                        <button type="button" class="layui-btn" id="test-upload-single">选择图片</button>
+                        <input  type="file"  name="oneFile" id="oneFile"  onchange="ajaxImg()"  />
                         <div class="layui-upload-list">
-                            <img class="img-thumbnail" id="test-upload-single-img" style="width: 385px; height: 244px;"
-                                 src="http://ow93rpra1.bkt.clouddn.com/image-15054658162330.jpg"
-                                 data-src="http://ow93rpra1.bkt.clouddn.com/image-15054658162330.jpg"/>
+                            <img class="img-thumbnail" id="img1" src="" style="width: 385px; height: 244px;" />
                         </div>
                     </div>
                 </div>
             </fieldset>
-
         </div>
 
 
@@ -75,7 +72,7 @@
 
 <script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
-<script type="text/javascript" th:src="@{/js/libs/uploader/JUpload.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/ajaxfileupload.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.js}"></script>
 <script type="text/javascript" th:src="@{/js/utils.js}"></script>
 <script type="text/javascript" th:src="@{/wangEditor-3.1.1/release/wangEditor.js}"></script>
@@ -114,6 +111,7 @@
                     id:$("#proId").val(),
                     type: $("#type").val(),
                     title:$("#title").val(),
+                    picture:$("#img1").attr("src"),
                     context:context
                 },
                 success:function(data){
@@ -138,7 +136,7 @@
         });
 
     });
-    
+
     function exit() {
         x_admin_close("render");
     }
@@ -147,26 +145,31 @@
 </script>
 <script>
 
-    layui.use(["layer"], function(){
-        var $ = layui.jquery;
-        $("#test-upload-single").JUpload({
-            url : '/commodity/uploadImg',
-            src : "myFileName",
-            success : function(res) {
-                alert(res);
-                //save image url here
-                layer.msg("文件上传成功.");
-                $("#test-upload-single-img").attr("src", url);
-            },
-            error: function (message) {
-
+    function ajaxImg() {
+        $.ajaxFileUpload
+        (
+            {
+                url: '/commodity/upload', //用于文件上传的服务器端请求地址
+                secureuri: false, //是否需要安全协议，一般设置为false
+                fileElementId: 'oneFile', //文件上传域的ID
+                dataType: 'json', //返回值类型 一般设置为json
+                success: function (res, status)  //服务器成功响应处理函数
+                {
+                    if(res.code==1){
+                        $("#img1").attr("src", res.data);
+                    }else{
+                        layui.msg("文件上传失败");
+                    }
+                },
+                error: function (data, status, e)//服务器响应失败处理函数
+                {
+                    alert(e);
+                }
             }
-        });
+        );
+        return false;
+    }
 
-
-        // 初始化图片预览插件
-        $("img").jpreview();
-    });
 
 </script>
 </body>
