@@ -41,7 +41,7 @@ public class ProductService {
         if(param.containsKey("title")){
             criteria.andTitleLike("%"+param.getString("title")+"%");
         }
-
+        example.setOrderByClause("createtime desc");
         return productMapper.selectByExample(example);
     }
 

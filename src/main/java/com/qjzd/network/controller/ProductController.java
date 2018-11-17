@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     @RequestMapping("/edit")
-    public String edit(Long id,Model model) throws Exception{
+    public String edit(Long id,Model model) {
         model.addAttribute("data",productService.selectById(id));
         model.addAttribute("types",productService.selectTypes(new JSONObject()));
         return "/pages/product/product-edit";
@@ -85,7 +85,7 @@ public class ProductController {
     }
 
     @RequestMapping("/add_view")
-    public String add_view(Long id,Model model) throws Exception{
+    public String add_view(Long id,Model model) {
         model.addAttribute("types",productService.selectTypes(new JSONObject()));
         return "/pages/product/add";
     }
@@ -174,9 +174,9 @@ public class ProductController {
     }
 
     @RequestMapping("/type/edit")
-    public String edit_type(Long id,Model model)throws Exception{
+    public String edit_type(Long id,Model model) throws Exception{
         if(CommonUtils.isNull(id)){
-            id= new Long("2");
+            throw new Exception("id为空");
         }
         ProductType productType = productService.selectTypeById(id);
         if(CommonUtils.isNull(productType)){

@@ -1,6 +1,7 @@
 package com.qjzd.network.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.qjzd.network.util.HtmlContextUtil;
 
 import java.util.Date;
 
@@ -16,6 +17,8 @@ public class Product {
     private String picture;
 
     private String context;
+
+    private String contextNoHtml;
 
     private Date createtime;
 
@@ -51,6 +54,14 @@ public class Product {
         this.title = title == null ? null : title.trim();
     }
 
+    public String getContextNoHtml() {
+        return contextNoHtml;
+    }
+
+    public void setContextNoHtml(String contextNoHtml) {
+        this.contextNoHtml = contextNoHtml;
+    }
+
     public String getPicture() {
         return picture;
     }
@@ -65,6 +76,9 @@ public class Product {
 
     public void setContext(String context) {
         this.context = context == null ? null : context.trim();
+        if(this.context!=null){
+            this.contextNoHtml = HtmlContextUtil.delHtmlTag(this.context);
+        }
     }
 
     public Date getCreatetime() {

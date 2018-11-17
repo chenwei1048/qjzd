@@ -23,8 +23,22 @@
     </ul>
 </div>
 <div class="slide-wrap">
-    <ul class="slide-banner">
-        <li>
+    <ul class="slide-banner" id="proPage">
+        <li th:each="list,listStat:${proLists}">
+            <div  th:each="pro,proStat:${list}"  class="media">
+            <a href="productshow_15327917.htm">
+            <div class="media__left">
+            <img class="media-object" th:src="${pro.picture}" height="98"/>
+            </div>
+            <div class="media__body">
+            <h4 class="media-heading" th:text="${pro.title}"> </h4>
+            <div class="media-content" th:text="${pro.getContextNoHtml()}">
+            </div>
+            </div>
+            </a>
+            </div>
+        </li>
+        <li   >
             <div class="media">
                 <a href="productshow_15327917.htm">
                     <div class="media__left">
@@ -66,47 +80,47 @@
             </div>
         </li>
 
-        <li>
-            <div class="media">
-                <a href="productshow_15327917.htm">
-                    <div class="media__left">
-                        <img class="media-object" th:src="@{/qt/images/20160914115004836274.jpg}" height="98"/>
-                    </div>
-                    <div class="media__body">
-                        <h4 class="media-heading">供应奇正印花机导带 聚旺印花机导带 Ra...</h4>
-                        <div class="media-content">
-                            详细说明 奇正印花机导带聚旺印花机导带Rapplon原配 RAPPLO
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="media">
-                <a href="productshow_15327846.htm">
-                    <div class="media__left">
-                        <img class="media-object" th:src="@{/qt/images/20160914114737689546.jpg}" height="98"/>
-                    </div>
-                    <div class="media__body">
-                        <h4 class="media-heading">供应木工行业预压机平皮带 输送带 铺装带...</h4>
-                        <div class="media-content">
-                            技术参数 型号：PU系类 厚度：3.8mm 重量：4.4mm 最小轮径：250m
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="media">
-                <a href="productshow_15327660.htm">
-                    <div class="media__left">
-                        <img class="media-object" th:src="@{/qt/images/20160914114737689546.jpg}" height="98"/>
-                    </div>
-                    <div class="media__body">
-                        <h4 class="media-heading">供应RAPPLON瓦楞纸箱行业皮带 高抓...</h4>
-                        <div class="media-content">
-                            技术参数： 厚度：6.3mm 颜色：兰色花纹带 请参考详细技术资料，或者联系
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </li>
+        <!--<li>-->
+            <!--<div class="media">-->
+                <!--<a href="productshow_15327917.htm">-->
+                    <!--<div class="media__left">-->
+                        <!--<img class="media-object" th:src="@{/qt/images/20160914115004836274.jpg}" height="98"/>-->
+                    <!--</div>-->
+                    <!--<div class="media__body">-->
+                        <!--<h4 class="media-heading">供应奇正印花机导带 聚旺印花机导带 Ra...</h4>-->
+                        <!--<div class="media-content">-->
+                            <!--详细说明 奇正印花机导带聚旺印花机导带Rapplon原配 RAPPLO-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="media">-->
+                <!--<a href="productshow_15327846.htm">-->
+                    <!--<div class="media__left">-->
+                        <!--<img class="media-object" th:src="@{/qt/images/20160914114737689546.jpg}" height="98"/>-->
+                    <!--</div>-->
+                    <!--<div class="media__body">-->
+                        <!--<h4 class="media-heading">供应木工行业预压机平皮带 输送带 铺装带...</h4>-->
+                        <!--<div class="media-content">-->
+                            <!--技术参数 型号：PU系类 厚度：3.8mm 重量：4.4mm 最小轮径：250m-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="media">-->
+                <!--<a href="productshow_15327660.htm">-->
+                    <!--<div class="media__left">-->
+                        <!--<img class="media-object" th:src="@{/qt/images/20160914114737689546.jpg}" height="98"/>-->
+                    <!--</div>-->
+                    <!--<div class="media__body">-->
+                        <!--<h4 class="media-heading">供应RAPPLON瓦楞纸箱行业皮带 高抓...</h4>-->
+                        <!--<div class="media-content">-->
+                            <!--技术参数： 厚度：6.3mm 颜色：兰色花纹带 请参考详细技术资料，或者联系-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</li>-->
 
     </ul>
 </div>
@@ -182,7 +196,44 @@
     </div>
 </div>
 <div th:replace="pages/qt/public/footer :: navbar"></div>
-<script>
+<script th:inline="javascript">
+    // var proList = [[${proList}]];
+    // $(function () {
+    //     var html = '';
+    //     var count=0;
+    //     $.each(proList, function(i,val){
+    //         count++;
+    //         if(count==1){
+    //             html+='<li>';
+    //         }
+    //         html+=gethtml(val);
+    //         if(count==3){
+    //             html+='</li>';
+    //             count=0;
+    //         }
+    //     });
+    //     // $("#proPage").append(html);
+    // })
+    //
+    //
+    // function gethtml(val) {
+    //     var html ='<div class="media">' +
+    //         '                <a href="productshow_15327917.htm">' +
+    //         '                    <div class="media__left">' +
+    //         '                        <img class="media-object" src="'+val.picture+'" height="98"/>' +
+    //         '                    </div>' +
+    //         '                    <div class="media__body">' +
+    //         '                        <h4 class="media-heading">'+val.title+'</h4><div class="media-content">'
+    //         +val.contextNoHtml+
+    //         '                        </div>' +
+    //         '                    </div>' +
+    //         '                </a>' +
+    //         '            </div>';
+    //     return html;
+    // }
+
+
+
     $('.top-banner').bxSlider({
         mode: "fade",
         auto: true,
@@ -197,6 +248,7 @@
     $('.product-wrap .btn').click(function (ev) {
         $(this).addClass('active').siblings('.active').removeClass('active')
     })
+
 </script>
 </body>
 </html>

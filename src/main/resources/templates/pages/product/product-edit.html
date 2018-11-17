@@ -14,7 +14,7 @@
 <body>
 <div class="x-body" id="app">
     <form class="layui-form">
-        <input type="hidden" th:value="${data.id}" id="proId"/>
+        <input type="hidden" th:value="${data.id}"   id="proId"/>
         <div class="layui-form-item">
             <label class="layui-form-label">产品分类</label>
             <div class="layui-input-block" style="width: 190px" id="typeFa" >
@@ -29,7 +29,7 @@
                 产品名称
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="title" th:value="${data.title}" lay-verify="required" name="title"  class="layui-input"/>
+                <input type="text" id="title" th:value="${data.title}"     lay-verify="required" name="title"  class="layui-input"/>
             </div>
 
         </div>
@@ -64,7 +64,7 @@
             </label>
             <button class="layui-btn" lay-filter="update" lay-submit="">保存</button>
 
-            <button class="layui-btn layui-btn-normal"  onclick="exit()">取消</button>
+            <button class="layui-btn" onclick="exit()">取消</button>
 
         </div>
     </form>
@@ -92,7 +92,6 @@
     editor.create();
     E.fullscreen.init('#editor');
     editor.txt.html([[${data.context}]]);
-
     //<![CDATA[
     var G = {
     	editUrl: "/product/update"
@@ -136,15 +135,12 @@
         });
 
     });
-
-    function exit() {
-        x_admin_close("render");
-    }
-
     //]]>
 </script>
 <script>
-
+    function exit() {
+        x_admin_close("render");
+    }
     function ajaxImg() {
         $.ajaxFileUpload
         (
