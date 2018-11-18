@@ -11,9 +11,17 @@
 <body>
 <div style="width: 864px;background-color: #fff;margin-left: 100px;margin-top: 50px">
      <div th:if="${code==1}" th:utext="${data}">无数据，请编辑!</div>
-    <a class="layui-btn layui-btn-normal layui-btn-mini" th:href="'/bas/to_update?type='+${type}"   style="margin-top: 50px">编辑</a>
+    <!--<a class="layui-btn layui-btn-normal layui-btn-mini" th:href="'/bas/to_update?type='+${type}"   style="margin-top: 50px">编辑</a>-->
+    <button class="layui-btn layui-btn-normal layui-btn-mini" th:onclick="'edit('+${type}+')'"    style="margin-top: 50px">编辑</button>
 </div>
 
 </body>
-
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script>
+    function edit(id) {
+        x_open_full('编辑关于我们',"/bas/to_update?type="+id);
+    }
+</script>
 </html>

@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/test")
 public class TestController {
 
-    @GetMapping("/testJsp")
+    @GetMapping("/um")
     public String testJsp(Model model) {
-        model.addAttribute("message", "this is index jsp page");
-        return "test";
+        return "pages/ue/index";
     }
     @GetMapping("/testThemleaf")
     public String testThemleaf(Model model) {
