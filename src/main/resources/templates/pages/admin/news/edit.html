@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/umeditor/themes/default/css/umeditor.css}"/>
+
+</head>
+
+<body>
+<div class="x-body" >
+        <input type="hidden"   th:value="${data.id}"   id="proId"/>
+
+        <div class="layui-form-item">
+            <label for="title" class="layui-form-label">
+                <span class="text-color-red">*</span>
+                新闻标题
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="title" th:value="${data.title}"   name="title"  class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div type="text/plain" id="myEditor" name="myEditor" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <!-- placeholder -->
+            </label>
+            <button class="layui-btn"  onclick="save()">保存</button>
+            <button class="layui-btn layui-btn-normal"  onclick="exit()">取消</button>
+
+        </div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/ajaxfileupload.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"></script>
+<script type="text/javascript" th:src="@{/umeditor/umeditor.config.js}" ></script>
+<script type="text/javascript" th:src="@{/umeditor/umeditor.min.js}" ></script>
+<script type="text/javascript" th:src="@{/umeditor/lang/zh-cn/zh-cn.js}" ></script>
+<script  th:inline="javascript">
+    var um = UM.getEditor('myEditor');
+    um.setContent([[${data.context}]]);
+
+    //<![CDATA[
+    var G = {
+    	editUrl: "/news/update"
+    };
+    function save() {
+        var id=$("#proId").val();
+        var type=$("#type").val();
+        var title=$("#title").val();
+        var src=$("#img1").attr("src");
+        var context = $("#myEditor").html();
+        if(title==null||title.trim()==""){
+            layer.msg("产品不能为空！！！");
+            return;
+        }
+
+        if(context==null||context.trim()==""){
+            layer.msg("产品描述不能为空！！！");
+            return;
+        }
+        $.ajax({
+            url: G.editUrl,
+            type: "POST",
+            data:{
+                id:id,
+                type:type ,
+                title:title,
+                picture:src,
+                context:context
+            },
+            success:function(data){
+                layer.closeAll();
+                if(data.code == 1){
+                    var handler = top.layer.alert("数据更新成功", {
+                        icon: 6
+                    }, function () {
+                        top.layer.close(handler);
+                        //关闭弹出层
+                        x_admin_close("reload");
+                    });
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(){
+                layer.closeAll();
+            }
+        });
+    }
+
+    function exit() {
+        x_admin_close("render");
+    }
+
+
+
+    //]]>
+
+
+</script>
+</body>
+
+</html>

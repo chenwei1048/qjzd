@@ -47,14 +47,14 @@ public class BasController {
             model.addAttribute("data",information.getContext());
         }
         model.addAttribute("type",Constant.GYWM.getCode());
-        return "pages/bas/about";
+        return "pages/admin/bas/about";
     }
 
     //联系我们
     @RequestMapping("/contact")
     public String contacts(Model model){
         model.addAttribute("data",organizationService.selectById(new Long(Constant.QJZD.getCode())));
-        return "pages/bas/contacts";
+        return "pages/admin/bas/contacts";
 
     }
 
@@ -98,7 +98,7 @@ public class BasController {
             model.addAttribute("data",information.getContext());
         }
         model.addAttribute("type",type);
-        return "pages/bas/update";
+        return "pages/admin/bas/update";
     }
 
     @RequestMapping("/update")

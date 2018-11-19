@@ -109,7 +109,7 @@ layui.config({debug: false}).use(['form', 'element'], function() {
 				$("tbody tr[cate-id=" + cateIds[i] + "]").hide().find('.x-show').html('&#xe623;').attr('status', 'true');
 			}
 		}
-	})
+	});
 
 	//左侧菜单效果
 	// $('#content').bind("click",function(event){
@@ -141,9 +141,8 @@ layui.config({debug: false}).use(['form', 'element'], function() {
 					event.stopPropagation();
 					return;
 				}
-			};
-
-			tab.tabAdd(title, url, index + 1);
+            }
+            tab.tabAdd(title, url, index + 1);
 			tab.tabChange(index + 1);
 		}
 
@@ -165,17 +164,17 @@ layui.config({debug: false}).use(['form', 'element'], function() {
 function x_admin_open(title, url, w, h) {
     if (title == null || title == '') {
         title = false;
-    };
+    }
     if (url == null || url == '') {
         url = "404.html";
-    };
+    }
     if (w == null || w == '') {
         w = ($(window).width() * 0.9);
-    };
+    }
     if (h == null || h == '') {
         h = ($(window).height() - 50);
-    };
-	var layer = parent.layer === undefined ? layui.layer : top.layer;
+    }
+    var layer = parent.layer === undefined ? layui.layer : top.layer;
     layer.open({
         type: 2,
         area: [w + 'px', h + 'px'],
@@ -211,7 +210,6 @@ function x_admin_close(callback) {
     var index = parent.layer.getFrameIndex(window.name);
     parent.layer.close(index);
     switch (callback) {
-
         case "reload": //刷新页面
             parent.location.reload();
             break;

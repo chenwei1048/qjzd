@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+
+</head>
+<body>
+<div style="width: 864px;background-color: #fff;margin-left: 100px;margin-top: 50px">
+    <div>
+      <h1 th:text="${data.title}"  style="text-align:center"></h1>
+        <p style="text-align:right" th:text="${#dates.format(data.createtime,'yyyy-MM-dd HH:mm:ss')}"></p>
+        <hr/>
+    </div>
+     <div style="margin-top: 50px"   th:utext="${data.context}">无数据!</div>
+    <!--<a class="layui-btn layui-btn-normal layui-btn-mini" th:href="'/bas/to_update?type='+${type}"   style="margin-top: 50px">编辑</a>-->
+
+    <div class="layui-form-item" style="margin-top: 50px">
+
+        <button class="layui-btn layui-btn-normal layui-btn-mini" th:onclick="'edit('+${data.id}+')'">编辑</button>
+        <button class="layui-btn layui-btn-default layui-btn-mini"  onclick="exit()">关闭</button>
+
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"></script>
+<script>
+    function exit() {
+        x_admin_close("render");
+    }
+    function edit(id) {
+        parent.edit(id);
+    }
+</script>
+</html>

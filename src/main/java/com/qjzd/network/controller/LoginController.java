@@ -36,7 +36,7 @@ public class LoginController {
 
     @RequestMapping()
     public String toLogin(){
-        return "login";
+        return "pages/admin/login";
     }
 
     @RequestMapping("/do_login")

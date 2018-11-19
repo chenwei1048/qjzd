@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+
+</head>
+
+<body>
+
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input class="layui-input layui-input-sm" placeholder="公司名称" style="height: 38px"  id="orgName" />
+                </div>
+                <div class="layui-input-inline">
+                    <input class="layui-input layui-input-sm" placeholder="联系人" style="height: 38px"  id="contacts" />
+                </div>
+                <div class="layui-input-inline">
+                    <input class="layui-input layui-input-sm" placeholder="联系电话" style="height: 38px"  id="contactNumber" />
+                </div>
+                <div class="layui-input-inline">
+                    <input class="layui-input layui-input-sm" placeholder="移动电话" style="height: 38px"  id="mobilePhone" />
+                </div>
+                <div class="layui-input-inline">
+                    <input class="layui-input layui-input-sm" placeholder="邮箱" style="height: 38px"  id="email" />
+                </div>
+                <div class="layui-input-inline">
+                    <input class="layui-input layui-input-sm" placeholder="地址" style="height: 38px"  id="address" />
+                </div>
+                <button class="layui-btn layui-btn-sm" type="button" onclick="render(1,G.pagesize)">搜索</button>
+            </div>
+        </form>
+    </div>
+
+    <blockquote class="layui-elem-quote layui-elem-quote-sm">
+        <button class="layui-btn layui-btn-sm layui-btn-danger" style="width: 106px;height: 38px" onclick="batchRemove()">
+            <i class="layui-icon">&#xe640;</i>批量删除</button>
+        <button class="layui-btn" onclick="upRead(1)"> 标记为已读</button>
+        <button class="layui-btn layui-btn-normal" onclick="upRead(0)"> 标记为未读</button>
+    </blockquote>
+    <div class="layui-form table-responsive">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th width="16">
+                    <input type="checkbox" lay-filter="select-all" title="" lay-skin="primary"/>
+                </th>
+                <th>ID</th>
+                <th>公司名称</th>
+                <th>联系人</th>
+                <th>联系电话</th>
+                <th>移动电话</th>
+                <th>邮箱</th>
+                <th>地址</th>
+                <th>留言日期</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="list">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="nodata" style="display: none" class="text-center layui-bg-gray no-records">对不起，暂无记录.</div>
+
+    <!-- 分页组件 -->
+    <div id="pagination" class="layui-box"></div>
+
+</div>
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/vue/vue.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"></script>
+
+<script th:inline="javascript">
+
+    //<![CDATA[
+    //全局数据
+    var G = {
+        dataListUrl: "/leaveWord/list", // 获取数据接口
+        delUrl: "/leaveWord/del", // 删除后端接口
+        editUrl:"/leaveWord/edit",
+        seeUrl:"/leaveWord/see",
+        statusUrl:"/leaveWord/status",
+        page: 1,
+        pagesize: 10,
+        count: 0
+    };
+
+
+    function upRead(status) {
+        // 检查选项
+        var selectItemsNum = $('input[name="id"]:checked').length;
+        if (selectItemsNum <= 0) {
+            top.layer.close(index);
+            return messageInfo("请至少选中一条数据.");
+        }
+        var cks= $('input[name="id"]:checked');
+        var ids = [];
+        cks.each(function() {
+            alert($("#ck"+$(this).val()).attr("checked"));
+            ids.push($(this).val());
+        });
+//        setTimeout(function () {
+//            $.ajax({
+//                url: G.statusUrl,
+//                type: "POST",
+//                data:{
+//                    ids:ids,
+//                    isRead: status
+//                },
+//                success:function(data){
+//                    layer.closeAll();
+//                    if(data.code == 1){
+//                        messageOk("操作成功！");
+//                    }else{
+//
+//                        data.elem.checked = !data.elem.checked;
+//                        form.render();
+//                        messageError(error);
+//                    }
+//                },
+//                error:function(){
+//                    messageError(error);
+//                }
+//            });
+//
+//        }, 500);
+    }
+
+    
+
+    //批量删除
+    function  batchRemove() {
+
+        var index = top.layer.confirm('确认要删除吗？', function () {
+            // 检查选项
+            var selectItemsNum = $('input[name="id"]:checked').length;
+            if (selectItemsNum <= 0) {
+                top.layer.close(index);
+                return messageInfo("请至少选中一条数据.");
+            }
+            // 发异步删除数据
+            var ids = [];
+            $('input[name="id"]:checked').each(function() {
+                ids.push($(this).val());
+            });
+            $.ajax({
+                url: G.delUrl,
+                type: "POST",
+                data:{
+                    ids:ids
+                },
+                dataType : 'json',
+                success:function(res){
+                    if(res.code==1){
+                        messageOk("删除成功!");
+                        render(G.page, G.pagesize);
+                    }else{
+                        messageOk("删除失败!");
+                    }
+                },
+                error:function(){
+                    messageOk("删除失败!");
+                }
+            });
+
+        });
+
+    }
+    function html(value) {
+        var html = '<tr>' +
+                '<td><input type="checkbox" name="id" value="'+value.id+'" title="" lay-skin="primary"/></td>'+
+            '<td>' + value.id + '</td>' +
+            '<td>' + value.orgName + '</td>' +
+            '<td>' + value.contacts + '</td>' +
+            '<td>' + value.contactNumber + '</td>' +
+            '<td>' + value.mobilePhone + '</td>' +
+            '<td>' + value.email + '</td>' +
+            '<td>' + value.address + '</td>' +
+            '<td>' + value.createtime + '</td>' +
+            '<td class="td-status">';
+            if(value.isRead==1){
+                html+='<input   type="checkbox" id="ck'+value.id+'" checked name="status" value="'+value.id+'" lay-filter="status"   lay-skin="switch" lay-text="已读|未读"/>';
+            }else{
+                html+='<input   type="checkbox" id="ck'+value.id+'" name="status" lay-filter="status" value="'+value.id+'"  lay-skin="switch" lay-text="已读|未读"/>';
+            }
+            html+=' </td>'+
+            '<td class="td-manage">' +
+            '<button class="layui-btn layui-btn-default layui-btn-xs" onclick="edit(' + value.id + ')">编辑</button>' +
+            '<button class="layui-btn layui-btn-danger layui-btn-xs" onclick="removeMember(' + value.id + ')">删除</button>' +
+            '</td></tr>';
+        return html;
+    }
+
+    function render(page, pagesize) {
+        if(page==null||page=='undefined'){
+            page=G.page;
+            pagesize=G.pagesize;
+        }
+        $.ajax({
+            url: G.dataListUrl,
+            type: "POST",
+            async: false,
+            data: {
+                page: page,
+                pagesize: pagesize,
+                orgName:$("#orgName").val(),
+                contacts:$("#contacts").val(),
+                contactNumber:$("#contactNumber").val(),
+                mobilePhone:$("#mobilePhone").val(),
+                email:$("#email").val(),
+                address:$("#address").val()
+            },
+            success: function (result) {
+                G.page = page;
+                G.pagesize = pagesize;
+                if (result.code == 1 && result.data.list.length > 0) {
+                    $("#list").html("");
+                    $("#nodata").hide();
+                    $.each(result.data.list, function (index, value) {
+                        console.log(value);
+                        G.count = result.data.total;
+                        $("#list").append(html(value));
+                    });
+                    layui.use(['laypage', 'form'], function () {
+                        var laypage = layui.laypage;
+                        var form = layui.form;
+                        form.render("checkbox");
+                        form.on('switch(status)', function(data){
+                            messageLoading();
+                            var status = data.elem.checked ? 1 : 0;
+                            var ids=[];
+                            ids.push(data.elem.value);
+                            setTimeout(function () {
+                                $.ajax({
+                                    url: G.statusUrl,
+                                    type: "POST",
+                                    data:{
+                                        ids:ids,
+                                        isRead: status
+                                    },
+                                    success:function(res){
+                                        alert(data.elem);
+                                        layer.closeAll();
+                                        if(res.code == 1){
+                                            data.elem.checked = !data.elem.checked;
+                                            messageOk("操作成功！");
+                                        }else{
+
+                                            messageError("操作失败！");
+                                        }
+                                    },
+                                    error:function(){
+                                        messageError("服务端异常");
+                                    }
+                                });
+
+                            }, 500);
+                        });
+
+
+
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'pagination', //分页container ID，不用加 # 号
+                            limit: G.pagesize, //页面显示记录条数
+                            count: G.count, //数据总数，从服务端得到
+                            groups: 5,
+                            curr: page,
+                            layout: ['prev', 'page', 'next', 'limit', 'count'],
+                            prev: '<i class="layui-icon layui-icon-left"></i>',
+                            next: '<i class="layui-icon layui-icon-right"></i>',
+                            jump: function (obj, first) {
+                                //首次不执行
+                                if (first) {
+                                    //do something
+                                    return;
+                                }
+                                render(obj.curr, obj.limit);
+                            }
+
+                        });
+
+                    });
+
+
+
+                } else {
+                    $("#list").html("");
+                    $("#nodata").show();
+                }
+            },
+            error: function () {
+                layer.closeAll();
+            }
+        });
+    }
+
+
+
+    function removeMember(id) {
+        var ids=[id];
+        //发异步删除数据
+        var index = top.layer.confirm('确认要删除吗？', function () {
+            top.layer.close(index);
+            $.ajax({
+                url: G.delUrl,
+                type: "POST",
+                data: {
+                    ids: ids
+                },
+                success: function (data) {
+                    layer.closeAll();
+                    if (data.code == 1) {
+                        layer.msg("删除成功");
+                        render(G.page, G.pagesize);
+                    } else {
+                        layer.msg("删除失败");
+                    }
+                },
+                error: function () {
+                    layer.msg("删除失败");
+                    layer.closeAll();
+                }
+            });
+        })
+    }
+
+
+    $(function () {
+        render(G.page, G.pagesize);
+
+    })
+
+    //]]>
+</script>
+
+</body>
+
+</html>

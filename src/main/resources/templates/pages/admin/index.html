@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>后台首页</title>
+	<title>前景传动后台管理系统</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	<link rel="icon"  th:href="@{/favicon.ico}" />
@@ -20,12 +20,12 @@
 	</div>
 	<ul class="layui-nav left fast-add" lay-filter="">
 		<li class="layui-nav-item">
-			<a href="javascript:;" title="刷新工具" id="frame-reload">
+			<a href="javascript:" title="刷新工具" id="frame-reload">
 				<i class="layui-icon" title="刷新页面">&#xe9aa;</i>
 			</a>
 		</li>
 		<li class="layui-nav-item">
-			<a href="javascript:;">DEMO菜单</a>
+			<a href="javascript:">DEMO菜单</a>
 			<dl class="layui-nav-child">
 				<!-- 二级菜单 -->
 				<dd>
@@ -45,7 +45,7 @@
 	</ul>
 	<ul class="layui-nav right" lay-filter="">
 		<li class="layui-nav-item">
-			<a href="javascript:;">admin</a>
+			<a href="javascript:">admin</a>
 			<dl class="layui-nav-child">
 				<!-- 二级菜单 -->
 				<dd>
@@ -55,7 +55,7 @@
 					<a onclick="x_admin_open('资讯','http://www.r9it.com')">技术博客</a>
 				</dd>
 				<dd>
-					<a href="./login.html">退出</a>
+					<a href="login.html">退出</a>
 				</dd>
 			</dl>
 		</li>
@@ -71,7 +71,7 @@
 	<div id="side-nav">
 		<ul id="nav">
 			<li>
-				<a href="javascript:;">
+				<a href="javascript:">
 					<i class="iconfont">&#xe6ae;</i>
 					<cite>基本设置</cite>
 					<i class="iconfont nav_right">&#xe697;</i>
@@ -92,7 +92,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="javascript:;">
+				<a href="javascript:">
 					<i class="iconfont">&#xe723;</i>
 					<cite>产品管理</cite>
 					<i class="iconfont nav_right">&#xe697;</i>
@@ -114,40 +114,34 @@
 			</li>
 
 			<li>
-				<a href="javascript:;">
-					<i class="iconfont">&#xe723;</i>
-					<cite>编辑器</cite>
+				<a href="javascript:">
+					<i class="iconfont">&#xe828;</i>
+					<cite>新闻资讯</cite>
 					<i class="iconfont nav_right">&#xe697;</i>
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a _href="/">
+						<a _href="/news/list_view">
 							<i class="iconfont">&#xe6a7;</i>
-							<cite>LayUI 自带</cite>
+							<cite>新闻列表</cite>
 						</a>
 					</li>
 
-					<li>
-						<a _href="/bas/introduce">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>NKeditor</cite>
-						</a>
-					</li>
 				</ul>
 			</li>
 
 			<li>
-				<a href="javascript:;">
-					<i class="iconfont">&#xe723;</i>
-					<cite>其他组件</cite>
+				<a href="javascript:">
+					<i class="iconfont">&#xe69f;</i>
+					<cite>留言中心</cite>
 					<i class="iconfont nav_right">&#xe697;</i>
 				</a>
 				<ul class="sub-menu">
 
 					<li>
-						<a _href="pages/components/form.html">
+						<a _href="/leaveWord/view">
 							<i class="iconfont">&#xe6a7;</i>
-							<cite>表单</cite>
+							<cite>留言列表</cite>
 						</a>
 					</li>
 
@@ -176,7 +170,7 @@
 			</li>
 
 			<li>
-				<a href="javascript:;">
+				<a href="javascript:">
 					<i class="iconfont">&#xe6ce;</i>
 					<cite>图表统计</cite>
 					<i class="iconfont nav_right">&#xe697;</i>

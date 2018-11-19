@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>introduce</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+
+</head>
+
+<body>
+
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input class="layui-input layui-input-sm" placeholder="产品名称" style="height: 38px"  id="title" />
+                </div>
+                <button class="layui-btn layui-btn-sm" type="button" onclick="render(1,G.pagesize)">搜索</button>
+            </div>
+        </form>
+    </div>
+
+    <blockquote class="layui-elem-quote layui-elem-quote-sm">
+        <button class="layui-btn layui-btn-sm" onclick="x_open_full('添加新闻','/product/add_view')">
+            <i class="layui-icon">&#xe654;</i>添加
+        </button>
+    </blockquote>
+    <div class="layui-form table-responsive">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="list">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="nodata" style="display: none" class="text-center layui-bg-gray no-records">对不起，暂无记录.</div>
+
+    <!-- 分页组件 -->
+    <div id="pagination" class="layui-box"></div>
+
+</div>
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/vue/vue.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"></script>
+
+<script th:inline="javascript">
+
+    //<![CDATA[
+    //全局数据
+    var G = {
+        dataListUrl: "/news/list", // 获取数据接口
+        delUrl: "/news/del", // 删除后端接口
+        editUrl:"/news/edit",
+        seeUrl:"/news/see",
+        page: 1,
+        pagesize: 10,
+        count: 0
+    };
+
+
+    function html(value) {
+        var html = '<tr>' +
+            '<td>' + value.id + '</td>' +
+            '<td>' + value.title + '</td>' +
+            '<td>' + value.createtime + '</td>' +
+            '<td class="td-manage">' +
+            '<button class="layui-btn layui-btn-normal layui-btn-xs" onclick="see(' + value.id + ')">查看</button>' +
+            '<button class="layui-btn layui-btn-default layui-btn-xs" onclick="edit(' + value.id + ')">编辑</button>' +
+            '<button class="layui-btn layui-btn-danger layui-btn-xs" onclick="removeMember(' + value.id + ')">删除</button>' +
+            '</td></tr>';
+        return html;
+    }
+
+    function render(page, pagesize) {
+        if(page==null||page=='undefined'){
+            page=G.page;
+            pagesize=G.pagesize;
+        }
+        $.ajax({
+            url: G.dataListUrl,
+            type: "POST",
+            async: false,
+            data: {
+                page: page,
+                pagesize: pagesize,
+                title:$("#title").val()
+            },
+            success: function (result) {
+                G.page = page;
+                G.pagesize = pagesize;
+                if (result.code == 1 && result.data.list.length > 0) {
+                    $("#list").html("");
+                    $("#nodata").hide();
+                    $.each(result.data.list, function (index, value) {
+                        console.log(value);
+                        G.count = result.data.total;
+                        $("#list").append(html(value));
+                    });
+                    layui.use(['laypage', 'form'], function () {
+                        var laypage = layui.laypage;
+                        var form = layui.form;
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'pagination', //分页container ID，不用加 # 号
+                            limit: G.pagesize, //页面显示记录条数
+                            count: G.count, //数据总数，从服务端得到
+                            groups: 5,
+                            curr: page,
+                            layout: ['prev', 'page', 'next', 'limit', 'count'],
+                            prev: '<i class="layui-icon layui-icon-left"></i>',
+                            next: '<i class="layui-icon layui-icon-right"></i>',
+                            jump: function (obj, first) {
+                                //首次不执行
+                                if (first) {
+                                    //do something
+                                    return;
+                                }
+                                render(obj.curr, obj.limit);
+                            }
+
+                        });
+
+                    });
+
+
+
+                } else {
+                    $("#list").html("");
+                    $("#nodata").show();
+                }
+            },
+            error: function () {
+                layer.closeAll();
+            }
+        });
+    }
+
+    function edit(id) {
+        x_open_full('编辑新闻',G.editUrl+"?id="+id);
+    }
+
+    function see(id) {
+        x_open_full('查看新闻',G.seeUrl+"?id="+id);
+    }
+    function removeMember(id) {
+        //发异步删除数据
+        var index = top.layer.confirm('确认要删除吗？', function () {
+            top.layer.close(index);
+            $.ajax({
+                url: G.delUrl,
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    layer.closeAll();
+                    if (data.code == 1) {
+                        layer.msg("删除成功");
+                        render(G.page, G.pagesize);
+                    } else {
+                        layer.msg("删除失败");
+                    }
+                },
+                error: function () {
+                    layer.msg("删除失败");
+                    layer.closeAll();
+                }
+            });
+        })
+    }
+
+
+    $(function () {
+        render(G.page, G.pagesize);
+
+    })
+
+    //]]>
+</script>
+
+</body>
+
+</html>

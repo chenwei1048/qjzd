@@ -60,7 +60,15 @@ public class ProductController {
     public String edit(Long id,Model model) {
         model.addAttribute("data",productService.selectById(id));
         model.addAttribute("types",productService.selectTypes(new JSONObject()));
-        return "/pages/product/product-edit";
+        return "/pages/admin/product/product-edit";
+    }
+    @RequestMapping("/see")
+    public String see(Long id,Model model)throws Exception{
+        if(CommonUtils.isNull(id)){
+            throw new Exception("服务异常，ID为空");
+        }
+        model.addAttribute("data",productService.selectById(id));
+        return "pages/admin/product/see";
     }
 
 
@@ -87,7 +95,7 @@ public class ProductController {
     @RequestMapping("/add_view")
     public String add_view(Long id,Model model) {
         model.addAttribute("types",productService.selectTypes(new JSONObject()));
-        return "/pages/product/add";
+        return "/pages/admin/product/add";
     }
 
     @ResponseBody
@@ -126,7 +134,7 @@ public class ProductController {
     public String product_view(Model model){
         List<ProductType> list = productService.selectTypes(new JSONObject());
         model.addAttribute("types",list);
-        return "pages/product/productList";
+        return "pages/admin/product/productList";
     }
 
 
@@ -135,8 +143,10 @@ public class ProductController {
         List<ProductType> list = productService.selectTypes(new JSONObject());
         model.addAttribute("data",list);
 
-        return "pages/product/type";
+        return "pages/admin/product/type";
     }
+
+
     @ResponseBody
     @RequestMapping("/type/add")
     public Result add_type(String name){
@@ -183,7 +193,7 @@ public class ProductController {
             throw new Exception("未查到此ID的产品类型");
         }
         model.addAttribute("data",productType);
-        return "/pages/product/editType";
+        return "pages/admin/product/editType";
 
     }
 

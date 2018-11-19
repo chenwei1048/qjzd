@@ -40,7 +40,7 @@
                 <div class="layui-upload">
                     <input  type="file"  name="oneFile" id="oneFile"  onchange="ajaxImg()"  />
                     <div class="layui-upload-list">
-                        <img class="img-thumbnail" id="img1" src="" style="width: 385px; height: 244px;" />
+                        <img class="img-thumbnail" id="img1" th:src="${data.picture}" style="width: 385px; height: 244px;" />
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                     }, function () {
                         top.layer.close(handler);
                         //关闭弹出层
-                        x_admin_close("reload");
+                        x_admin_close("render");
                     });
                 }else{
                     layer.msg(data.msg);
@@ -127,6 +127,8 @@
     function exit() {
         x_admin_close("render");
     }
+
+
 
 
     function ajaxImg() {

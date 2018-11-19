@@ -91,6 +91,7 @@
         dataListUrl: "/product/list", // 获取数据接口
         delUrl: "/product/del", // 删除后端接口
         editUrl:"/product/edit",
+        seeUrl:"/product/see",
         page: 1,
         pagesize: 10,
         count: 0
@@ -104,6 +105,7 @@
             '<td>' + value.title + '</td>' +
             '<td>' + value.createtime + '</td>' +
             '<td class="td-manage">' +
+            '<button class="layui-btn layui-btn-normal layui-btn-xs" onclick="see(' + value.id + ')">查看</button>' +
             '<button class="layui-btn layui-btn-default layui-btn-xs" onclick="edit(' + value.id + ')">编辑</button>' +
             '<button class="layui-btn layui-btn-danger layui-btn-xs" onclick="removeMember(' + value.id + ')">删除</button>' +
             '</td></tr>';
@@ -111,6 +113,10 @@
     }
 
     function render(page, pagesize) {
+        if(page==null||page=='undefined'){
+            page=G.page;
+            pagesize=G.pagesize;
+        }
         $.ajax({
             url: G.dataListUrl,
             type: "POST",
@@ -123,6 +129,7 @@
             },
             success: function (result) {
                 G.page = page;
+                G.pagesize = pagesize;
                 if (result.code == 1 && result.data.list.length > 0) {
                     $("#list").html("");
                     $("#nodata").hide();
@@ -174,7 +181,9 @@
         x_open_full('编辑产品',G.editUrl+"?id="+id);
     }
 
-
+    function see(id) {
+        x_open_full('查看产品',G.seeUrl+"?id="+id);
+    }
     function removeMember(id) {
         //发异步删除数据
         var index = top.layer.confirm('确认要删除吗？', function () {
