@@ -45,6 +45,11 @@ public class ProductService {
         return productMapper.selectByExample(example);
     }
 
+    public int selectCount(){
+        ProductExample example = new ProductExample();
+        return productMapper.countByExample(example);
+    }
+
     public Product selectById(Long id){
         return productMapper.selectByPrimaryKey(id);
     }

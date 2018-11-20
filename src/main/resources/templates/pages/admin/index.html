@@ -13,7 +13,7 @@
 <!-- 顶部开始 -->
 <div class="container">
 	<div class="logo">
-		<a href="index.html">ddblock-admin</a>
+		<a href="index.html">前景传动后台管理系统</a>
 	</div>
 	<div class="left_open">
 		<i title="展开左侧栏" class="iconfont">&#xe699;</i>
@@ -24,43 +24,43 @@
 				<i class="layui-icon" title="刷新页面">&#xe9aa;</i>
 			</a>
 		</li>
-		<li class="layui-nav-item">
-			<a href="javascript:">DEMO菜单</a>
-			<dl class="layui-nav-child">
-				<!-- 二级菜单 -->
-				<dd>
-					<a href="javascript:void(0);">
-						<i class="iconfont">&#xe6a2;</i>资讯</a>
-				</dd>
-				<dd>
-					<a href="javascript:void(0);">
-						<i class="iconfont">&#xe6a8;</i>图片</a>
-				</dd>
-				<dd>
-					<a href="javascript:void(0);">
-						<i class="iconfont">&#xe6b8;</i>用户</a>
-				</dd>
-			</dl>
-		</li>
+		<!--<li class="layui-nav-item">-->
+			<!--<a href="javascript:">DEMO菜单</a>-->
+			<!--<dl class="layui-nav-child">-->
+				<!--&lt;!&ndash; 二级菜单 &ndash;&gt;-->
+				<!--<dd>-->
+					<!--<a href="javascript:void(0);">-->
+						<!--<i class="iconfont">&#xe6a2;</i>资讯</a>-->
+				<!--</dd>-->
+				<!--<dd>-->
+					<!--<a href="javascript:void(0);">-->
+						<!--<i class="iconfont">&#xe6a8;</i>图片</a>-->
+				<!--</dd>-->
+				<!--<dd>-->
+					<!--<a href="javascript:void(0);">-->
+						<!--<i class="iconfont">&#xe6b8;</i>用户</a>-->
+				<!--</dd>-->
+			<!--</dl>-->
+		<!--</li>-->
 	</ul>
 	<ul class="layui-nav right" lay-filter="">
 		<li class="layui-nav-item">
-			<a href="javascript:">admin</a>
+			<a href="javascript:" th:text="${session.user.username}"></a>
 			<dl class="layui-nav-child">
 				<!-- 二级菜单 -->
 				<dd>
 					<a onclick="x_admin_open('修改密码','/user/to_upPass', 452, 300)">修改密码</a>
 				</dd>
+				<!--<dd>-->
+					<!--<a onclick="x_admin_open('资讯','http://www.r9it.com')">技术博客</a>-->
+				<!--</dd>-->
 				<dd>
-					<a onclick="x_admin_open('资讯','http://www.r9it.com')">技术博客</a>
-				</dd>
-				<dd>
-					<a href="login.html">退出</a>
+					<a href="/login/loginOut">退出</a>
 				</dd>
 			</dl>
 		</li>
 		<li class="layui-nav-item to-index">
-			<a href="/">前台首页</a>
+			<a   target="_blank">前台首页</a>
 		</li>
 	</ul>
 </div>
@@ -145,87 +145,87 @@
 						</a>
 					</li>
 
-					<li>
-						<a _href="pages/components/progress.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>进度条</cite>
-						</a>
-					</li>
+					<!--<li>-->
+						<!--<a _href="pages/components/progress.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>进度条</cite>-->
+						<!--</a>-->
+					<!--</li>-->
 
-					<li>
-						<a _href="pages/components/city.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>城市联动</cite>
-						</a>
-					</li>
+					<!--<li>-->
+						<!--<a _href="pages/components/city.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>城市联动</cite>-->
+						<!--</a>-->
+					<!--</li>-->
 
-					<li>
-						<a _href="pages/components/unicode.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>图标</cite>
-						</a>
-					</li>
+					<!--<li>-->
+						<!--<a _href="pages/components/unicode.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>图标</cite>-->
+						<!--</a>-->
+					<!--</li>-->
 
 				</ul>
 			</li>
 
-			<li>
-				<a href="javascript:">
-					<i class="iconfont">&#xe6ce;</i>
-					<cite>图表统计</cite>
-					<i class="iconfont nav_right">&#xe697;</i>
-				</a>
-				<ul class="sub-menu">
-					<li>
-						<a _href="pages/echarts/echarts1.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>拆线图</cite>
-						</a>
-					</li>
-					<li>
-						<a _href="pages/echarts/echarts2.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>柱状图</cite>
-						</a>
-					</li>
-					<li>
-						<a _href="pages/echarts/echarts3.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>地图</cite>
-						</a>
-					</li>
-					<li>
-						<a _href="pages/echarts/echarts4.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>饼图</cite>
-						</a>
-					</li>
-					<li>
-						<a _href="pages/echarts/echarts5.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>雷达图</cite>
-						</a>
-					</li>
-					<li>
-						<a _href="pages/echarts/echarts6.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>k线图</cite>
-						</a>
-					</li>
-					<li>
-						<a _href="pages/echarts/echarts7.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>热力图</cite>
-						</a>
-					</li>
-					<li>
-						<a _href="pages/echarts/echarts8.html">
-							<i class="iconfont">&#xe6a7;</i>
-							<cite>仪表图</cite>
-						</a>
-					</li>
-				</ul>
-			</li>
+			<!--<li>-->
+				<!--<a href="javascript:">-->
+					<!--<i class="iconfont">&#xe6ce;</i>-->
+					<!--<cite>图表统计</cite>-->
+					<!--<i class="iconfont nav_right">&#xe697;</i>-->
+				<!--</a>-->
+				<!--<ul class="sub-menu">-->
+					<!--<li>-->
+						<!--<a _href="pages/echarts/echarts1.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>拆线图</cite>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<a _href="pages/echarts/echarts2.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>柱状图</cite>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<a _href="pages/echarts/echarts3.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>地图</cite>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<a _href="pages/echarts/echarts4.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>饼图</cite>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<a _href="pages/echarts/echarts5.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>雷达图</cite>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<a _href="pages/echarts/echarts6.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>k线图</cite>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<a _href="pages/echarts/echarts7.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>热力图</cite>-->
+						<!--</a>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<a _href="pages/echarts/echarts8.html">-->
+							<!--<i class="iconfont">&#xe6a7;</i>-->
+							<!--<cite>仪表图</cite>-->
+						<!--</a>-->
+					<!--</li>-->
+				<!--</ul>-->
+			<!--</li>-->
 
 		</ul>
 	</div>
@@ -242,7 +242,7 @@
 		</ul>
 		<div class="layui-tab-content">
 			<div class="layui-tab-item layui-show">
-				<iframe th:src="@{/home/welcome}" frameborder="0" id="iframe_0" class="x-iframe"></iframe>
+				<iframe src="/admin/welcome" frameborder="0" id="iframe_0" class="x-iframe"></iframe>
 			</div>
 		</div>
 	</div>
@@ -260,4 +260,11 @@
 <script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"  ></script>
 <script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"   ></script>
 <script type="text/javascript" th:src="@{/js/main.js}"   ></script>
+<!--<script src="http://pv.sohu.com/cityjson?ie=utf-8">-->
+<!--</script>-->
+<!--<script type="text/javascript" th:src="@{/js/clientIp.js}"   ></script>-->
+<!--<script>-->
+	<!--var cip =returnCitySN["cip"];-->
+	<!--var cname=returnCitySN["cname"]-->
+<!--</script>-->
 </html>

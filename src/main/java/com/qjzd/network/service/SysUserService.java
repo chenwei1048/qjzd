@@ -60,4 +60,9 @@ public class SysUserService {
         }
         return user;
     }
+
+
+    public int update(SysUser user){
+        return sysUserMapper.updateByPrimaryKey(user);
+    }
 }

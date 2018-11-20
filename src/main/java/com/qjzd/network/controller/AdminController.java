@@ -1,6 +1,14 @@
 package com.qjzd.network.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.qjzd.network.domain.Lookcount;
+import com.qjzd.network.service.LeaveWordService;
+import com.qjzd.network.service.LookCountService;
+import com.qjzd.network.service.NewsinformationService;
+import com.qjzd.network.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -14,14 +22,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private NewsinformationService newsinformationService;
+
+    @Autowired
+    private LeaveWordService leaveWordService;
+
+    @Autowired
+    private LookCountService lookCountService;
+
     @RequestMapping("/index")
     public String index(){
         return "pages/admin/index";
     }
 
     @RequestMapping("/welcome")
-    public String welcome(){
-        return "pages/welcome";
+    public String welcome(Model model){
+        model.addAttribute("proCount",productService.selectCount());
+        model.addAttribute("newsCount",newsinformationService.selectCount());
+        JSONObject param = new JSONObject();
+        model.addAttribute("leaveWordCount",leaveWordService.selectCount(param));
+        param.put("isRead","0");
+        model.addAttribute("noReadleaveWordCount",leaveWordService.selectCount(param));
+//        model.addAttribute("zfwCount",lookCountService.selectCount());
+        return "pages/admin/welcome";
     }
 
     @RequestMapping("/product/type")

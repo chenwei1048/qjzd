@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>welcome</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet"  th:href="@{/assets/css/main.css}"  />
+</head>
+
+<body>
+<div class="layui-fluid x-body" id="app">
+	<blockquote class="layui-elem-quote">欢迎管理员：
+		<span class="x-red" th:text="${session.user.username}"></span>！当前时间: {{ curentTime }}
+	</blockquote>
+
+
+
+	<fieldset class="layui-elem-field">
+		<legend>数据统计</legend>
+		<div class="layui-field-box">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-body">
+						<div class="layui-carousel x-admin-carousel x-admin-backlog" lay-anim="" lay-indicator="inside"
+							 lay-arrow="none" style="width: 100%; height: 90px;">
+							<div carousel-item="">
+								<ul class="layui-row layui-col-space10 layui-this">
+									<li class="layui-col-xs2">
+										<a href="javascript:" class="x-admin-backlog-body">
+											<h3>产品数量</h3>
+											<p>
+												<cite th:text="${proCount}">0</cite></p>
+										</a>
+									</li>
+									<li class="layui-col-xs2">
+										<a href="javascript:" class="x-admin-backlog-body">
+											<h3>新闻数量</h3>
+											<p>
+												<cite th:text="${newsCount}">0</cite></p>
+										</a>
+									</li>
+									<li class="layui-col-xs2">
+										<a href="javascript:" class="x-admin-backlog-body">
+											<h3>留言总数</h3>
+											<p>
+												<cite th:text="${leaveWordCount}">0</cite></p>
+										</a>
+									</li>
+									<li class="layui-col-xs2">
+										<a href="javascript:" class="x-admin-backlog-body">
+											<h3>未回复留言</h3>
+											<p>
+												<cite th:text="${noReadleaveWordCount}">0</cite></p>
+										</a>
+									</li>
+									<!--<li class="layui-col-xs2">-->
+										<!--<a href="javascript:;" class="x-admin-backlog-body">-->
+											<!--<h3>文章数</h3>-->
+											<!--<p>-->
+												<!--<cite>67</cite></p>-->
+										<!--</a>-->
+									<!--</li>-->
+									<!--<li class="layui-col-xs2">-->
+										<!--<a href="javascript:;" class="x-admin-backlog-body">-->
+											<!--<h3>文章数</h3>-->
+											<!--<p>-->
+												<!--<cite>6766</cite></p>-->
+										<!--</a>-->
+									<!--</li>-->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+
+	<fieldset class="layui-elem-field">
+		<legend>访问统计</legend>
+		<div class="layui-field-box">
+			<div class="layui-row layui-col-space15">
+				<div class="layui-col-sm6 layui-col-md3">
+					<div class="layui-card bg-gray">
+						<div class="layui-card-header">
+							访问量
+							<span class="layui-badge layui-bg-blue layuiadmin-badge">周</span>
+						</div>
+						<div class="layui-card-body layuiadmin-card-list">
+							<p class="layuiadmin-big-font">9,999,666</p>
+							<p>
+								总计访问量
+								<span class="layuiadmin-span-color">88万 <i
+									class="layui-inline layui-icon layui-icon-flag"></i></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-sm6 layui-col-md3">
+					<div class="layui-card bg-gray">
+						<div class="layui-card-header">
+							下载
+							<span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span>
+						</div>
+						<div class="layui-card-body layuiadmin-card-list">
+							<p class="layuiadmin-big-font">33,555</p>
+							<p>
+								新下载
+								<span class="layuiadmin-span-color">10% <i
+									class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-sm6 layui-col-md3">
+					<div class="layui-card bg-gray">
+						<div class="layui-card-header">
+							收入
+							<span class="layui-badge layui-bg-green layuiadmin-badge">年</span>
+						</div>
+						<div class="layui-card-body layuiadmin-card-list">
+
+							<p class="layuiadmin-big-font">999,666</p>
+							<p>
+								总收入
+								<span class="layuiadmin-span-color">*** <i
+									class="layui-inline layui-icon layui-icon-dollar"></i></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-sm6 layui-col-md3">
+					<div class="layui-card bg-gray">
+						<div class="layui-card-header">
+							活跃用户
+							<span class="layui-badge layui-bg-orange layuiadmin-badge">月</span>
+						</div>
+						<div class="layui-card-body layuiadmin-card-list">
+
+							<p class="layuiadmin-big-font">66,666</p>
+							<p>
+								最近一个月
+								<span class="layuiadmin-span-color">15% <i
+									class="layui-inline layui-icon layui-icon-user"></i></span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+
+	<fieldset class="layui-elem-field">
+		<legend>系统信息</legend>
+		<div class="layui-field-box">
+			<table class="layui-table">
+				<tbody>
+				<tr>
+					<th>系统版本</th>
+					<td>1.0</td></tr>
+				<tr>
+					<th>服务器地址</th>
+					<td>腾讯云服务器</td></tr>
+				<tr>
+					<th>操作系统</th>
+					<td>windows server 2012</td></tr>
+				<tr>
+					<th>运行环境</th>
+					<td>Apache-tomcat 1.7</td></tr>
+				<tr>
+					<th>JDK版本</th>
+					<td>1.8.0_144</td></tr>
+				<tr>
+					<th>MYSQL版本</th>
+					<td>5.6.39</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+
+	<fieldset class="layui-elem-field">
+		<legend>开发团队</legend>
+		<div class="layui-field-box">
+			<table class="layui-table">
+				<tbody>
+				<tr>
+					<th>作者</th>
+					<td>陈威(cherry_5917@163.com)</td>
+				</tr>
+				<tr>
+					<th>个人博客</th>
+					<td>
+						<a href="http://www.lovecherry7.cn" class='x-a' target="_blank">http://www.lovecherry7.cn</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+
+</div>
+
+<script type="text/javascript" th:src="@{/js/libs/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/vue/vue.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script>
+    //<![CDATA[
+	var APP = new Vue({
+		el: "#app",
+		data: {
+			now: new Date(),
+			tasks: [
+				{finished: true, time: "两小时", name: "需求讨论会", progress:2},
+				{finished: false, time: "一天", name: "前端架构", progress:0},
+				{finished: true, time: "两天半", name: "后端架构", progress:2},
+				{finished: false, time: "五天", name: "用户模块开发", progress:1},
+				{finished: true, time: "三天半", name: "交易模块开发", progress:2},
+				{finished: false, time: "四天半", name: "订单模块开发", progress:0},
+				{finished: false, time: "三天", name: "测试 + 修 Bug", progress:0},
+			]
+		},
+		computed: {
+			curentTime: function () {
+				function formatNumber(num) {
+					return num <= 9 ? "0" + num : num;
+				}
+
+				var seperator1 = "-";
+				var seperator2 = ":";
+				return this.now.getFullYear() + seperator1
+					+ formatNumber(this.now.getMonth()) + seperator1
+					+ formatNumber(this.now.getDate()) + " "
+					+ formatNumber(this.now.getHours()) + seperator2
+					+ formatNumber(this.now.getMinutes()) + seperator2
+					+ formatNumber(this.now.getSeconds());
+			}
+		},
+		
+		methods: {
+
+			// checkbox onchange event.
+			checkboxClick: function (checkbox) {
+				var index = checkbox.getAttribute("index");
+				if (checkbox.checked) {
+					this.tasks[index].progress = 2;
+					this.tasks[index].finished = true;
+				} else {
+					this.tasks[index].progress = 0;
+					this.tasks[index].finished = false;
+				}
+			}
+		}
+	});
+
+	layui.use(['form'], function () {
+		var form = layui.form;
+		form.on('checkbox(task)', function(data) {
+			APP.checkboxClick(data.elem);
+		})
+	});
+    //]]>
+</script>
+</body>
+
+</html>

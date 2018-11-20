@@ -1,5 +1,12 @@
 package com.qjzd.network;
 
+import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.model.CityResponse;
+import com.maxmind.geoip2.record.*;
+
+import java.io.File;
+import java.net.InetAddress;
+
 /**
  * @Author:
  * @Description:
@@ -9,7 +16,6 @@ package com.qjzd.network;
  */
 public class Test {
 
-    public static void main(String arg[]){
 
-    }
+
 }

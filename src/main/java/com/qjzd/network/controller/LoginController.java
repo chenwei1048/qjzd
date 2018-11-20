@@ -51,5 +51,11 @@ public class LoginController {
         return Result.success(user);
     }
 
-
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpSession session){
+        if(session.getAttribute("user")!=null){
+            session.removeAttribute("user");
+        }
+        return "pages/admin/login";
+    }
 }

@@ -54,6 +54,15 @@ public class LeaveWordService {
         return leavewordMapper.selectByExample(example);
     }
 
+    public int selectCount(JSONObject jsonObject){
+        LeavewordExample example =new LeavewordExample();
+        LeavewordExample.Criteria criteria = example.createCriteria();
+        if(jsonObject.containsKey("isRead")){
+            criteria.andIsReadEqualTo(jsonObject.getString("isRead"));
+        }
+        return leavewordMapper.countByExample(example);
+    }
+
     public int updateByPrimaryKeySelective(Leaveword leaveword){
         LeavewordExample example = new LeavewordExample();
         LeavewordExample.Criteria criteria = example.createCriteria();

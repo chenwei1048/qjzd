@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 public class LoginVo {
 	
 	@NotNull
-	@Length(min=10)
+	@Length(min=5)
 	private String username;
 	
 	@NotNull

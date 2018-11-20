@@ -18,6 +18,9 @@ public class CodeMsg {
 	public static CodeMsg MOBILE_ERROR = new CodeMsg(500213, "手机号格式错误");
 	public static CodeMsg USERNAME_NOT_EXIST = new CodeMsg(500214, "用户名不存在");
 	public static CodeMsg PASSWORD_ERROR = new CodeMsg(500215, "密码错误");
+	public static CodeMsg OLDPASS_ERROR = new CodeMsg(500216, "旧密码错误");
+	public static CodeMsg REPASS_ERROR = new CodeMsg(500217, "两次密码输入不正确");
+	public static CodeMsg TOWPASS_ERROR = new CodeMsg(500218, "新密码与旧密码相同");
 
 	//基本信息模块
 	public static CodeMsg TYPE_ERROR = new CodeMsg(500216, "类型不能为空或不正确");
@@ -30,6 +33,10 @@ public class CodeMsg {
 	//产品模块 5003XX
 	public static CodeMsg TYPENAME_ALREADY_EXISTED = new CodeMsg(500310, "名称已存在");
 	public static CodeMsg PRODUCT_EXISTED_TYPE = new CodeMsg(500310, "存在此类型的产品，无法删除!");
+
+	//统计模块
+	public static CodeMsg IP_EMPTY = new CodeMsg(500400, "ip为空");
+
 	//订单模块 5004XX
 	
 	//秒杀模块 5005XX

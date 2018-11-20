@@ -35,6 +35,10 @@ public class NewsinformationService {
         return newsinformationMapper.selectByExample(example);
     }
 
+    public int selectCount(){
+        return newsinformationMapper.countByExample(new NewsinformationExample());
+    }
+
     public Newsinformation selectById(Long id){
         return newsinformationMapper.selectByPrimaryKey(id);
     }
