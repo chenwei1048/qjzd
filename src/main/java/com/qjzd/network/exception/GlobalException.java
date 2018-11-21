@@ -12,8 +12,7 @@ public class GlobalException extends RuntimeException{
 		super(cm.toString());
 		this.cm = cm;
 	}
-
-	public CodeMsg getCm() {
+  	public CodeMsg getCm() {
 		return cm;
 	}
 

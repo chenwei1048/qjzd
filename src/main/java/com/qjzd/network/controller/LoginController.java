@@ -35,7 +35,10 @@ public class LoginController {
     private SysUserService userService;
 
     @RequestMapping()
-    public String toLogin(){
+    public String toLogin(HttpSession session){
+        if(session.getAttribute("user")!=null){
+            return "redirect:/admin/index";
+        }
         return "pages/admin/login";
     }
 

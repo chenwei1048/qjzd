@@ -3,6 +3,7 @@ package com.qjzd.network.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.qjzd.network.domain.Newsinformation;
+import com.qjzd.network.domain.Product;
 import com.qjzd.network.result.CodeMsg;
 import com.qjzd.network.result.Result;
 import com.qjzd.network.service.NewsinformationService;
@@ -50,6 +51,24 @@ public class NewsinformationController {
 
     }
 
+
+    @ResponseBody
+    @RequestMapping("/insert")
+    public Result insert(Newsinformation newsinformation){
+        if(CommonUtils.isNull(newsinformation)){
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
+        if(CommonUtils.isNull(newsinformation.getTitle())){
+            return Result.error(CodeMsg.TITLE_ERROR);
+        }
+        if(CommonUtils.isNull(newsinformation.getContext())){
+            return Result.error(CodeMsg.CONTEXT_ERROR);
+        }
+        newsinformation.setCreatetime(new Date());
+        int res = newsinformationService.insert(newsinformation);
+        return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
+    }
+
     @ResponseBody
     @RequestMapping("/update")
     public Result update(Newsinformation product){
@@ -77,6 +96,11 @@ public class NewsinformationController {
     @RequestMapping("/list_view")
     public String list_view(){
         return "pages/admin/news/list";
+    }
+
+    @RequestMapping("/add_view")
+    public String add_view(){
+        return "pages/admin/news/add";
     }
 
     @RequestMapping("/see")

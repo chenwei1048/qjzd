@@ -3,7 +3,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import com.qjzd.network.result.Result;
-import com.qjzd.network.util.ConfigUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +20,8 @@ import java.util.Date;
 @RequestMapping("/commodity")
 public class CommodityController {
 
-    private final String ip = ConfigUtil.getString("IPCONFIG");
+    @Value("${IPCONFIG}")
+    private String ip ;
 
     @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
     @ResponseBody

@@ -95,7 +95,7 @@ public class LeaveWordController {
 
     @RequestMapping("/view")
     public String view(){
-        return "/pages/admin/leaveWord/list";
+        return "pages/admin/leaveWord/list";
     }
 
 }

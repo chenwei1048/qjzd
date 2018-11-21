@@ -12,7 +12,6 @@
 
 <body>
 <div class="x-body" >
-        <input type="hidden"   th:value="${data.id}"   id="proId"/>
 
         <div class="layui-form-item">
             <label for="title" class="layui-form-label">
@@ -20,7 +19,7 @@
                 新闻标题
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="title" th:value="${data.title}"   name="title"  class="layui-input"/>
+                <input type="text" id="title"   name="title"  class="layui-input"/>
             </div>
         </div>
 
@@ -32,7 +31,7 @@
             <label class="layui-form-label">
                 <!-- placeholder -->
             </label>
-            <button class="layui-btn"  onclick="save()">保存</button>
+            <button class="layui-btn"  onclick="save()">添加</button>
             <button class="layui-btn layui-btn-normal"  onclick="exit()">取消</button>
 
         </div>
@@ -48,11 +47,10 @@
 <script type="text/javascript" th:src="@{/umeditor/lang/zh-cn/zh-cn.js}" ></script>
 <script  th:inline="javascript">
     var um = UM.getEditor('myEditor');
-    um.setContent([[${data.context}]]);
 
     //<![CDATA[
     var G = {
-    	editUrl: "/news/update"
+    	addUrl: "/news/insert"
     };
     function save() {
         var id=$("#proId").val();
@@ -61,16 +59,16 @@
         var src=$("#img1").attr("src");
         var context = $("#myEditor").html();
         if(title==null||title.trim()==""){
-            layer.msg("产品不能为空！！！");
+            layer.msg("新闻标题不能为空！！！");
             return;
         }
 
         if(context==null||context.trim()==""){
-            layer.msg("产品描述不能为空！！！");
+            layer.msg("新闻描述不能为空！！！");
             return;
         }
         $.ajax({
-            url: G.editUrl,
+            url: G.addUrl,
             type: "POST",
             data:{
                 id:id,
@@ -82,7 +80,7 @@
             success:function(data){
                 layer.closeAll();
                 if(data.code == 1){
-                    var handler = top.layer.alert("数据更新成功", {
+                    var handler = top.layer.alert("数据添加成功", {
                         icon: 6
                     }, function () {
                         top.layer.close(handler);

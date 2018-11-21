@@ -117,6 +117,17 @@
 		  <artifactId>commons-configuration</artifactId>
 		  <version>1.9</version>
 	  </dependency>
+	  <!--根据ip获取城市-->
+	  <dependency>
+		  <groupId>com.maxmind.geoip2</groupId>
+		  <artifactId>geoip2</artifactId>
+		  <version>2.8.1</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>javax.mail</groupId>
+		  <artifactId>javax.mail-api</artifactId>
+		  <version>1.5.4</version>
+	  </dependency>
   </dependencies>
 
 	<build>
@@ -130,7 +141,12 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
+
 	</build>
 
 </project>

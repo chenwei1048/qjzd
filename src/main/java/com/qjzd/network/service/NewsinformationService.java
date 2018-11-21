@@ -35,6 +35,10 @@ public class NewsinformationService {
         return newsinformationMapper.selectByExample(example);
     }
 
+    public int insert(Newsinformation newsinformation){
+        return newsinformationMapper.insert(newsinformation);
+    }
+
     public int selectCount(){
         return newsinformationMapper.countByExample(new NewsinformationExample());
     }

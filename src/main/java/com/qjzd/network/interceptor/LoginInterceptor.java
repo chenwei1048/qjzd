@@ -32,11 +32,15 @@ public class LoginInterceptor implements HandlerInterceptor {
         Object loginName = request.getSession().getAttribute("user");
         if (null == loginName || !(loginName instanceof SysUser)) {
             // 未登录，重定向到登录页
-            response.sendRedirect("/login");
+            if(!"/admin/index".equals(request.getRequestURI())){
+                response.getWriter().write("<script language=javascript>parent.location.href='/login';</script>");
+            }else{
+                response.sendRedirect("/login");
+            }
             return false;
         }
         SysUser user = (SysUser) loginName;
-        System.out.println("当前用户已登录，登录的用户名为： " + user.getUsername());
+        System.out.println("当前用户已登录，登录的用户名为： " + user.getUsername()+request.getRequestURI());
         return true;
     }
 
