@@ -2,7 +2,6 @@ package com.qjzd.network.vo;
 
 import javax.validation.constraints.NotNull;
 
-import com.qjzd.network.validator.IsMobile;
 import org.hibernate.validator.constraints.Length;
 
 
