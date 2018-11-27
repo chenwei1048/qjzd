@@ -1,7 +1,6 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.admin;
 
 import com.alibaba.fastjson.JSONObject;
-import com.qjzd.network.domain.Lookcount;
 import com.qjzd.network.service.LeaveWordService;
 import com.qjzd.network.service.LookCountService;
 import com.qjzd.network.service.NewsinformationService;
@@ -47,13 +46,8 @@ public class AdminController {
         model.addAttribute("leaveWordCount",leaveWordService.selectCount(param));
         param.put("isRead","0");
         model.addAttribute("noReadleaveWordCount",leaveWordService.selectCount(param));
-//        model.addAttribute("zfwCount",lookCountService.selectCount());
         return "pages/admin/welcome";
     }
 
-    @RequestMapping("/product/type")
-    public String productType(){
-        return "pages/product/type";
-    }
 
 }

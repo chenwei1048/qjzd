@@ -1,4 +1,4 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.qt;
 
 import com.qjzd.network.result.CodeMsg;
 import com.qjzd.network.result.Result;

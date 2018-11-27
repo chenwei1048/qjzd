@@ -1,4 +1,4 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.admin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjzd.network.domain.BasInformation;
@@ -24,7 +24,7 @@ import java.util.*;
  * @parameter
  */
 @Controller
-@RequestMapping("/bas")
+@RequestMapping("/admin/bas")
 public class BasController {
 
     @Autowired

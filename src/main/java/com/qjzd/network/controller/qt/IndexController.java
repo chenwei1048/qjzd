@@ -1,4 +1,4 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.qt;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjzd.network.annotation.MyOperation;
@@ -57,7 +57,7 @@ public class IndexController {
         }
         model.addAttribute("proLists",lists);
         model.addAttribute("types",types);
-        return "pages/qt/index";
+        return "pages/qt/index2";
     }
 
 

@@ -1,4 +1,4 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.admin;
 
 import com.qjzd.network.domain.SysUser;
 import com.qjzd.network.result.CodeMsg;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
  * @parameter
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin/user")
 public class SysUserController {
 
     @Autowired

@@ -25,7 +25,7 @@
     </div>
 
     <blockquote class="layui-elem-quote layui-elem-quote-sm">
-        <button class="layui-btn layui-btn-sm" onclick="x_open_full('添加新闻','/news/add_view')">
+        <button class="layui-btn layui-btn-sm" onclick="x_open_full('添加新闻','/admin/news/add_view')">
             <i class="layui-icon">&#xe654;</i>添加
         </button>
     </blockquote>
@@ -62,10 +62,10 @@
     //<![CDATA[
     //全局数据
     var G = {
-        dataListUrl: "/news/list", // 获取数据接口
-        delUrl: "/news/del", // 删除后端接口
-        editUrl:"/news/edit",
-        seeUrl:"/news/see",
+        dataListUrl: "/admin/news/list", // 获取数据接口
+        delUrl: "/admin/news/del", // 删除后端接口
+        editUrl:"/admin/news/edit",
+        seeUrl:"/admin/news/see",
         page: 1,
         pagesize: 10,
         count: 0

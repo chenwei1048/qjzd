@@ -1,4 +1,4 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.admin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
@@ -26,7 +26,7 @@ import java.util.List;
  * @parameter
  */
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/admin/product")
 public class ProductController {
 
     @Autowired
@@ -60,7 +60,7 @@ public class ProductController {
     public String edit(Long id,Model model) {
         model.addAttribute("data",productService.selectById(id));
         model.addAttribute("types",productService.selectTypes(new JSONObject()));
-        return "/pages/admin/product/product-edit";
+        return "pages/admin/product/product-edit";
     }
     @RequestMapping("/see")
     public String see(Long id,Model model)throws Exception{
@@ -95,7 +95,7 @@ public class ProductController {
     @RequestMapping("/add_view")
     public String add_view(Long id,Model model) {
         model.addAttribute("types",productService.selectTypes(new JSONObject()));
-        return "/pages/admin/product/add";
+        return "pages/admin/product/add";
     }
 
     @ResponseBody

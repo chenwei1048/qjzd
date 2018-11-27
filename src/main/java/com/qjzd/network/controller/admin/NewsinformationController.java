@@ -1,4 +1,4 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.admin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
@@ -23,7 +23,7 @@ import java.util.*;
  * @parameter
  */
 @Controller
-@RequestMapping("/news")
+@RequestMapping("/admin/news")
 public class NewsinformationController {
 
     @Autowired

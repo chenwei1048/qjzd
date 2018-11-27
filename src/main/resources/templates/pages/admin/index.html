@@ -24,24 +24,6 @@
 				<i class="layui-icon" title="刷新页面">&#xe9aa;</i>
 			</a>
 		</li>
-		<!--<li class="layui-nav-item">-->
-			<!--<a href="javascript:">DEMO菜单</a>-->
-			<!--<dl class="layui-nav-child">-->
-				<!--&lt;!&ndash; 二级菜单 &ndash;&gt;-->
-				<!--<dd>-->
-					<!--<a href="javascript:void(0);">-->
-						<!--<i class="iconfont">&#xe6a2;</i>资讯</a>-->
-				<!--</dd>-->
-				<!--<dd>-->
-					<!--<a href="javascript:void(0);">-->
-						<!--<i class="iconfont">&#xe6a8;</i>图片</a>-->
-				<!--</dd>-->
-				<!--<dd>-->
-					<!--<a href="javascript:void(0);">-->
-						<!--<i class="iconfont">&#xe6b8;</i>用户</a>-->
-				<!--</dd>-->
-			<!--</dl>-->
-		<!--</li>-->
 	</ul>
 	<ul class="layui-nav right" lay-filter="">
 		<li class="layui-nav-item">
@@ -49,18 +31,15 @@
 			<dl class="layui-nav-child">
 				<!-- 二级菜单 -->
 				<dd>
-					<a onclick="x_admin_open('修改密码','/user/to_upPass', 452, 300)">修改密码</a>
+					<a onclick="x_admin_open('修改密码','/admin/user/to_upPass', 452, 300)">修改密码</a>
 				</dd>
-				<!--<dd>-->
-					<!--<a onclick="x_admin_open('资讯','http://www.r9it.com')">技术博客</a>-->
-				<!--</dd>-->
 				<dd>
-					<a href="/login/loginOut">退出</a>
+					<a href="/admin/login/loginOut">退出</a>
 				</dd>
 			</dl>
 		</li>
 		<li class="layui-nav-item to-index">
-			<a   target="_blank">前台首页</a>
+			<a href="/index"  target="_blank">前台首页</a>
 		</li>
 	</ul>
 </div>
@@ -78,13 +57,13 @@
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a _href="/bas/introduce">
+						<a _href="/admin/bas/introduce">
 							<i class="iconfont">&#xe6a7;</i>
 							<cite>关于我们</cite>
 						</a>
 					</li>
 					<li>
-						<a _href="/bas/contact">
+						<a _href="/admin/bas/contact">
 							<i class="iconfont">&#xe6a7;</i>
 							<cite>联系我们</cite>
 						</a>
@@ -99,13 +78,13 @@
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a _href="/product/type">
+						<a _href="/admin/product/type">
 							<i class="iconfont">&#xe6a7;</i>
 							<cite>产品类型</cite>
 						</a>
 					</li>
 					<li>
-						<a _href="/product/product_view">
+						<a _href="/admin/product/product_view">
 							<i class="iconfont">&#xe6a7;</i>
 							<cite>产品列表</cite>
 						</a>
@@ -121,7 +100,7 @@
 				</a>
 				<ul class="sub-menu">
 					<li>
-						<a _href="/news/list_view">
+						<a _href="/admin/news/list_view">
 							<i class="iconfont">&#xe6a7;</i>
 							<cite>新闻列表</cite>
 						</a>
@@ -139,93 +118,13 @@
 				<ul class="sub-menu">
 
 					<li>
-						<a _href="/leaveWord/view">
+						<a _href="/admin/leaveWord/view">
 							<i class="iconfont">&#xe6a7;</i>
 							<cite>留言列表</cite>
 						</a>
 					</li>
-
-					<!--<li>-->
-						<!--<a _href="pages/components/progress.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>进度条</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-
-					<!--<li>-->
-						<!--<a _href="pages/components/city.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>城市联动</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-
-					<!--<li>-->
-						<!--<a _href="pages/components/unicode.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>图标</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-
 				</ul>
 			</li>
-
-			<!--<li>-->
-				<!--<a href="javascript:">-->
-					<!--<i class="iconfont">&#xe6ce;</i>-->
-					<!--<cite>图表统计</cite>-->
-					<!--<i class="iconfont nav_right">&#xe697;</i>-->
-				<!--</a>-->
-				<!--<ul class="sub-menu">-->
-					<!--<li>-->
-						<!--<a _href="pages/echarts/echarts1.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>拆线图</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<a _href="pages/echarts/echarts2.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>柱状图</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<a _href="pages/echarts/echarts3.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>地图</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<a _href="pages/echarts/echarts4.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>饼图</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<a _href="pages/echarts/echarts5.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>雷达图</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<a _href="pages/echarts/echarts6.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>k线图</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<a _href="pages/echarts/echarts7.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>热力图</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<a _href="pages/echarts/echarts8.html">-->
-							<!--<i class="iconfont">&#xe6a7;</i>-->
-							<!--<cite>仪表图</cite>-->
-						<!--</a>-->
-					<!--</li>-->
-				<!--</ul>-->
-			<!--</li>-->
 
 		</ul>
 	</div>

@@ -33,9 +33,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (null == loginName || !(loginName instanceof SysUser)) {
             // 未登录，重定向到登录页
             if(!"/admin/index".equals(request.getRequestURI())){
-                response.getWriter().write("<script language=javascript>parent.location.href='/login';</script>");
+                response.getWriter().write("<script language=javascript>parent.location.href='/admin/login';</script>");
             }else{
-                response.sendRedirect("/login");
+                response.sendRedirect("/admin/login");
             }
             return false;
         }

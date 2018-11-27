@@ -1,4 +1,4 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.api;
 
 import com.qjzd.network.util.Uploader;
 import org.springframework.stereotype.Controller;

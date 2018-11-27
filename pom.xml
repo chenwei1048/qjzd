@@ -48,11 +48,8 @@
 		<version>1.0.5</version>
 	</dependency>
 	
-	<dependency>
-	    <groupId>redis.clients</groupId>
-	    <artifactId>jedis</artifactId>
-	</dependency>
-	
+
+
 	<dependency>
 	    <groupId>com.alibaba</groupId>
 	    <artifactId>fastjson</artifactId>

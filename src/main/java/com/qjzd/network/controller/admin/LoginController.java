@@ -1,11 +1,9 @@
-package com.qjzd.network.controller;
+package com.qjzd.network.controller.admin;
 
 import com.qjzd.network.domain.SysUser;
-import com.qjzd.network.exception.GlobalException;
 import com.qjzd.network.result.CodeMsg;
 import com.qjzd.network.result.Result;
 import com.qjzd.network.service.SysUserService;
-import com.qjzd.network.util.CommonUtils;
 import com.qjzd.network.vo.LoginVo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -26,7 +22,7 @@ import javax.validation.Valid;
  * @parameter
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/admin/login")
 public class LoginController {
 
     private Logger logger = Logger.getLogger(LoginController.class);
