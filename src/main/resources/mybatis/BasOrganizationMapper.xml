@@ -7,8 +7,9 @@
     <result column="contacts" property="contacts" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
+    <result column="creatTime" property="creatTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, contacts, phone, fax, address, creattime
+    id, title, contacts, phone, fax, email, address, creatTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qjzd.network.domain.BasOrganizationExample" >
     select
@@ -102,22 +103,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.qjzd.network.domain.BasOrganization" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into bas_organization (title, contacts, phone, 
-      fax, address, creattime
-      )
-    values (#{title,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{fax,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}
-      )
+    insert into bas_organization (id, title, contacts, 
+      phone, fax, email, 
+      address, creatTime)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.qjzd.network.domain.BasOrganization" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into bas_organization
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="title != null" >
         title,
       </if>
@@ -130,14 +128,20 @@
       <if test="fax != null" >
         fax,
       </if>
+      <if test="email != null" >
+        email,
+      </if>
       <if test="address != null" >
         address,
       </if>
-      <if test="creattime != null" >
-        creattime,
+      <if test="creatTime != null" >
+        creatTime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
@@ -150,11 +154,14 @@
       <if test="fax != null" >
         #{fax,jdbcType=VARCHAR},
       </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="creattime != null" >
-        #{creattime,jdbcType=TIMESTAMP},
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -182,11 +189,14 @@
       <if test="record.fax != null" >
         fax = #{record.fax,jdbcType=VARCHAR},
       </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
       <if test="record.address != null" >
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.creattime != null" >
-        creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      <if test="record.creatTime != null" >
+        creatTime = #{record.creatTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -200,8 +210,9 @@
       contacts = #{record.contacts,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       fax = #{record.fax,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
-      creattime = #{record.creattime,jdbcType=TIMESTAMP}
+      creatTime = #{record.creatTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -221,11 +232,14 @@
       <if test="fax != null" >
         fax = #{fax,jdbcType=VARCHAR},
       </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="creattime != null" >
-        creattime = #{creattime,jdbcType=TIMESTAMP},
+      <if test="creatTime != null" >
+        creatTime = #{creatTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -236,8 +250,9 @@
       contacts = #{contacts,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       fax = #{fax,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP}
+      creatTime = #{creatTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

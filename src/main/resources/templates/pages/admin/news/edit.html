@@ -48,7 +48,7 @@
 <script type="text/javascript" th:src="@{/umeditor/lang/zh-cn/zh-cn.js}" ></script>
 <script  th:inline="javascript">
     var um = UM.getEditor('myEditor');
-    um.setContent([[${data.context}]]);
+    um.setContent([[${data.content}]]);
 
     //<![CDATA[
     var G = {
@@ -59,13 +59,13 @@
         var type=$("#type").val();
         var title=$("#title").val();
         var src=$("#img1").attr("src");
-        var context = $("#myEditor").html();
+        var content = $("#myEditor").html();
         if(title==null||title.trim()==""){
             layer.msg("产品不能为空！！！");
             return;
         }
 
-        if(context==null||context.trim()==""){
+        if(content==null||content.trim()==""){
             layer.msg("产品描述不能为空！！！");
             return;
         }
@@ -77,7 +77,7 @@
                 type:type ,
                 title:title,
                 picture:src,
-                context:context
+                content:content
             },
             success:function(data){
                 layer.closeAll();

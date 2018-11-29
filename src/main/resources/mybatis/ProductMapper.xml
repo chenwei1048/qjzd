@@ -6,8 +6,9 @@
     <result column="type" property="type" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="picture" property="picture" jdbcType="VARCHAR" />
-    <result column="context" property="context" jdbcType="VARCHAR" />
-    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="contentNoHtml" property="contentNoHtml" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, type, title, picture, context, createTime
+    id, type, title, picture, content, contentNoHtml, createTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qjzd.network.domain.ProductExample" >
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.qjzd.network.domain.Product" >
     insert into product (id, type, title, 
-      picture, context, createTime
-      )
+      picture, content, contentNoHtml, 
+      createTime)
     values (#{id,jdbcType=BIGINT}, #{type,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
-      #{picture,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
-      )
+      #{picture,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{contentNoHtml,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.qjzd.network.domain.Product" >
     insert into product
@@ -123,10 +124,13 @@
       <if test="picture != null" >
         picture,
       </if>
-      <if test="context != null" >
-        context,
+      <if test="content != null" >
+        content,
       </if>
-      <if test="createtime != null" >
+      <if test="contentNoHtml != null" >
+        contentNoHtml,
+      </if>
+      <if test="createTime != null" >
         createTime,
       </if>
     </trim>
@@ -143,11 +147,14 @@
       <if test="picture != null" >
         #{picture,jdbcType=VARCHAR},
       </if>
-      <if test="context != null" >
-        #{context,jdbcType=VARCHAR},
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="contentNoHtml != null" >
+        #{contentNoHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -172,11 +179,14 @@
       <if test="record.picture != null" >
         picture = #{record.picture,jdbcType=VARCHAR},
       </if>
-      <if test="record.context != null" >
-        context = #{record.context,jdbcType=VARCHAR},
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
-      <if test="record.createtime != null" >
-        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      <if test="record.contentNoHtml != null" >
+        contentNoHtml = #{record.contentNoHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -189,8 +199,9 @@
       type = #{record.type,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
-      context = #{record.context,jdbcType=VARCHAR},
-      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+      content = #{record.content,jdbcType=VARCHAR},
+      contentNoHtml = #{record.contentNoHtml,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -207,11 +218,14 @@
       <if test="picture != null" >
         picture = #{picture,jdbcType=VARCHAR},
       </if>
-      <if test="context != null" >
-        context = #{context,jdbcType=VARCHAR},
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="contentNoHtml != null" >
+        contentNoHtml = #{contentNoHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -221,8 +235,9 @@
     set type = #{type,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
-      context = #{context,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP}
+      content = #{content,jdbcType=VARCHAR},
+      contentNoHtml = #{contentNoHtml,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

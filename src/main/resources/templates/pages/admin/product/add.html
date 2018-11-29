@@ -90,8 +90,8 @@
         var form = layui.form;
         //监听提交
         form.on('submit(update)', function (data) {
-            var context = $("#editor").html();
-            if(context==null||context.trim()==""){
+            var content = $("#editor").html();
+            if(content==null||content.trim()==""){
                 layer.msg("产品描述不能为空！！！");
                 return false;
             }
@@ -102,7 +102,7 @@
                     type: $("#type").val(),
                     title:$("#title").val(),
                     picture:$("#img1").attr("src"),
-                    context:context
+                    content:content
                 },
                 success:function(data){
                     layer.closeAll();

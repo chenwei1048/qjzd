@@ -1,0 +1,63 @@
+IPCONFIG: 127.0.0.1:8080
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    minIdle: 1
+    validationQuery: select 'x'
+    initialSize: 1
+    maxWait: 60000
+    poolPreparedStatements: true
+    filters: stat
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/qjzd?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    password: root
+    testOnBorrow: false
+    maxOpenPreparedStatements: 20
+    testWhileIdle: true
+    minEvictableIdleTimeMillis: 300000
+    timeBetweenEvictionRunsMillis: 60000
+    testOnReturn: false
+    driver-class-name: com.mysql.jdbc.Driver
+    maxActive: 2
+    username: root
+  thymeleaf:
+    mode: HTML5
+    cache: false
+    prefix: classpath:/templates/
+    content-type: text/html
+    encoding: UTF-8
+    suffix: .html
+    enabled: true
+  devtools:
+    restart:
+      enabled: true
+server:
+  port: 8080
+  tomcat:
+      max-http-header-size: 8192
+  session:
+    timeout: 28800
+pagehelper:
+  supportMethodsArguments: true
+  reasonable: true
+  helperDialect: mysql
+  params: count=countSql
+mybatis:
+  configuration:
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+    map-underscore-to-camel-case: true
+  mapperLocations: classpath:/mybatis/**/*Mapper.xml
+  type-aliases-package: com.qjzd.network.domain
+logging:
+  file: logs/spring-boot-logging.log
+  level:
+    com:
+      qjzd:
+        network:
+          controller: WARN
+          dao: DEBUG
+  pattern:
+    console: '%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n'
+    file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'

@@ -9,9 +9,11 @@ public class BasInformation {
 
     private String title;
 
-    private String context;
+    private String content;
 
-    private Date createtime;
+    private Date createTime;
+
+    private String contentNoHtml;
 
     public Long getId() {
         return id;
@@ -37,19 +39,27 @@ public class BasInformation {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context == null ? null : context.trim();
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getContentNoHtml() {
+        return contentNoHtml;
+    }
+
+    public void setContentNoHtml(String contentNoHtml) {
+        this.contentNoHtml = contentNoHtml == null ? null : contentNoHtml.trim();
     }
 }

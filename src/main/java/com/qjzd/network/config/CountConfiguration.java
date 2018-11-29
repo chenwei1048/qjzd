@@ -23,7 +23,7 @@ import java.util.List;
  * @MOdifyBy:
  * @parameter
  */
-@Configuration
+//@Configuration
 public class CountConfiguration implements WebMvcConfigurer {
     @Override
     public void configurePathMatch(PathMatchConfigurer pathMatchConfigurer) {

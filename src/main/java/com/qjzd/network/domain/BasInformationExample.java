@@ -295,133 +295,203 @@ public class BasInformationExample {
             return (Criteria) this;
         }
 
-        public Criteria andContextIsNull() {
-            addCriterion("context is null");
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
             return (Criteria) this;
         }
 
-        public Criteria andContextIsNotNull() {
-            addCriterion("context is not null");
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContextEqualTo(String value) {
-            addCriterion("context =", value, "context");
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextNotEqualTo(String value) {
-            addCriterion("context <>", value, "context");
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextGreaterThan(String value) {
-            addCriterion("context >", value, "context");
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextGreaterThanOrEqualTo(String value) {
-            addCriterion("context >=", value, "context");
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextLessThan(String value) {
-            addCriterion("context <", value, "context");
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextLessThanOrEqualTo(String value) {
-            addCriterion("context <=", value, "context");
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextLike(String value) {
-            addCriterion("context like", value, "context");
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextNotLike(String value) {
-            addCriterion("context not like", value, "context");
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextIn(List<String> values) {
-            addCriterion("context in", values, "context");
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextNotIn(List<String> values) {
-            addCriterion("context not in", values, "context");
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextBetween(String value1, String value2) {
-            addCriterion("context between", value1, value2, "context");
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
             return (Criteria) this;
         }
 
-        public Criteria andContextNotBetween(String value1, String value2) {
-            addCriterion("context not between", value1, value2, "context");
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeIsNull() {
+        public Criteria andCreateTimeIsNull() {
             addCriterion("createTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeIsNotNull() {
+        public Criteria andCreateTimeIsNotNull() {
             addCriterion("createTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeEqualTo(Date value) {
-            addCriterion("createTime =", value, "createtime");
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("createTime =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotEqualTo(Date value) {
-            addCriterion("createTime <>", value, "createtime");
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("createTime <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThan(Date value) {
-            addCriterion("createTime >", value, "createtime");
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("createTime >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("createTime >=", value, "createtime");
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("createTime >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThan(Date value) {
-            addCriterion("createTime <", value, "createtime");
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("createTime <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
-            addCriterion("createTime <=", value, "createtime");
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("createTime <=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeIn(List<Date> values) {
-            addCriterion("createTime in", values, "createtime");
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("createTime in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotIn(List<Date> values) {
-            addCriterion("createTime not in", values, "createtime");
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("createTime not in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeBetween(Date value1, Date value2) {
-            addCriterion("createTime between", value1, value2, "createtime");
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("createTime between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
-            addCriterion("createTime not between", value1, value2, "createtime");
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("createTime not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlIsNull() {
+            addCriterion("contentNoHtml is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlIsNotNull() {
+            addCriterion("contentNoHtml is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlEqualTo(String value) {
+            addCriterion("contentNoHtml =", value, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlNotEqualTo(String value) {
+            addCriterion("contentNoHtml <>", value, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlGreaterThan(String value) {
+            addCriterion("contentNoHtml >", value, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlGreaterThanOrEqualTo(String value) {
+            addCriterion("contentNoHtml >=", value, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlLessThan(String value) {
+            addCriterion("contentNoHtml <", value, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlLessThanOrEqualTo(String value) {
+            addCriterion("contentNoHtml <=", value, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlLike(String value) {
+            addCriterion("contentNoHtml like", value, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlNotLike(String value) {
+            addCriterion("contentNoHtml not like", value, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlIn(List<String> values) {
+            addCriterion("contentNoHtml in", values, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlNotIn(List<String> values) {
+            addCriterion("contentNoHtml not in", values, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlBetween(String value1, String value2) {
+            addCriterion("contentNoHtml between", value1, value2, "contentNoHtml");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNoHtmlNotBetween(String value1, String value2) {
+            addCriterion("contentNoHtml not between", value1, value2, "contentNoHtml");
             return (Criteria) this;
         }
     }

@@ -13,9 +13,11 @@ public class BasOrganization {
 
     private String fax;
 
+    private String email;
+
     private String address;
 
-    private Date creattime;
+    private Date creatTime;
 
     public Long getId() {
         return id;
@@ -57,6 +59,14 @@ public class BasOrganization {
         this.fax = fax == null ? null : fax.trim();
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
     public String getAddress() {
         return address;
     }
@@ -65,11 +75,11 @@ public class BasOrganization {
         this.address = address == null ? null : address.trim();
     }
 
-    public Date getCreattime() {
-        return creattime;
+    public Date getCreatTime() {
+        return creatTime;
     }
 
-    public void setCreattime(Date creattime) {
-        this.creattime = creattime;
+    public void setCreatTime(Date creatTime) {
+        this.creatTime = creatTime;
     }
 }

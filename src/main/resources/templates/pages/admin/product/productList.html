@@ -38,7 +38,7 @@
 
     <blockquote class="layui-elem-quote layui-elem-quote-sm">
 
-        <button class="layui-btn layui-btn-sm" onclick="x_open_full('添加用户','/product/add_view')">
+        <button class="layui-btn layui-btn-sm" onclick="x_open_full('添加用户','/admin/product/add_view')">
             <i class="layui-icon">&#xe654;</i>添加
         </button>
     </blockquote>
@@ -88,7 +88,7 @@
     //<![CDATA[
     //全局数据
     var G = {
-        dataListUrl: "/admin/product/list", // 获取数据接口
+        dataListUrl: "/api/productList", // 获取数据接口
         delUrl: "/admin/product/del", // 删除后端接口
         editUrl:"/admin/product/edit",
         seeUrl:"/admin/product/see",
@@ -103,7 +103,7 @@
             '<td>' + value.id + '</td>' +
             '<td>' + value.typeName + '</td>' +
             '<td>' + value.title + '</td>' +
-            '<td>' + value.createtime + '</td>' +
+            '<td>' + value.createTime + '</td>' +
             '<td class="td-manage">' +
             '<button class="layui-btn layui-btn-normal layui-btn-xs" onclick="see(' + value.id + ')">查看</button>' +
             '<button class="layui-btn layui-btn-default layui-btn-xs" onclick="edit(' + value.id + ')">编辑</button>' +

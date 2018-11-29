@@ -445,6 +445,76 @@ public class BasOrganizationExample {
             return (Criteria) this;
         }
 
+        public Criteria andEmailIsNull() {
+            addCriterion("email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailIsNotNull() {
+            addCriterion("email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailEqualTo(String value) {
+            addCriterion("email =", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotEqualTo(String value) {
+            addCriterion("email <>", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailGreaterThan(String value) {
+            addCriterion("email >", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("email >=", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLessThan(String value) {
+            addCriterion("email <", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLessThanOrEqualTo(String value) {
+            addCriterion("email <=", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLike(String value) {
+            addCriterion("email like", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotLike(String value) {
+            addCriterion("email not like", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailIn(List<String> values) {
+            addCriterion("email in", values, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotIn(List<String> values) {
+            addCriterion("email not in", values, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailBetween(String value1, String value2) {
+            addCriterion("email between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotBetween(String value1, String value2) {
+            addCriterion("email not between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
         public Criteria andAddressIsNull() {
             addCriterion("address is null");
             return (Criteria) this;
@@ -515,63 +585,63 @@ public class BasOrganizationExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeIsNull() {
-            addCriterion("creattime is null");
+        public Criteria andCreatTimeIsNull() {
+            addCriterion("creatTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeIsNotNull() {
-            addCriterion("creattime is not null");
+        public Criteria andCreatTimeIsNotNull() {
+            addCriterion("creatTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeEqualTo(Date value) {
-            addCriterion("creattime =", value, "creattime");
+        public Criteria andCreatTimeEqualTo(Date value) {
+            addCriterion("creatTime =", value, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeNotEqualTo(Date value) {
-            addCriterion("creattime <>", value, "creattime");
+        public Criteria andCreatTimeNotEqualTo(Date value) {
+            addCriterion("creatTime <>", value, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeGreaterThan(Date value) {
-            addCriterion("creattime >", value, "creattime");
+        public Criteria andCreatTimeGreaterThan(Date value) {
+            addCriterion("creatTime >", value, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("creattime >=", value, "creattime");
+        public Criteria andCreatTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("creatTime >=", value, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeLessThan(Date value) {
-            addCriterion("creattime <", value, "creattime");
+        public Criteria andCreatTimeLessThan(Date value) {
+            addCriterion("creatTime <", value, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeLessThanOrEqualTo(Date value) {
-            addCriterion("creattime <=", value, "creattime");
+        public Criteria andCreatTimeLessThanOrEqualTo(Date value) {
+            addCriterion("creatTime <=", value, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeIn(List<Date> values) {
-            addCriterion("creattime in", values, "creattime");
+        public Criteria andCreatTimeIn(List<Date> values) {
+            addCriterion("creatTime in", values, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeNotIn(List<Date> values) {
-            addCriterion("creattime not in", values, "creattime");
+        public Criteria andCreatTimeNotIn(List<Date> values) {
+            addCriterion("creatTime not in", values, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeBetween(Date value1, Date value2) {
-            addCriterion("creattime between", value1, value2, "creattime");
+        public Criteria andCreatTimeBetween(Date value1, Date value2) {
+            addCriterion("creatTime between", value1, value2, "creatTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreattimeNotBetween(Date value1, Date value2) {
-            addCriterion("creattime not between", value1, value2, "creattime");
+        public Criteria andCreatTimeNotBetween(Date value1, Date value2) {
+            addCriterion("creatTime not between", value1, value2, "creatTime");
             return (Criteria) this;
         }
     }

@@ -57,13 +57,13 @@
         var type=$("#type").val();
         var title=$("#title").val();
         var src=$("#img1").attr("src");
-        var context = $("#myEditor").html();
+        var content = $("#myEditor").html();
         if(title==null||title.trim()==""){
             layer.msg("新闻标题不能为空！！！");
             return;
         }
 
-        if(context==null||context.trim()==""){
+        if(content==null||content.trim()==""){
             layer.msg("新闻描述不能为空！！！");
             return;
         }
@@ -75,7 +75,7 @@
                 type:type ,
                 title:title,
                 picture:src,
-                context:context
+                content:content
             },
             success:function(data){
                 layer.closeAll();

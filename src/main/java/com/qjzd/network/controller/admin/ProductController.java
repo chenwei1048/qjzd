@@ -8,6 +8,7 @@ import com.qjzd.network.result.CodeMsg;
 import com.qjzd.network.result.Result;
 import com.qjzd.network.service.ProductService;
 import com.qjzd.network.util.CommonUtils;
+import com.qjzd.network.util.HtmlContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,29 +33,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @ResponseBody
-    @RequestMapping("/list")
-    public Result list(@RequestParam(value = "page",defaultValue = "1",required = false)int page,
-                                @RequestParam(value = "pagesize",defaultValue = "10",required = false)int pagesize, Long type,String title){
-        JSONObject param = new JSONObject();
-        if(!CommonUtils.isNull(type)){
-            param.put("type",type);
-        }
-        if(!CommonUtils.isNull(title)){
-            param.put("title",title);
-        }
-        List<Product> list = productService.selectList(param,page,pagesize);
-        List<ProductType> types = productService.selectTypes(new JSONObject());
-        for(Product product : list){
-            for(ProductType type1 : types){
-                if(product.getType().equals(type1.getId())){
-                    product.setTypeName(type1.getName());
-                }
-            }
-        }
-        PageInfo pageInfo = new PageInfo(list);
-        return Result.success(pageInfo);
-    }
 
     @RequestMapping("/edit")
     public String edit(Long id,Model model) {
@@ -84,10 +62,11 @@ public class ProductController {
         if(CommonUtils.isNull(product.getType())){
             return Result.error(CodeMsg.TYPE_ERROR);
         }
-        if(CommonUtils.isNull(product.getContext())&&product.getContext().length()<30){
+        if(CommonUtils.isNull(product.getContent())){
             return Result.error(CodeMsg.CONTEXT_ERROR);
         }
-        product.setCreatetime(new Date());
+        product.setContentNoHtml(HtmlContextUtil.delHtmlTag(product.getContent()));
+        product.setCreateTime(new Date());
         int res = productService.insert(product);
         return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
     }
@@ -110,10 +89,11 @@ public class ProductController {
         if(CommonUtils.isNull(product.getType())){
             return Result.error(CodeMsg.TYPE_ERROR);
         }
-        if(CommonUtils.isNull(product.getContext())){
+        if(CommonUtils.isNull(product.getContent())){
             return Result.error(CodeMsg.CONTEXT_ERROR);
         }
-        product.setCreatetime(new Date());
+        product.setContentNoHtml(HtmlContextUtil.delHtmlTag(product.getContent()));
+        product.setCreateTime(new Date());
         int res = productService.update(product);
         return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
     }

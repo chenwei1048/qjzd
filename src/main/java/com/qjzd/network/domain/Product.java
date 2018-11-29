@@ -1,8 +1,5 @@
 package com.qjzd.network.domain;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.qjzd.network.util.HtmlContextUtil;
-
 import java.util.Date;
 
 public class Product {
@@ -16,11 +13,11 @@ public class Product {
 
     private String picture;
 
-    private String context;
+    private String content;
 
-    private String contextNoHtml;
+    private String contentNoHtml;
 
-    private Date createtime;
+    private Date createTime;
 
     public Long getId() {
         return id;
@@ -54,14 +51,6 @@ public class Product {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getContextNoHtml() {
-        return contextNoHtml;
-    }
-
-    public void setContextNoHtml(String contextNoHtml) {
-        this.contextNoHtml = contextNoHtml;
-    }
-
     public String getPicture() {
         return picture;
     }
@@ -70,22 +59,27 @@ public class Product {
         this.picture = picture == null ? null : picture.trim();
     }
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context == null ? null : context.trim();
-        if(this.context!=null){
-            this.contextNoHtml = HtmlContextUtil.delHtmlTag(this.context);
-        }
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public String getContentNoHtml() {
+        return contentNoHtml;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setContentNoHtml(String contentNoHtml) {
+        this.contentNoHtml = contentNoHtml == null ? null : contentNoHtml.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

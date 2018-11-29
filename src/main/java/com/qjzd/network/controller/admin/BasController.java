@@ -9,12 +9,15 @@ import com.qjzd.network.service.BasInformationService;
 import com.qjzd.network.service.BasOrganizationService;
 import com.qjzd.network.util.CommonUtils;
 import com.qjzd.network.util.Constant;
+import com.qjzd.network.util.HtmlContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 /**
  * @Author:
@@ -44,7 +47,7 @@ public class BasController {
             model.addAttribute("data","");
         }else{
             model.addAttribute("code", CodeMsg.SUCCESS.getCode());
-            model.addAttribute("data",information.getContext());
+            model.addAttribute("data",information.getContent());
         }
         model.addAttribute("type",Constant.GYWM.getCode());
         return "pages/admin/bas/about";
@@ -53,7 +56,7 @@ public class BasController {
     //联系我们
     @RequestMapping("/contact")
     public String contacts(Model model){
-        model.addAttribute("data",organizationService.selectById(new Long(Constant.QJZD.getCode())));
+        model.addAttribute("data",organizationService.selectById(new Long(Constant.QJCD.getCode())));
         return "pages/admin/bas/contacts";
 
     }
@@ -61,7 +64,7 @@ public class BasController {
     //修改联系我们
     @ResponseBody
     @RequestMapping("/update_contact")
-    public Result update_contact(BasOrganization basOrganization){
+    public Result update_contact(BasOrganization basOrganization, HttpServletRequest request){
         if(CommonUtils.isNull(basOrganization)){
             return Result.error(CodeMsg.SERVER_ERROR);
         }
@@ -77,9 +80,14 @@ public class BasController {
             return Result.error(CodeMsg.ADDRESS_ERROR);
         }
 
-        basOrganization.setId(new Long(Constant.QJZD.getCode()));
+        basOrganization.setId(new Long(Constant.QJCD.getCode()));
         int res = organizationService.updateById(basOrganization);
-        return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
+        if(res>0){
+            request.getServletContext().setAttribute("basOrganization",basOrganization);
+            return Result.success(null);
+        }else {
+            return Result.error(CodeMsg.SERVER_ERROR);
+        }
 
     }
 
@@ -95,7 +103,7 @@ public class BasController {
             model.addAttribute("code", CodeMsg.NODATA.getCode());
             model.addAttribute("data","");
         }else{
-            model.addAttribute("data",information.getContext());
+            model.addAttribute("data",information.getContent());
         }
         model.addAttribute("type",type);
         return "pages/admin/bas/update";
@@ -103,11 +111,11 @@ public class BasController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Result update(long type,String context){
+    public Result update(long type,String content){
         if(CommonUtils.isNull(type)){
             return Result.error(CodeMsg.TYPE_ERROR);
         }
-        if(CommonUtils.isNull(context)||context.length()<20){
+        if(CommonUtils.isNull(content)){
             return Result.error(CodeMsg.CONTEXT_ERROR);
         }
         JSONObject param = new JSONObject();
@@ -121,12 +129,14 @@ public class BasController {
             }
             information.setTitle(Constant.type.get(type));
             information.setType(type);
-            information.setContext(context);
-            information.setCreatetime(new Date());
+            information.setContent(content);
+            information.setContentNoHtml(HtmlContextUtil.delHtmlTag(content));
+            information.setCreateTime(new Date());
             res = basInformationService.add(information);
         }else {
-            information.setContext(context);
-            information.setCreatetime(new Date());
+            information.setContent(content);
+            information.setContentNoHtml(HtmlContextUtil.delHtmlTag(content));
+            information.setCreateTime(new Date());
             res = basInformationService.update(information);
         }
         if(res>0){

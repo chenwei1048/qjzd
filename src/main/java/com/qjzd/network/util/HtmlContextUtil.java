@@ -26,9 +26,9 @@ public class HtmlContextUtil {
 
 
     public static String delHtmlTag(String str){
-        String newstr = "";
-        newstr = str.replaceAll("<[.[^>]]*>","");
-        newstr = newstr.replaceAll(" ", "");
-        return newstr;
+        String text = "";
+        text = str.replaceAll("<[.[^>]]*>","");
+        text = text.replaceAll(" ", "");
+        return text;
     }
 }

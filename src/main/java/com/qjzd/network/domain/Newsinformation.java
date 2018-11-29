@@ -11,9 +11,11 @@ public class Newsinformation {
 
     private String picture;
 
-    private String context;
+    private String content;
 
-    private Date createtime;
+    private String contentNoHtml;
+
+    private Date createTime;
 
     public Long getId() {
         return id;
@@ -47,19 +49,27 @@ public class Newsinformation {
         this.picture = picture == null ? null : picture.trim();
     }
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context == null ? null : context.trim();
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public String getContentNoHtml() {
+        return contentNoHtml;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setContentNoHtml(String contentNoHtml) {
+        this.contentNoHtml = contentNoHtml == null ? null : contentNoHtml.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

@@ -8,6 +8,7 @@ import com.qjzd.network.result.CodeMsg;
 import com.qjzd.network.result.Result;
 import com.qjzd.network.service.NewsinformationService;
 import com.qjzd.network.util.CommonUtils;
+import com.qjzd.network.util.HtmlContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,29 +62,31 @@ public class NewsinformationController {
         if(CommonUtils.isNull(newsinformation.getTitle())){
             return Result.error(CodeMsg.TITLE_ERROR);
         }
-        if(CommonUtils.isNull(newsinformation.getContext())){
+        if(CommonUtils.isNull(newsinformation.getContent())){
             return Result.error(CodeMsg.CONTEXT_ERROR);
         }
-        newsinformation.setCreatetime(new Date());
+        newsinformation.setContentNoHtml(HtmlContextUtil.delHtmlTag(newsinformation.getContent()));
+        newsinformation.setCreateTime(new Date());
         int res = newsinformationService.insert(newsinformation);
         return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
     }
 
     @ResponseBody
     @RequestMapping("/update")
-    public Result update(Newsinformation product){
-        if(CommonUtils.isNull(product)||CommonUtils.isNull(product.getId())){
+    public Result update(Newsinformation newsinformation){
+        if(CommonUtils.isNull(newsinformation)||CommonUtils.isNull(newsinformation.getId())){
             return Result.error(CodeMsg.SERVER_ERROR);
         }
-        if(CommonUtils.isNull(product.getTitle())){
+        if(CommonUtils.isNull(newsinformation.getTitle())){
             return Result.error(CodeMsg.TITLE_ERROR);
         }
 
-        if(CommonUtils.isNull(product.getContext())){
+        if(CommonUtils.isNull(newsinformation.getContent())){
             return Result.error(CodeMsg.CONTEXT_ERROR);
         }
-        product.setCreatetime(new Date());
-        int res = newsinformationService.update(product);
+        newsinformation.setContentNoHtml(HtmlContextUtil.delHtmlTag(newsinformation.getContent()));
+        newsinformation.setCreateTime(new Date());
+        int res = newsinformationService.update(newsinformation);
         return res>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
     }
 

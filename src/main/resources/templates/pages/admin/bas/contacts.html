@@ -9,78 +9,93 @@
 
 </head>
 <style>
-    .layui-input{
-        background-color:#eee;
+    .layui-input {
+        background-color: #eee;
     }
 </style>
 <body>
 <div class="x-body" id="app">
-        <input type="hidden" id="id" name="id" v-model="id" th:value="${data.id}"/>
+    <input type="hidden" id="id" name="id" v-model="id" th:value="${data.id}"/>
 
-        <div class="layui-form-item">
-            <label for="title" class="layui-form-label">
-                <span class="text-color-red">*</span>
-                公司名称
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="title" name="title" v-model="title" th:value="${data.title}" disabled="disabled" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input"/>
-            </div>
-
-        </div>
-
-        <div class="layui-form-item">
-            <label for="contacts" class="layui-form-label">
-                <span class="text-color-red">*</span>
-                联系人
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="contacts" name="contacts" v-model="contacts" th:value="${data.contacts}" disabled="disabled" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input"/>
-            </div>
-
-        </div>
-
-        <div class="layui-form-item">
-            <label for="phone" class="layui-form-label">
-                <span class="text-color-red">*</span>
-                手机号
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="phone" name="phone" v-model="phone" th:value="${data.phone}" disabled="disabled" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input"/>
-            </div>
-
-        </div>
-
-        <div class="layui-form-item">
-            <label for="fax" class="layui-form-label">
-                传真
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="fax" name="fax" v-model="fax" th:value="${data.fax}" disabled="disabled"
-                       autocomplete="off" class="layui-input"/>
-            </div>
-
-        </div>
-
-        <div class="layui-form-item">
-            <label for="address" class="layui-form-label">
-                <span class="text-color-red">*</span>
-                地址
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="address" name="address" v-model="address" th:value="${data.address}" disabled="disabled" required="" lay-verify="required"
-                       autocomplete="off" class="layui-input"/>
-            </div>
-
-        </div>
-
-        <label class="layui-form-label">
+    <div class="layui-form-item">
+        <label for="title" class="layui-form-label">
+            <span class="text-color-red">*</span>
+            公司名称
         </label>
-        <button class="layui-btn"   id="editBut">编辑</button>
-        <button class="layui-btn"   id="save" style="display: none">保存</button>
-        <button class="layui-btn layui-btn-normal" type="button" onclick="closeck()">取消</button>
+        <div class="layui-input-inline">
+            <input type="text" id="title" name="title" v-model="title" th:value="${data.title}" disabled="disabled"
+                   required="" lay-verify="required"
+                   autocomplete="off" class="layui-input"/>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label for="contacts" class="layui-form-label">
+            <span class="text-color-red">*</span>
+            联系人
+        </label>
+        <div class="layui-input-inline">
+            <input type="text" id="contacts" name="contacts" v-model="contacts" th:value="${data.contacts}"
+                   disabled="disabled" required="" lay-verify="required"
+                   autocomplete="off" class="layui-input"/>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label for="phone" class="layui-form-label">
+            <span class="text-color-red">*</span>
+            手机号
+        </label>
+        <div class="layui-input-inline">
+            <input type="text" id="phone" name="phone" v-model="phone" th:value="${data.phone}" disabled="disabled"
+                   required="" lay-verify="required"
+                   autocomplete="off" class="layui-input"/>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label for="fax" class="layui-form-label">
+            传真
+        </label>
+        <div class="layui-input-inline">
+            <input type="text" id="fax" name="fax" v-model="fax" th:value="${data.fax}" disabled="disabled"
+                   autocomplete="off" class="layui-input"/>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label for="email" class="layui-form-label">
+            邮箱
+        </label>
+        <div class="layui-input-inline">
+            <input type="text" id="email" name="fax" v-model="email" th:value="${data.email}" disabled="disabled"
+                   autocomplete="off" class="layui-input"/>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label for="address" class="layui-form-label">
+            <span class="text-color-red">*</span>
+            地址
+        </label>
+        <div class="layui-input-inline">
+            <input type="text" id="address" name="address" v-model="address" th:value="${data.address}"
+                   disabled="disabled" required="" lay-verify="required"
+                   autocomplete="off" class="layui-input"/>
+        </div>
+
+    </div>
+
+    <label class="layui-form-label">
+    </label>
+    <button class="layui-btn" id="editBut">编辑</button>
+    <button class="layui-btn" id="save" style="display: none">保存</button>
+    <button class="layui-btn layui-btn-normal" type="button" onclick="closeck()">取消</button>
 </div>
 
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
@@ -93,7 +108,7 @@
 <script>
     $("#editBut").click(function () {
         $(".layui-input").removeAttr('disabled');
-        $(".layui-input").css("background-color","#fff");
+        $(".layui-input").css("background-color", "#fff");
         $("#editBut").hide();
         $("#save").show();
     });
@@ -103,46 +118,48 @@
         var contacts = $("#contacts").val();
         var phone = $("#phone").val();
         var fax = $("#fax").val();
+        var email = $("#email").val();
         var address = $("#address").val();
         var id = $("#id").val();
-        if(title==null||title==''){
+        if (title == null || title == '') {
             layer.msg("名称不能为空！！！");
             return;
         }
-        if(contacts==null||contacts==''){
+        if (contacts == null || contacts == '') {
             layer.msg("联系人不能为空！！！");
             return;
         }
-        if(phone==null||phone==''){
+        if (phone == null || phone == '') {
             layer.msg("手机号不能为空！！！");
             return;
         }
-        if(address==null||address==''){
+        if (address == null || address == '') {
             layer.msg("地址不能为空！！！");
             return;
         }
         $.ajax({
             url: "/admin/bas/update_contact",
             type: "POST",
-            data:{
-                title:title,
+            data: {
+                title: title,
                 contacts: contacts,
                 phone: phone,
                 contacts: contacts,
                 fax: fax,
+                email:email,
                 address: address,
                 id: id,
             },
-            success:function(data){
+            success: function (data) {
                 layer.closeAll();
-                if(data.code == 1){
+                if (data.code == 1) {
                     layer.msg("成功");
-                    setTimeout(closeck,"2000");
-                }else{
+                    setTimeout(closeck, "2000");
+                } else {
                     layer.msg(data.msg);
                 }
             },
-            error:function(){
+            error: function () {
                 layer.closeAll();
             }
         });

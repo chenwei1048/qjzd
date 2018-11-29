@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/umeditor/themes/default/css/umeditor.css}"/>
 </head>
 <body>
-<input th:value="${data}" type="hidden" id="context"/>
+<input th:value="${data}" type="hidden" id="content"/>
 <form  method="post" >
     <input type="hidden" th:value="${type}" id="type" />
         <!--<textarea rows="5" cols="35" name="usIntroduce" style="display:none;" id="introduce"></textarea>-->
@@ -28,18 +28,18 @@
 <script type="text/javascript" th:src="@{/umeditor/lang/zh-cn/zh-cn.js}" ></script>
   <script type="text/javascript">
     var um = UM.getEditor('myEditor');
-    um.setContent($("#context").val());
+    um.setContent($("#content").val());
 </script>
 <script>
     function save(){
         var type = $("#type").val();
-        var context = $("#myEditor").html();
+        var content = $("#myEditor").html();
         $.ajax({
             url: "/admin/bas/update",
             type: "POST",
             data:{
                 type:type,
-                context: context
+                content: content
             },
             success:function(data){
                 // layer.closeAll();
