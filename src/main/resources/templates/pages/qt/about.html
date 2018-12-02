@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>关于我们</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/qt/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/qt/css/product.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+</head>
+<body>
+<div th:replace="pages/qt/public/header :: navbar"></div>
+<div class="header-img">
+</div>
+<div class="product-page">
+    <div class="wrap clearfix">
+        <div class="g-aside">
+            <div class="cate commonstyle">
+                <div class="title">
+                    <span>产品分类</span>
+                    <span class="en">Product Categories</span>
+                </div>
+                <ul class="box type-list">
+                    <li><a href="/index/product" title="所有产品">所有产品</a></li>
+                </ul>
+            </div>
+            <div class="contact commonstyle">
+                <div class="title">
+                    <span>联系我们</span>
+                    <span class="en">Contact Us</span>
+                </div>
+                <div class="box">
+                    <p class="name">上海前敬传动设备有限公司</p>
+                    <p>联 系 人：<span th:text="${application.basOrganization.contacts}"></span><br/>
+                        联系电话：<span  href="contact.htm" th:text="${application.basOrganization.phone}"></span><br/>
+                        传真号码：<span href="contact.htm" th:text="${application.basOrganization.fax}"></span><br/>
+                        联系地址：<span href="about.htm" th:text="${application.basOrganization.address}"></span><br/>
+                        电子邮箱：<span href="about.htm" th:text="${application.basOrganization.email}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="local">
+                当前位置：
+                <a href="/">网站首页</a>&gt;
+                <span>关于我们</span>
+            </div>
+            <div th:utext="${application.gywm.content}"></div>
+
+        </div>
+    </div>
+</div>
+<div th:replace="pages/qt/public/footer :: navbar"></div>
+
+</body>
+<script th:inline="javascript">
+    //<![CDATA[
+    var G = {
+        typeUrl: "/api/types",
+        productUrl: "/api/productList",
+        pagesize:9,
+        count:6,
+        page: 1
+    };
+
+    $(function () {
+        $.ajax({
+            url: G.typeUrl,
+            type: "POST",
+            success: function (result) {
+                if (result.code == 1) {
+                    $.each(result.data, function (index, value) {
+                        $(".type-list").append('<li><a href="/index/product?type='+value.id+'">' + value.name + '</a></li>');
+                    });
+                }
+            },
+        });
+        render(G.page, G.pagesize);
+    })
+    
+
+    //]]>
+</script>
+</html>

@@ -272,44 +272,44 @@ a:hover {
 .grid-row .grid-col12 {
   width: 100%;
 }
-.g-header {
-  height: 93px;
-  line-height: 93px;
-  background: #f8f8f8;
-}
-.g-header h1 {
-  float: left;
-  font-size: 26px;
-  color: #1e50ae;
-}
-.g-header h1 a{color: #1e50ae;}
-.g-header ul {
-  float: right;
-}
-.g-header li {
-  float: left;
-  margin-left: 45px;
-}
-.g-header li a {
-  display: block;
-  position: relative;
-  color: #888;
-  font-size: 16px;
-}
-.g-header li a.active,
-.g-header li a:hover {
-  color: #1e50ae;
-}
-.g-header li a.active:after,
-.g-header li a:hover:after {
-  position: absolute;
-  content: "";
-  width: 63px;
-  height: 3px;
-  top: 62px;
-  left: 0;
-  background-color: #1e50ae;
-}
+/*.g-header {*/
+  /*height: 93px;*/
+  /*line-height: 93px;*/
+  /*background: #f8f8f8;*/
+/*}*/
+/*.g-header h1 {*/
+  /*float: left;*/
+  /*font-size: 26px;*/
+  /*color: #1e50ae;*/
+/*}*/
+/*.g-header h1 a{color: #1e50ae;}*/
+/*.g-header ul {*/
+  /*float: right;*/
+/*}*/
+/*.g-header li {*/
+  /*float: left;*/
+  /*margin-left: 45px;*/
+/*}*/
+/*.g-header li a {*/
+  /*display: block;*/
+  /*position: relative;*/
+  /*color: #888;*/
+  /*font-size: 16px;*/
+/*}*/
+/*.g-header li a.active,*/
+/*.g-header li a:hover {*/
+  /*color: #1e50ae;*/
+/*}*/
+/*.g-header li a.active:after,*/
+/*.g-header li a:hover:after {*/
+  /*position: absolute;*/
+  /*content: "";*/
+  /*width: 63px;*/
+  /*height: 3px;*/
+  /*top: 62px;*/
+  /*left: 0;*/
+  /*background-color: #1e50ae;*/
+/*}*/
 .g-aside {
   width: 282px;
   float: left;
@@ -462,3 +462,24 @@ a:hover {
 .hyfw_right{ font-size:12px; color:#fff; line-height:38px; float:right;}
 .hyfw_right a{ font-size:12px; color:#fff;}
 .hyfw_right a:hover{ font-size:12px; color:#ffea00;}
+
+
+/*抬头*/
+#taitou{ width:100%; height:100px; background:url(../images/20161017175938_656398474.jpg)}
+.taitou_kz{ width:1290px; margin:0 auto;}
+#taitou_z{ width:420px; height:54px; float:left; margin-top:15px;}
+
+#nav1 li{ width:110px; height:20px; float:left; margin-top:44px;}
+#nav1 a{width:110px; height:20px; display:block; color:#222; font-size:15px; line-height:20px; text-align:center; border-right:1px dotted #ccc; }
+#nav1 a:hover{width:110px; height:20px; color:#00599e;}
+
+#nav1 li a:hover{display:block; font-size:15px;}
+#nav1 .a_nav1 a{display:block; font-size:15px;  color:#00599e;}
+#taitou_y{ width:160px; height:54px; float:right; margin-top:25px; margin-right:30px;}
+
+#nav li a:hover{display:block; font-size:15px;}
+#nav .a_nav a{display:block; font-size:15px; color:#fff;}
+
+
+#search_r{width:139px; float:right; padding-top:40px;}
+#search_r li{float:left;}

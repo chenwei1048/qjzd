@@ -29,28 +29,28 @@ public class NewsinformationController {
 
     @Autowired
     private NewsinformationService newsinformationService;
-    @ResponseBody
-    @RequestMapping("/list")
-    public Result selectList(@RequestParam(value = "page",defaultValue = "1",required = false)int page,
-                             @RequestParam(value = "pagesize",defaultValue = "10",required = false)int pagesize,
-                             Long type, String title){
-
-        JSONObject param = new JSONObject();
-        if(!CommonUtils.isNull(type)){
-            param.put("type",type);
-        }
-        if(!CommonUtils.isNull(title)){
-            param.put("title",title);
-        }
-        List<Newsinformation> list = newsinformationService.selectList(param,page,pagesize);
-        if(CommonUtils.isNull(list)){
-            return Result.error(CodeMsg.NODATA);
-        }else{
-            PageInfo pageInfo = new PageInfo(list);
-            return Result.success(pageInfo);
-        }
-
-    }
+//    @ResponseBody
+//    @RequestMapping("/list")
+//    public Result selectList(@RequestParam(value = "page",defaultValue = "1",required = false)int page,
+//                             @RequestParam(value = "pagesize",defaultValue = "10",required = false)int pagesize,
+//                             Long type, String title){
+//
+//        JSONObject param = new JSONObject();
+//        if(!CommonUtils.isNull(type)){
+//            param.put("type",type);
+//        }
+//        if(!CommonUtils.isNull(title)){
+//            param.put("title",title);
+//        }
+//        List<Newsinformation> list = newsinformationService.selectList(param,page,pagesize);
+//        if(CommonUtils.isNull(list)){
+//            return Result.error(CodeMsg.NODATA);
+//        }else{
+//            PageInfo pageInfo = new PageInfo(list);
+//            return Result.success(pageInfo);
+//        }
+//
+//    }
 
 
     @ResponseBody

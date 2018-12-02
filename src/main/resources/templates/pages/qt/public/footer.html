@@ -24,9 +24,7 @@
                         公司地址：<a
                             href="about.htm" th:text="${application.basOrganization.address}"></a></p>
                 </div>
-                <div class="wx-code">
-                    <img th:src="@{/qt/images/wx2wm.jpg}" />
-                </div>
+
                 <div class="links">
                     <a href="/" title="首页" class="active">网站首页</a><br/>
                     <a href="about.htm" title="关于我们">关于我们</a><br/>
@@ -34,7 +32,9 @@
                     <a href="ly.htm" title="留言中心">留言中心</a><br/>
                     <a href="contract.htm" title="联系我们">联系我们</a>
                 </div>
-
+                <div class="wx-code">
+                    <img th:src="@{/qt/images/wx2wm.jpg}" />
+                </div>
             </div>
         </div>
         <div class="footer-bottom">

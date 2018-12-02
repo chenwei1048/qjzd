@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/qt/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/qt/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/js/libs/layui/css/layui.css}"/>
     <link rel="stylesheet" th:href="@{/qt/css/jquery.bxslider.min.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/qt/js/jquery.bxslider.min.js}"></script>
@@ -36,25 +37,12 @@
         <p class="tip">Products</p>
         <ul class="btn-group">
             <li class="btn" th:each="type,stat:${types}">
-                <a href="product_145073_1.htm" th:title="${type.name}" th:text="${type.name}"></a>
+                <a th:href="@{'/index/product?type='+${type.id}}" th:title="${type.name}" th:text="${type.name}"></a>
             </li>
         </ul>
         <ul class="product-list">
-
-            <!--<li>-->
-                <!--<a href="productshow_15327917.htm" target="_blank" class="aitem">-->
-                    <!--<img src="images/a20160914115004836274.jpg" border="0" title="供应奇正印花机导带 聚旺印花机导带 Rapplon原配"/>-->
-                <!--</a>-->
-                <!--<span>-->
-                <!--<a href="productshow_15327917.htm" target="_blank">-->
-                    <!--供应奇正印花机导带 聚旺印花机导带 Rapplon原...-->
-                <!--</a>-->
-                <!--</span>-->
-            <!--</li>-->
-
-
         </ul>
-        <a href="product.htm" class="more">查看更多</a>
+        <a href="/index/product" class="more">查看更多</a>
     </div>
 </div>
 <div th:replace="pages/qt/public/footer :: navbar"></div>
@@ -91,11 +79,11 @@
     
     function html(value) {
         let html = '<li>' +
-            '                <a href="productshow_15327917.htm" target="_blank" class="aitem">' +
+            '                <a href="/index/productDetail?id='+value.id+'"  class="aitem">' +
             '                    <img src="'+value.picture+'" width="270px" height="270px" border="0" title="'+value.title+'"/>' +
             '                </a>' +
             '                <span>' +
-            '                <a href="productshow_15327917.htm" target="_blank">' +
+            '                <a href="/index/productDetail?id='+value.id+'">' +
             value.title +
             '                </a>' +
             '                </span>' +
@@ -109,9 +97,6 @@
         controls: false
     });
 
-    $('.product-wrap .btn').click(function (ev) {
-        $(this).addClass('active').siblings('.active').removeClass('active')
-    })
 </script>
 </body>
 </html>

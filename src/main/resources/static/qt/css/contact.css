@@ -1,0 +1,64 @@
+
+.contact-wrap {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.contact-wrap h2 {
+  color: #1e50ae;
+  text-align: center;
+  font-size: 24px;
+  padding: 10px 0;
+}
+.contact-wrap .tip {
+  color: #666;
+  position: relative;
+  width: 62px;
+  margin: 0 auto;
+}
+.contact-wrap .tip:before {
+  width: 40px;
+  height: 1px;
+  position: absolute;
+  right: -40px;
+  top: 10px;
+  content: "";
+  display: block;
+  background-color: #999;
+}
+.contact-wrap .tip:after {
+  width: 40px;
+  height: 1px;
+  position: absolute;
+  left: -42px;
+  top: 10px;
+  content: "";
+  display: block;
+  background-color: #999;
+}
+.contact-wrap .wrap {
+  overflow: hidden;
+  padding-top: 40px;
+}
+.contact-wrap .content-left {
+  float: left;
+  width: 462px;
+  color: #666;
+}
+.contact-wrap .content-left p {
+  line-height: 1.8;
+  padding-bottom: 20px;
+}
+.contact-wrap .content-left li {
+  margin: 20px 0;
+}
+.contact-wrap .content-left li img {
+  vertical-align: middle;
+  margin-right: 15px;
+}
+.contact-wrap .map-wrap {
+  float: right;
+  width: 702px;
+  height: 415px;
+  border: 1px solid #eee;
+}
+.contact-wrap .map-wrap #allmap{height: 415px;}

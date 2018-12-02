@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>新闻资讯</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/qt/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/qt/css/product.css}"/>
+    <link rel="stylesheet" th:href="@{/qt/css/news.css}"/>
+
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+</head>
+<style>
+    .layui-laypage-limits{
+        display:none !important;
+    }
+</style>
+<body>
+<div th:replace="pages/qt/public/header :: navbar"></div>
+<div class="header-img">
+</div>
+<div class="product-page">
+    <div class="wrap clearfix">
+        <div class="g-aside">
+            <div class="cate commonstyle">
+                <div class="title">
+                    <span>产品分类</span>
+                    <span class="en">Product Categories</span>
+                </div>
+                <ul class="box type-list">
+                    <li><a href="/index/product" title="所有产品">所有产品</a></li>
+                </ul>
+            </div>
+            <div class="contact commonstyle">
+                <div class="title">
+                    <span>联系我们</span>
+                    <span class="en">Contact Us</span>
+                </div>
+                <div class="box">
+                    <p class="name">上海前敬传动设备有限公司</p>
+                    <p>联 系 人：<span th:text="${application.basOrganization.contacts}"></span><br/>
+                        联系电话：<span href="contact.htm" th:text="${application.basOrganization.phone}"></span><br/>
+                        传真号码：<span href="contact.htm" th:text="${application.basOrganization.fax}"></span><br/>
+                        联系地址：<span href="about.htm" th:text="${application.basOrganization.address}"></span><br/>
+                        电子邮箱：<span href="about.htm" th:text="${application.basOrganization.email}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="local">
+                当前位置：
+                <a href="/">网站首页</a>&gt;
+                <span>新闻资讯</span>
+            </div>
+
+            <div class="concompanycon">
+                <ul class="news_list">
+                </ul>
+                <div id="pagination" class="layui-box"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="pages/qt/public/footer :: navbar"></div>
+
+</body>
+<script th:inline="javascript">
+    //<![CDATA[
+    var G = {
+        typeUrl: "/api/types",
+        newsUrl: "/api/newsList",
+        detailUrl: "/index/newsDetail",
+        pagesize: 10,
+        count: 0,
+        page: 1
+    };
+
+    $(function () {
+        $.ajax({
+            url: G.typeUrl,
+            type: "POST",
+            success: function (result) {
+                if (result.code == 1) {
+                    $.each(result.data, function (index, value) {
+                        $(".type-list").append('<li><a href="/index/product?type=' + value.id + '">' + value.name + '</a></li>');
+                    });
+                }
+            },
+        });
+        render(G.page, G.pagesize);
+    });
+
+
+    function render(page) {
+        $.ajax({
+            url: G.newsUrl,
+            type: "POST",
+            data: {
+                page: page,
+                pagesize: G.pagesize,
+            },
+            success: function (result) {
+                if (result.code == 1 && result.data.list.length > 0) {
+                    G.page = page;
+                    $(".news_list").html("");
+                    var txt = "";
+                    $.each(result.data.list, function (index, value) {
+                        G.count = result.data.total;
+                        $(".news_list").append(html(value));
+                    });
+                }
+                layui.use(['laypage', 'form'], function () {
+                    var laypage = layui.laypage;
+                    var form = layui.form;
+                    //执行一个laypage实例
+                    laypage.render({
+                        elem: 'pagination', //分页container ID，不用加 # 号
+                        theme: '#2553A4',
+                        limit: G.pagesize, //页面显示记录条数
+                        count: G.count, //数据总数，从服务端得到
+                        groups: 5,
+                        curr: page,
+                        layout: ['prev', 'page', 'next', 'limit', 'count'],
+                        prev: '<i class="layui-icon layui-icon-left"></i>',
+                        next: '<i class="layui-icon layui-icon-right"></i>',
+                        jump: function (obj, first) {
+                            //首次不执行
+                            if (first) {
+                                //do something
+                                return;
+                            }
+                            render(obj.curr, obj.limit);
+                        }
+
+                    });
+
+                });
+
+            },
+        });
+    }
+
+
+    function html(value) {
+        var html = '   <div class="rnewys">' +
+            '<ul class="newconleft">' + value.createTime + '</ul>' +
+            ' <ul class="newsconright">' +
+            '    <a href="'+G.detailUrl+'?id='+value.id+'" title="'+value.title+'">' +
+            '    <div class="newsconright1">' + value.title +
+            '    </div>' + value.contentNoHtml.substring(0,100)+ '...</a>' +
+            ' </ul></div>';
+        return html;
+    }
+
+    //]]>
+</script>
+</html>

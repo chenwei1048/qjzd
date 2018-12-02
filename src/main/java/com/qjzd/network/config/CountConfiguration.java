@@ -63,7 +63,8 @@ public class CountConfiguration implements WebMvcConfigurer {
         loginRegistry.addPathPatterns("/index");
         loginRegistry.addPathPatterns("/index/*");
 //        // 排除路径
-        loginRegistry.excludePathPatterns("/client/isSaveIp");
+        loginRegistry.addPathPatterns("/index/header");
+        loginRegistry.addPathPatterns("/index/footer");
         loginRegistry.excludePathPatterns("/static/*");
 //        loginRegistry.excludePathPatterns("/login/*");
 //        loginRegistry.excludePathPatterns("/index");

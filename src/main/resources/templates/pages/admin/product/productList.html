@@ -134,7 +134,6 @@
                     $("#list").html("");
                     $("#nodata").hide();
                     $.each(result.data.list, function (index, value) {
-                        console.log(value);
                         G.count = result.data.total;
                         $("#list").append(html(value));
                     });

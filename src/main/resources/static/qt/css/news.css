@@ -1,0 +1,46 @@
+.concompanycon {
+  width: 96%;
+  height: 100%;
+  padding-top: 15px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+.rnewys {
+  width: 100%;
+  height: 120px;
+  border-bottom: #d9d9d9 solid 1px;
+  padding-top: 10px;
+}
+
+.newconleft {
+  width: 78px;
+  height: 120px;
+  float: left;
+  color: #676767;
+}
+
+.newsconright {
+  width: 85%;
+  height: 120px;
+  float: right;
+}
+
+.newsconright a {
+  width: 100%;
+  height: 120px;
+  display: block;
+  color: #676767;
+}
+
+.newsconright a:hover {
+  color: #CE4E4D;
+  text-decoration: none;
+}
+
+.newsconright1 {
+  color: #333;
+  font-weight: bold;
+  padding-bottom: 10px;
+}

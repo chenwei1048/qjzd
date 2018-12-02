@@ -122,7 +122,6 @@ public class ProductController {
     public String type(Model model){
         List<ProductType> list = productService.selectTypes(new JSONObject());
         model.addAttribute("data",list);
-
         return "pages/admin/product/type";
     }
 
