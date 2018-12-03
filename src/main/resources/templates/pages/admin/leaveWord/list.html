@@ -61,6 +61,7 @@
                 <th>移动电话</th>
                 <th>邮箱</th>
                 <th>地址</th>
+                <th>留言内容</th>
                 <th>留言日期</th>
                 <th>状态</th>
                 <th>操作</th>
@@ -205,6 +206,11 @@
             '<td>' + value.mobilePhone + '</td>' +
             '<td>' + value.email + '</td>' +
             '<td>' + value.address + '</td>' +
+            '<td title="'+value.content+'">' + value.content.substring(0,14) ;
+            if(value.content.length>14){
+                html+="...";
+            }
+            html+='</td>' +
             '<td>' + value.createtime + '</td>' +
             '<td class="td-status">';
             if(value.isRead==1){
@@ -214,7 +220,8 @@
             }
             html+=' </td>'+
             '<td class="td-manage">' +
-            '<button class="layui-btn layui-btn-danger layui-btn-xs" onclick="removeMember(' + value.id + ')">删除</button>' +
+//                '<button class="layui-btn layui-btn-normal layui-btn-xs" onclick="x_admin_open(\'留言内容\',\'/admin/leaveWord/content\', 452, 300)">查看</button>' +
+                '<button class="layui-btn layui-btn-danger layui-btn-xs" onclick="removeMember(' + value.id + ')">删除</button>' +
             '</td></tr>';
         return html;
     }

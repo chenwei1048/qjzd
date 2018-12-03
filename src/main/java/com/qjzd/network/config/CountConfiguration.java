@@ -23,7 +23,7 @@ import java.util.List;
  * @MOdifyBy:
  * @parameter
  */
-//@Configuration
+@Configuration
 public class CountConfiguration implements WebMvcConfigurer {
     @Override
     public void configurePathMatch(PathMatchConfigurer pathMatchConfigurer) {
@@ -63,9 +63,8 @@ public class CountConfiguration implements WebMvcConfigurer {
         loginRegistry.addPathPatterns("/index");
         loginRegistry.addPathPatterns("/index/*");
 //        // 排除路径
-        loginRegistry.addPathPatterns("/index/header");
-        loginRegistry.addPathPatterns("/index/footer");
-        loginRegistry.excludePathPatterns("/static/*");
+//        loginRegistry.addPathPatterns("/index/header");
+//        loginRegistry.addPathPatterns("/index/footer");
 //        loginRegistry.excludePathPatterns("/login/*");
 //        loginRegistry.excludePathPatterns("/index");
 //        loginRegistry.excludePathPatterns("/index/*");

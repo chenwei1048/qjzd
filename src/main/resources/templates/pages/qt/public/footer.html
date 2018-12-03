@@ -14,23 +14,20 @@
                 <div class="contact">
                     <h3 class="title">联系我们</h3>
                     <p>
-                        联 系 人：<span th:text="${application.basOrganization.contacts}"></span><br/>
-                        联系电话：<a
-                            href="contact.htm" th:text="${application.basOrganization.phone}"></a><br/>
-                        传真号码：<a
-                            href="contact.htm" th:text="${application.basOrganization.fax}"></a><br/>
-                        电子邮箱：<a
-                            href="contact.htm" th:text="${application.basOrganization.email}"></a><br/>
-                        公司地址：<a
-                            href="about.htm" th:text="${application.basOrganization.address}"></a></p>
+                        联 系 人：<span  th:text="${application.basOrganization.contacts}"></span><br/>
+                        手机号码：<span  th:text="${application.basOrganization.phone}"></span><br/>
+                        联系电话：<span  th:text="${application.basOrganization.fax}"></span><br/>
+                        电子邮箱：<span  th:text="${application.basOrganization.email}"></span><br/>
+                        公司地址：<span  th:text="${application.basOrganization.address}"></span></p>
                 </div>
 
                 <div class="links">
-                    <a href="/" title="首页" class="active">网站首页</a><br/>
-                    <a href="about.htm" title="关于我们">关于我们</a><br/>
-                    <a href="product.htm" title="产品展示">产品展示</a><br/>
-                    <a href="ly.htm" title="留言中心">留言中心</a><br/>
-                    <a href="contract.htm" title="联系我们">联系我们</a>
+                    <a href="/" title="首页">网站首页</a><br/>
+                    <a href="/index/about" title="关于我们">关于我们</a><br/>
+                    <a href="/index/product" title="产品展示">产品展示</a><br/>
+                    <a href="/index/leave" title="留言中心">留言中心</a><br/>
+                    <a href="/index/news" title="新闻咨询">新闻咨询</a><br/>
+                    <a href="/index/contract" title="联系我们">联系我们</a>
                 </div>
                 <div class="wx-code">
                     <img th:src="@{/qt/images/wx2wm.jpg}" />
@@ -38,7 +35,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <a href="https://www.shqjcd.com">上海前敬传动设备有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;版权所有
+            <a href="http://www.shqjcd.com">上海前敬传动设备有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;版权所有
         </div>
     </footer>
 </div>

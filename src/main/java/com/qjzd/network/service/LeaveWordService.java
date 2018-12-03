@@ -75,4 +75,8 @@ public class LeaveWordService {
     public int delete(Long id){
         return leavewordMapper.deleteByPrimaryKey(id);
     }
+
+    public int insert(Leaveword leaveword){
+        return leavewordMapper.insert(leaveword);
+    }
 }

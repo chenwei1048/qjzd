@@ -1,0 +1,62 @@
+
+.feedback-main {
+  width: 864px;
+  border: solid 1px #e5e5e5;
+  background-color: #fff;
+}
+.feedback-main .head {
+  text-align: right;
+  height: 38px;
+  line-height: 38px;
+  border-bottom: solid 1px #e5e5e5;
+  padding-right: 11px;
+  color: #999999;
+  background-color: #f9f9f9;
+}
+.feedback-main .head a{color: #999999;}
+.feedback-main .main {
+  padding-left: 24px;
+}
+.feedback-main .p1 {
+  color: #333333;
+  line-height: 30px;
+  padding: 42px 24px 48px 0;
+  text-indent: 2rem;
+}
+.feedback-main .input {
+  padding-bottom: 14px;
+}
+.feedback-main .input input[type=text] {
+  width: 260px;
+  height: 46px;
+  border: solid 1px #c3c3c3;
+  padding: 0 12px;
+  margin-right: 13px;
+  margin-bottom: 26px;
+}
+.feedback-main textarea {
+  width: 800px;
+  height: 203px;
+  border: solid 1px #c3c3c3;
+  padding: 20px;
+  margin-bottom: 42px;
+}
+.feedback-main .btn {
+  font-size: 16px;
+  margin-bottom: 134px;
+}
+.feedback-main .btn .btn1 {
+  width: 152px;
+  height: 46px;
+  background-color: #2553a4;
+  border-radius: 5px;
+  margin-right: 30px;
+  color: #fff;
+}
+.feedback-main .btn .btn2 {
+  width: 152px;
+  height: 46px;
+  background-color: #e5e5e5;
+  border-radius: 5px;
+  color: #333;
+}

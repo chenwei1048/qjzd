@@ -98,4 +98,8 @@ public class LeaveWordController {
         return "pages/admin/leaveWord/list";
     }
 
+    @RequestMapping("/content")
+    public String content(){
+        return "pages/admin/leaveWord/content";
+    }
 }

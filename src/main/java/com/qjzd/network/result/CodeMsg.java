@@ -10,6 +10,8 @@ public class CodeMsg {
 	public static CodeMsg NODATA = new CodeMsg(-1, "无数据");
 	public static CodeMsg SERVER_ERROR = new CodeMsg(500100, "服务端异常");
 	public static CodeMsg BIND_ERROR = new CodeMsg(500101, "参数校验异常：%s");
+	public static CodeMsg HANDLE_OFTNE = new CodeMsg(500102, "操作频繁，请稍后重试");
+
 	//登录模块 5002XX
 	public static CodeMsg USERNAME_EMPTY = new CodeMsg(500209, "用户名不能为空");
 	public static CodeMsg SESSION_ERROR = new CodeMsg(500210, "Session不存在或者已经失效");
@@ -33,6 +35,9 @@ public class CodeMsg {
 	//产品模块 5003XX
 	public static CodeMsg TYPENAME_ALREADY_EXISTED = new CodeMsg(500310, "名称已存在");
 	public static CodeMsg PRODUCT_EXISTED_TYPE = new CodeMsg(500310, "存在此类型的产品，无法删除!");
+
+	//留言模块
+	public static CodeMsg MOBILE_OR_CONTACT_EMPTY = new CodeMsg(6000000, "手机号或电话号码不能同时为空");
 
 	//统计模块
 	public static CodeMsg IP_EMPTY = new CodeMsg(500400, "ip为空");

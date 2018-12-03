@@ -2,13 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>关于我们</title>
+    <title>留言中心</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/qt/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/qt/css/product.css}"/>
+    <link rel="stylesheet" th:href="@{/qt/css/leave.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 </head>
+<style>
+    #code_input{
+        border: solid 1px #c3c3c3;
+        width: 100px;
+        height: 40px;
+    }
+    #v_container{
+        position: relative;
+        top: 8px;
+    }
+</style>
 <body>
 <div th:replace="pages/qt/public/header :: navbar"></div>
 <div class="header-img">
@@ -33,37 +45,57 @@
                 <div class="box">
                     <p class="name">上海前敬传动设备有限公司</p>
                     <p>联 系 人：<span th:text="${application.basOrganization.contacts}"></span><br/>
-                        联系电话：<span  href="contact.htm" th:text="${application.basOrganization.phone}"></span><br/>
-                        传真号码：<span href="contact.htm" th:text="${application.basOrganization.fax}"></span><br/>
+                        手机号码：<span  href="contact.htm" th:text="${application.basOrganization.phone}"></span><br/>
+                        联系电话：<span href="contact.htm" th:text="${application.basOrganization.fax}"></span><br/>
                         联系地址：<span href="about.htm" th:text="${application.basOrganization.address}"></span><br/>
                         电子邮箱：<span href="about.htm" th:text="${application.basOrganization.email}"></span>
                     </p>
                 </div>
             </div>
         </div>
-        <div class="main">
-            <div class="local">
+        <div class="feedback-main fr">
+            <div class="head">
                 当前位置：
-                <a href="/">网站首页</a>&gt;
-                <span>产品展示</span>&gt;<span th:text="${product.title}"></span>
+                <a href="/">网站首页</a>&gt;留言中心
             </div>
-            <div th:utext="${product.content}"></div>
-
+            <div class="main">
+                <p class="p1">感谢您的关注，如您有任何建议，请填写并提交以下内容，我们的工作人员将及时与您取得联系，感谢您对我们的信任！ </p>
+                <form  method="post" id="form" name="form" onsubmit="return addLeave()">
+                    <div class="input">
+                        <input type="text" placeholder="公司名称" name="orgName" id="orgName"/>
+                        <input type="text" placeholder="您的姓名" name="contacts" id="contacts"/>
+                        <input type="text" placeholder="联系电话" name="contactNumber" id="contactNumber"/>
+                        <input type="text" placeholder="移动电话" id="mobilePhone" name="mobilePhone"/>
+                        <input type="text" placeholder="E-mail"  id="email" name="email"/>
+                        <input type="text" placeholder="公司地址" id="address" name="address"/>
+                    </div>
+                    <textarea placeholder="留言内容" id="content" name="content"></textarea>
+                    <div class="btn tc">
+                        <span id="v_container" style="width: 200px;height: 50px;"></span>
+                        <input type="text" id="code_input"   value="" placeholder="请输入验证码"/>
+                        <button class="btn1" type="submit" >提交内容</button>
+                        <button class="btn2" type="reset">重置</button>
+                    </div>
+                </form>
+            </div>
         </div>
+
     </div>
 </div>
 <div th:replace="pages/qt/public/footer :: navbar"></div>
 
 </body>
+<script type="text/javascript" th:src="@{/js/gVerify.js}"></script>
+<script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/utils.js}"></script>
 <script th:inline="javascript">
     //<![CDATA[
+    var verifyCode = new GVerify("v_container");
     var G = {
         typeUrl: "/api/types",
-        productUrl: "/api/productList",
-        pagesize:9,
-        count:6,
-        page: 1
     };
+
 
     $(function () {
         $.ajax({
@@ -77,10 +109,51 @@
                 }
             },
         });
-        render(G.page, G.pagesize);
-    })
-    
+    });
 
+    function addLeave() {
+        var res = verifyCode.validate($("#code_input").val());
+        if(!res){
+            messageError("验证码输入不正确！！！");
+            return false;
+        }
+        var data=$('#form').serializeJson();
+        console.log(data);
+        if(data.contactNumber==""||data.mobilePhone==""){
+            messageError("联系电话或手机号不能同时为空！！！");
+            return false;
+        }
+        if(data.content==""){
+            messageError("留言内容不能为空！！！");
+            return false;
+        }
+
+        $.ajax({
+            url: "/api/addLeave",
+            type: "POST",
+            data:data,
+            success:function(data){
+                layer.closeAll();
+                if(data.code == 1){
+                    window.location.reload();
+                }else{
+                    messageError(data.msg);
+                }
+            },
+            error:function(){
+                layer.closeAll();
+            }
+        });
+        return false;
+    }
+    $.fn.serializeJson = function () {
+        var serializeObj = {};
+        $(this.serializeArray()).each(function () {
+            serializeObj[this.name] = this.value;
+        });
+
+        return serializeObj;
+    };
     //]]>
 </script>
 </html>

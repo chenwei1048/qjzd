@@ -1,38 +1,48 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
 
 <head>
     <title>introduce</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/qt/css/common.css}"/>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?8e91303d263d7a280673f9f26f080c33";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
 </head>
 <body>
-<header class="g-header" th:fragment="navbar">
+<header class="g-header" >
     <div id="hyfw_bj">
         <div class="hyfw_zj">
             <div class="hyfw_left">
                 您好！欢迎光临上海前敬传动设备有限公司官网！
             </div>
             <div class="hyfw_right">
-                <a href="sitemap.htm" target="_blank">后台系统</a>　|　
-                <a href="sitemap.htm" target="_blank">网站地图</a>　|　
-                <a href="feedback.html">在线留言</a>　|　全国客户服务热线：10086　
+                <a href="/admin/login" target="_blank">后台系统</a>　|　
+                <a href="/index/contract">网站地图</a>　|　
+                <a href="/index/leave">在线留言</a>　|　全国客户服务热线：<span th:text="${application.basOrganization.fax}"></span>　
             </div>
         </div>
     </div>
     <div id="taitou">
         <div class="taitou_kz">
-            <form name="form1" action="products_s.html" method="get"  style="margin:0; padding:0;">
-                <div id="search_r">
-                    <ul>
-                        <li th:style="'width:108px; background: url('+@{/qt/images/20161017175927_1577335644.jpg}+') no-repeat; height:28px;)'"><input name="infoname" class="input" id="infoname" size="13" placeholder="请输入关键词"  style=" color:#9e968c; margin:0; padding:0;border:0px solid #c00; margin-left:10px; width:97px; margin-top:2px; height:23px; background:none;"/></li>
-                        <li style="width:31px; height:28px; text-align:right;"><input type="image" width="31" height="28" name="imageField" th:src="@{/qt/images/search.jpg}" style="border:none;" alt="搜索"/></li>
-                    </ul>
-                    <div class="clear"></div>
-                </div>
+            <!--<form name="form1" action="products_s.html" method="get"  style="margin:0; padding:0;">-->
+                <!--<div id="search_r">-->
+                    <!--<ul>-->
+                        <!--<li th:style="'width:108px; background: url('+@{/qt/images/20161017175927_1577335644.jpg}+') no-repeat; height:28px;)'"><input name="infoname" class="input" id="infoname" size="13" placeholder="请输入关键词"  style=" color:#9e968c; margin:0; padding:0;border:0px solid #c00; margin-left:10px; width:97px; margin-top:2px; height:23px; background:none;"/></li>-->
+                        <!--<li style="width:31px; height:28px; text-align:right;"><input type="image" width="31" height="28" name="imageField" th:src="@{/qt/images/search.jpg}" style="border:none;" alt="搜索"/></li>-->
+                    <!--</ul>-->
+                    <!--<div class="clear"></div>-->
+                <!--</div>-->
 
-            </form>
-            <div id="taitou_z" style="font-size: 26px;color: #1e50ae"><a href="/"><img th:src="@{/qt/images/logo.gif}" height="80px" src="images/20161017175927_1473388908.jpg" alt="上海前敬传动设备有限公司"/></a>
+            <!--</form>-->
+            <div id="taitou_z" style="font-size: 26px;color: #1e50ae"><a href="/"><img th:src="@{/qt/images/logo.gif}" height="80px"/></a>
                  <span>上海前敬传动设备有限公司</span>
             </div>
             <div id="nav1">
@@ -40,7 +50,7 @@
                     <li class="a_nav1 bian"><a href="/">网站首页</a></li>
                     <li id="aa1"><a href="/index/about">关于我们</a></li>
                     <li id="aa2"><a href="/index/product">产品展示</a></li>
-                    <li id="aa4"><a href="dgweb-95751.html">应用领域</a></li>
+                    <li id="aa4"><a href="/index/leave">留言中心</a></li>
                     <li id="aa5"><a href="/index/news">新闻咨询</a></li>
                     <li id="aa6"><a href="/index/contract">联系我们</a></li>
                 </ul>
@@ -59,4 +69,5 @@
             <!--</div>-->
 </header>
 </body>
+
 </html>

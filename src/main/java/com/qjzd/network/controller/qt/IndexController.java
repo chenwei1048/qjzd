@@ -109,6 +109,12 @@ public class IndexController {
     public String contract(Model model){
         return "pages/qt/contract";
     }
+
+    @MyOperation("留言中心")
+    @RequestMapping("/leave")
+    public String leave(Model model){
+        return "pages/qt/leave";
+    }
 //
 //    @RequestMapping("/header")
 //    public String header(){

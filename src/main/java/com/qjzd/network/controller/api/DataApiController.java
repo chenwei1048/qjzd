@@ -2,14 +2,17 @@ package com.qjzd.network.controller.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.qjzd.network.domain.Leaveword;
 import com.qjzd.network.domain.Newsinformation;
 import com.qjzd.network.domain.Product;
 import com.qjzd.network.domain.ProductType;
 import com.qjzd.network.result.CodeMsg;
 import com.qjzd.network.result.Result;
+import com.qjzd.network.service.LeaveWordService;
 import com.qjzd.network.service.NewsinformationService;
 import com.qjzd.network.service.ProductService;
 import com.qjzd.network.util.CommonUtils;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,10 +36,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class DataApiController {
+
     @Autowired
     private ProductService productService;
+
     @Autowired
     private NewsinformationService newsinformationService;
+
+    @Autowired
+    private LeaveWordService leaveWordService;
+
     @RequestMapping("/productList")
     public Result list(@RequestParam(value = "page",defaultValue = "1",required = false)int page,
                        @RequestParam(value = "pagesize",defaultValue = "10",required = false)int pagesize, Long type, String title){
@@ -58,7 +70,6 @@ public class DataApiController {
     }
 
 
-    @ResponseBody
     @RequestMapping("/newsList")
     public Result selectList(@RequestParam(value = "page",defaultValue = "1",required = false)int page,
                              @RequestParam(value = "pagesize",defaultValue = "10",required = false)int pagesize,
@@ -85,5 +96,26 @@ public class DataApiController {
     public Result types(){
         List<ProductType> list = productService.selectTypes(new JSONObject());
         return Result.success(list);
+    }
+
+    @RequestMapping("/addLeave")
+    public Result addLeave(Leaveword leaveword, HttpSession session){
+
+
+        if(CommonUtils.isNull(leaveword.getContactNumber())||CommonUtils.isNull(leaveword.getMobilePhone())){
+            return Result.error(CodeMsg.MOBILE_OR_CONTACT_EMPTY);
+        }
+        if(CommonUtils.isNull(leaveword.getContent())){
+            return Result.error(CodeMsg.CONTEXT_ERROR);
+        }
+        if(session.getAttribute("addTime")==null){
+            session.setAttribute("addTime",new Date());
+            session.setMaxInactiveInterval(5);
+        }else{
+            return Result.error(CodeMsg.HANDLE_OFTNE);
+        }
+        leaveword.setIsRead("0");
+        leaveword.setCreatetime(new Date());
+        return leaveWordService.insert(leaveword)>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
     }
 }

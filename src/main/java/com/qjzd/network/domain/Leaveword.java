@@ -17,6 +17,8 @@ public class Leaveword {
 
     private String address;
 
+    private String content;
+
     private String isRead;
 
     private Date createtime;
@@ -75,6 +77,14 @@ public class Leaveword {
 
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public String getIsRead() {
