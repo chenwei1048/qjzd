@@ -41,4 +41,8 @@ public class LookCountService {
     public int insert(Lookcount lookcount){
         return lookcountMapper.insert(lookcount);
     }
+
+    public int update(Lookcount lookcount){
+        return lookcountMapper.updateByPrimaryKey(lookcount);
+    }
 }

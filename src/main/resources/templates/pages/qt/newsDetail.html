@@ -11,8 +11,8 @@
 </head>
 <body>
 <div th:replace="pages/qt/public/header :: navbar"></div>
-<div class="header-img">
-</div>
+<!--<div class="header-img">-->
+<!--</div>-->
 <div class="product-page">
     <div class="wrap clearfix">
         <div class="g-aside">
@@ -58,33 +58,8 @@
     </div>
 </div>
 <div th:replace="pages/qt/public/footer :: navbar"></div>
+<script src="../../../static/qt/js/newsdetail.js" th:src="@{/qt/js/newsdetail.js}"></script>
 
 </body>
-<script th:inline="javascript">
-    //<![CDATA[
-    var G = {
-        typeUrl: "/api/types",
-        productUrl: "/api/productList",
-        pagesize:9,
-        count:6,
-        page: 1
-    };
 
-    $(function () {
-        $.ajax({
-            url: G.typeUrl,
-            type: "POST",
-            success: function (result) {
-                if (result.code == 1) {
-                    $.each(result.data, function (index, value) {
-                        $(".type-list").append('<li><a href="/index/product?type='+value.id+'">' + value.name + '</a></li>');
-                    });
-                }
-            },
-        });
-    })
-    
-
-    //]]>
-</script>
 </html>

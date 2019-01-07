@@ -1,0 +1,14 @@
+ipAddressUrl: http://ip.taobao.com/service/getIpInfo.php
+ipConfig: www.shqjcd.com
+uploadSrc: C:/qjcd/upload/
+SECRETID: AKID9hh1aAkhFhXusPxGXvnsz3xhKnY2rpKe
+SECRETKEY: HhP6EE4vNgVB7y2RL9kU2BhDvONoUk2b
+BUCKETNAME: qjcd-1255952474
+REGIONID: ap-shanghai
+
+mail:
+  host: smtp.163.com
+  sendName: cherry_5917@163.com
+  sendPort: 25
+  userName: cherry_5917
+  userPass: cherry917

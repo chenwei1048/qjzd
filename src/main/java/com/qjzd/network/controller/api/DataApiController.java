@@ -1,18 +1,20 @@
 package com.qjzd.network.controller.api;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.qjzd.network.domain.Leaveword;
-import com.qjzd.network.domain.Newsinformation;
-import com.qjzd.network.domain.Product;
-import com.qjzd.network.domain.ProductType;
+import com.qjzd.network.activemq.Producer;
+import com.qjzd.network.activemq.QueueConstant;
+import com.qjzd.network.domain.*;
 import com.qjzd.network.result.CodeMsg;
 import com.qjzd.network.result.Result;
 import com.qjzd.network.service.LeaveWordService;
 import com.qjzd.network.service.NewsinformationService;
 import com.qjzd.network.service.ProductService;
 import com.qjzd.network.util.CommonUtils;
+import com.qjzd.network.util.MailUtil;
 import com.sun.org.apache.bcel.internal.classfile.Code;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,9 @@ public class DataApiController {
 
     @Autowired
     private LeaveWordService leaveWordService;
+
+    @Autowired
+    private Producer producer;
 
     @RequestMapping("/productList")
     public Result list(@RequestParam(value = "page",defaultValue = "1",required = false)int page,
@@ -100,8 +105,6 @@ public class DataApiController {
 
     @RequestMapping("/addLeave")
     public Result addLeave(Leaveword leaveword, HttpSession session){
-
-
         if(CommonUtils.isNull(leaveword.getContactNumber())||CommonUtils.isNull(leaveword.getMobilePhone())){
             return Result.error(CodeMsg.MOBILE_OR_CONTACT_EMPTY);
         }
@@ -116,6 +119,12 @@ public class DataApiController {
         }
         leaveword.setIsRead("0");
         leaveword.setCreatetime(new Date());
-        return leaveWordService.insert(leaveword)>0?Result.success(null):Result.error(CodeMsg.SERVER_ERROR);
+        leaveWordService.insert(leaveword);
+        BasOrganization basOrganization = (BasOrganization)session.getServletContext().getAttribute("basOrganization");
+        if(basOrganization.getEmail()!=null){
+            MailUtil.sendMail(basOrganization.getEmail(),"您有新的客户留言，请进后台查看！","您有新的客户留言，请进后台查看！<br><a href=\"www.shqjcd.com\">www.shqjcd.com</a>");
+        }
+//        producer.sendData(new ActiveMQQueue(QueueConstant.LEAVE_MAIL), JSON.toJSONString(leaveword));
+        return Result.success(null);
     }
 }

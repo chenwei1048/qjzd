@@ -13,8 +13,8 @@
 <style>
     #code_input{
         border: solid 1px #c3c3c3;
-        width: 100px;
-        height: 40px;
+        width: 10%;
+        height: 46px;
     }
     #v_container{
         position: relative;
@@ -23,8 +23,8 @@
 </style>
 <body>
 <div th:replace="pages/qt/public/header :: navbar"></div>
-<div class="header-img">
-</div>
+<!--<div class="header-img">-->
+<!--</div>-->
 <div class="product-page">
     <div class="wrap clearfix">
         <div class="g-aside">
@@ -53,12 +53,13 @@
                 </div>
             </div>
         </div>
-        <div class="feedback-main fr">
-            <div class="head">
-                当前位置：
-                <a href="/">网站首页</a>&gt;留言中心
-            </div>
             <div class="main">
+                <div class="local">
+                    当前位置：
+                    <a href="/">网站首页</a>&gt;
+                    <a href="/">网站首页</a>&gt;留言中心
+                </div>
+                <div class="feedback-main fr">
                 <p class="p1">感谢您的关注，如您有任何建议，请填写并提交以下内容，我们的工作人员将及时与您取得联系，感谢您对我们的信任！ </p>
                 <form  method="post" id="form" name="form" onsubmit="return addLeave()">
                     <div class="input">
@@ -71,14 +72,15 @@
                     </div>
                     <textarea placeholder="留言内容" id="content" name="content"></textarea>
                     <div class="btn tc">
-                        <span id="v_container" style="width: 200px;height: 50px;"></span>
+                        <span id="v_container" style="width: 10%;height: 30px;"></span>
                         <input type="text" id="code_input"   value="" placeholder="请输入验证码"/>
                         <button class="btn1" type="submit" >提交内容</button>
                         <button class="btn2" type="reset">重置</button>
                     </div>
                 </form>
+                </div>
             </div>
-        </div>
+        <!--</div>-->
 
     </div>
 </div>
@@ -89,71 +91,5 @@
 <script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.js}"></script>
 <script type="text/javascript" th:src="@{/js/utils.js}"></script>
-<script th:inline="javascript">
-    //<![CDATA[
-    var verifyCode = new GVerify("v_container");
-    var G = {
-        typeUrl: "/api/types",
-    };
-
-
-    $(function () {
-        $.ajax({
-            url: G.typeUrl,
-            type: "POST",
-            success: function (result) {
-                if (result.code == 1) {
-                    $.each(result.data, function (index, value) {
-                        $(".type-list").append('<li><a href="/index/product?type='+value.id+'">' + value.name + '</a></li>');
-                    });
-                }
-            },
-        });
-    });
-
-    function addLeave() {
-        var res = verifyCode.validate($("#code_input").val());
-        if(!res){
-            messageError("验证码输入不正确！！！");
-            return false;
-        }
-        var data=$('#form').serializeJson();
-        console.log(data);
-        if(data.contactNumber==""||data.mobilePhone==""){
-            messageError("联系电话或手机号不能同时为空！！！");
-            return false;
-        }
-        if(data.content==""){
-            messageError("留言内容不能为空！！！");
-            return false;
-        }
-
-        $.ajax({
-            url: "/api/addLeave",
-            type: "POST",
-            data:data,
-            success:function(data){
-                layer.closeAll();
-                if(data.code == 1){
-                    window.location.reload();
-                }else{
-                    messageError(data.msg);
-                }
-            },
-            error:function(){
-                layer.closeAll();
-            }
-        });
-        return false;
-    }
-    $.fn.serializeJson = function () {
-        var serializeObj = {};
-        $(this.serializeArray()).each(function () {
-            serializeObj[this.name] = this.value;
-        });
-
-        return serializeObj;
-    };
-    //]]>
-</script>
+<script src="../../../static/qt/js/leave.js" th:src="@{/qt/js/leave.js}"></script>
 </html>

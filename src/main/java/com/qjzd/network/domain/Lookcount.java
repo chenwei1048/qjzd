@@ -1,8 +1,9 @@
 package com.qjzd.network.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lookcount {
+public class Lookcount implements Serializable{
     private Long id;
 
     private String ip;

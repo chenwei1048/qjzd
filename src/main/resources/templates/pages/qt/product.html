@@ -7,19 +7,21 @@
     <link rel="stylesheet" th:href="@{/qt/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/qt/css/product.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <!--<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>-->
+    <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <link rel="stylesheet" th:href="@{/qt/magnify/dist/jquery.magnify.css}" href="../../../static/qt/magnify/dist/jquery.magnify.css" />
     <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/libs/layui/layui.js}"></script>
-<style>
-    .layui-laypage-limits{
-        display:none !important;
-    }
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="../../../static/qt/magnify/dist/style.css" th:href="@{/qt/magnify/dist/style.css}" />
 
-</style>
+
 </head>
 <body>
 <div th:replace="pages/qt/public/header :: navbar"></div>
-<div class="header-img">
-</div>
+<!--<div class="header-img">-->
+<!--</div>-->
 <div class="product-page">
     <div class="wrap clearfix">
         <div class="g-aside">
@@ -55,6 +57,7 @@
                 <span>产品展示</span>&gt;<span  th:text="${typeName}"></span>
             </div>
             <ul class="product-list">
+
             </ul>
             <div id="pagination" class="layui-box"></div>
             <input type="hidden" id="type" th:value="${type}"/>
@@ -62,93 +65,10 @@
     </div>
 </div>
 <div th:replace="pages/qt/public/footer :: navbar"></div>
-
 </body>
-<script th:inline="javascript">
-    //<![CDATA[
-    var G = {
-        typeUrl: "/api/types",
-        productUrl: "/api/productList",
-        detailUrl:"/index/productDetail",
-        pagesize:9,
-        count:0,
-        page: 1
-    };
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../../../static/qt/magnify/dist/jquery.magnify.js" th:src="@{/qt/magnify/dist/jquery.magnify.js}"></script>
+<script src="../../../static/qt/js/product.js" th:src="@{/qt/js/product.js}"></script>
 
-    $(function () {
-        $.ajax({
-            url: G.typeUrl,
-            type: "POST",
-            success: function (result) {
-                if (result.code == 1) {
-                    $.each(result.data, function (index, value) {
-                        $(".type-list").append('<li><a href="/index/product?type='+value.id+'">' + value.name + '</a></li>');
-                    });
-                }
-            },
-        });
-        render(G.page, G.pagesize);
-    });
-    
-    function render(page) {
-        let type = $("#type").val();
-        $.ajax({
-            url: G.productUrl,
-            type: "POST",
-            data:{
-                page:page,
-                pagesize:G.pagesize,
-                type:type
-            },
-            success: function (result) {
-                if (result.code == 1 && result.data.list.length > 0) {
-                    G.page = page;
-                    $(".product-list").html("");
-                    $.each(result.data.list, function (index, value) {
-                        G.count = result.data.total;
-                        $(".product-list").append(html(value));
-                    });
-                }
-                layui.use(['laypage', 'form'], function () {
-                    var laypage = layui.laypage;
-                    var form = layui.form;
-                    //执行一个laypage实例
-                    laypage.render({
-                        elem: 'pagination', //分页container ID，不用加 # 号
-                        theme:'#2553A4',
-                        limit: G.pagesize, //页面显示记录条数
-                        count: G.count, //数据总数，从服务端得到
-                        groups: 5,
-                        curr: page,
-                        layout: ['prev', 'page', 'next', 'limit', 'count'],
-                        prev: '<i class="layui-icon layui-icon-left"></i>',
-                        next: '<i class="layui-icon layui-icon-right"></i>',
-                        jump: function (obj, first) {
-                            //首次不执行
-                            if (first) {
-                                //do something
-                                return;
-                            }
-                            render(obj.curr, obj.limit);
-                        }
 
-                    });
-
-                });
-
-            },
-        });
-    }
-
-    function html(value) {
-        var html = '<li>' +
-            '<a href="'+G.detailUrl+'?id='+value.id+'" title="'+value.title+'" class="aitem">' +
-            '<img src="'+value.picture+'" alt="'+value.title+'" width="238"/></a>' +
-            '<p class="tc">' +
-            '<a href="'+G.detailUrl+'?id='+value.id+'" title="'+value.title+'">'+value.title+'</a>' +
-            '</p></li>';
-        return html;
-    }
-    //]]>
-</script>
 </html>

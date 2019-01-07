@@ -246,8 +246,9 @@ public class Uploader {
 	 */
 	private String getPhysicalPath(String path) {
 		String realPath = this.request.getSession().getServletContext()
-				.getRealPath("static"+File.separator+"images");
-		return new File(realPath).getParent() +"/" +path;
+				.getRealPath("static");
+//				.getRealPath("static"+File.separator+"images");
+		return new File(realPath)+"/" +path;
 	}
 
 	public void setSavePath(String savePath) {

@@ -1,9 +1,6 @@
 package com.qjzd.network.controller.api;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
 import com.qjzd.network.result.Result;
-import org.springframework.beans.factory.annotation.Value;
+import com.qjzd.network.util.CosUtil;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,64 +16,15 @@ import java.util.Date;
 @RequestMapping("/commodity")
 public class CommodityController {
 
-    @Value("${IPCONFIG}")
-    private String ip ;
-
-    @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
-    @ResponseBody
-    public void uploadImg(@RequestParam(value = "myFileName", required = false) MultipartFile cardFile,
-                          HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("*************接收上传文件*************");
-        String path= Class.class.getClass().getResource("/").getPath();
-        path= path+"static/uploadfiles";
-        try {
-            if (cardFile != null) {
-                String oldFileName = cardFile.getOriginalFilename();// 获取文件名称
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-                String newFileName = sdf.format(new Date()) + "_" + oldFileName;
-                String realPath = path;
-                File targetFile = new File(realPath, newFileName);
-                // 检测是否存在目录
-                if (!targetFile.getParentFile().exists()) {
-                    targetFile.getParentFile().mkdirs();
-                }
-                // cardFile.transferTo(targetFile);
-                BufferedOutputStream out1 = new BufferedOutputStream(new FileOutputStream(targetFile));
-                out1.write(cardFile.getBytes());
-                out1.flush();
-                out1.close();
-                if(targetFile.exists()){
-                    System.out.println("文件已经存在");
-                }
-                JSONObject json = new JSONObject();
-                JSONArray arr = new JSONArray();
-                String imgUrl = "http://" + ip +"/uploadfiles/" + newFileName;
-                arr.add(imgUrl);
-                json.put("errno", 0);
-                json.put("data", arr);
-                response.setContentType("text/text;charset=utf-8");
-                PrintWriter out = response.getWriter();
-                out.print(json.toString());
-                out.flush();
-                out.close();
-            } else {
-                System.out.println("************上传文件为空***************");
-            }
-            System.out.println("*************接收上传文件结束*************");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     public Result upload(@RequestParam(value = "oneFile", required = false) MultipartFile cardFile,
                          HttpServletRequest request, HttpServletResponse response) {
         System.out.println("*************接收上传文件*************");
-        String path= Class.class.getClass().getResource("/").getPath();
-        path= path+"static/uploadfiles";
+        String path= request.getSession().getServletContext()
+                .getRealPath("static"+File.separator+"upload");
+//        path= path+"static/uploadfiles";
         String imgUrl = "";
         try {
             if (cardFile != null) {
@@ -90,7 +37,6 @@ public class CommodityController {
                 if (!targetFile.getParentFile().exists()) {
                     targetFile.getParentFile().mkdirs();
                 }
-                // cardFile.transferTo(targetFile);
                 BufferedOutputStream out1 = new BufferedOutputStream(new FileOutputStream(targetFile));
                 out1.write(cardFile.getBytes());
                 out1.flush();
@@ -98,7 +44,8 @@ public class CommodityController {
                 if(targetFile.exists()){
                     System.out.println("文件已经存在");
                 }
-                imgUrl = "http://" + ip +"/uploadfiles/" + newFileName;
+//                imgUrl = "http://" + ip +"/uploadfiles/" + newFileName;
+                imgUrl = CosUtil.uploadFile(realPath+"/"+newFileName,newFileName);
             } else {
                 System.out.println("************上传文件为空***************");
             }

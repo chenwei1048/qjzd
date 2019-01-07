@@ -19,6 +19,12 @@ import java.util.Properties;
  */
 public class MailUtil {
 
+    public static String host;
+    public static String sendName;
+    public static String sendPort;
+    public static String userName;
+    public static String userPass;
+
 
     public static boolean send(String to, String subject, String content, String smtp, String host,
                                String sendName, String sendPort, String userName, String userPwd) {
@@ -79,9 +85,9 @@ public class MailUtil {
         return false;
     }
 
-    public static void heartMail(String email,String hosname) {
+    public static void sendMail(String email,String title,String content) {
         // 您要发送给谁，标题，内容
-        MailUtil.send(email, hosname+"已下线，请及时处理哦！", hosname+"已下线，请及时处理哦！", "smtp", "smtp.163.com", "cherry_5917@163.com", "25", "cherry_5917", "cherry917");
+        MailUtil.send(email, title, content, "smtp", host, sendName, sendPort, userName, userPass);
     }
 
 

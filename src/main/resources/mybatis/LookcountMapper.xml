@@ -99,7 +99,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.qjzd.network.domain.Lookcount" >
+  <insert id="insert" parameterType="com.qjzd.network.domain.Lookcount" useGeneratedKeys="true" keyProperty="id" >
     insert into lookcount (id, ip, city, 
       url, createtime)
     values (#{id,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 

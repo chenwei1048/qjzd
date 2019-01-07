@@ -54,15 +54,7 @@ body {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
-.banner-wrap {
-  width: 1920px;
-  margin-left: -960px;
-  text-align: center;
-  position: relative;
-  left: 50%;
-  clear: both;
-  overflow: hidden;
-}
+
 .slide-wrap {
   width: 1200px;
   margin: 20px auto;
@@ -82,15 +74,23 @@ body {
   height: 520px;
   background: url(../images/sybg1.png) no-repeat center center;
 }
+
 .about-wrap .wrap {
   overflow: hidden;
   padding-top: 100px;
+  text-align: center;
+  margin:0 auto;
+  padding-left: 5%;
+  padding-right: 5%;
 }
+
+
+
 .about-wrap .about-content {
   float: left;
   color: #fff;
   height: 328px;
-  width: 633px;
+  width: 40%;
   background: rgba(62, 149, 190, 0.5);
   padding: 30px;
 }
@@ -156,12 +156,14 @@ body {
   background-color: #666;
 }
 .product-wrap .btn-group {
-  overflow: hidden;
+  /*overflow: hidden;*/
   margin: 40px 0 30px 0;
-  padding-left: 150px;
+  text-align:center;
+  /*padding-left: 150px;*/
 }
 .product-wrap .btn-group .btn {
-  float: left;
+  /*float: left;*/
+  display:inline-block;
   margin-left: 20px;
   padding: 10px 25px;
   background: #fff;
@@ -176,13 +178,16 @@ body {
   color: #fff;
 }
 .product-wrap .product-list {
+  width: 100%;
   overflow: hidden;
-  margin-left: -22px;
+  margin: 3%  auto;
+
 }
 .product-wrap .product-list li {
+  display:inline-block;
   float: left;
   width: 385px;
-  margin-left: 22px;
+  margin-left: 5%;
   text-align: center;
   margin-bottom: 8px;
 }
@@ -207,3 +212,4 @@ body {
   text-align: center;
   font-size: 16px;
 }
+

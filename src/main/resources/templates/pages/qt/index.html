@@ -7,27 +7,26 @@
     <link rel="stylesheet" th:href="@{/qt/css/common.css}"/>
     <link rel="stylesheet" th:href="@{/qt/css/index.css}"/>
     <link rel="stylesheet" th:href="@{/js/libs/layui/css/layui.css}"/>
-    <link rel="stylesheet" th:href="@{/qt/css/jquery.bxslider.min.css}"/>
+    <!--<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>-->
+    <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <link rel="stylesheet" th:href="@{/qt/magnify/dist/jquery.magnify.css}" href="../../../static/qt/magnify/dist/jquery.magnify.css" />
     <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/qt/js/jquery.bxslider.min.js}"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="../../../static/qt/magnify/dist/style.css" th:href="@{/qt/magnify/dist/style.css}" />
 
 </head>
 <body>
 <div th:replace="pages/qt/public/header :: navbar"></div>
+<!--<div class="header-img">-->
+<!--</div>-->
 
-<div class="banner-wrap">
-    <ul class="top-banner">
-        <li><img th:src="@{/qt/images/sh_banner1.jpg}"/></li>
-        <!--<li><img th:src="@{/qt/images/sh_banner1.jpg}"/></li>-->
-        <!--<li><img th:src="@{/qt/images/sh_banner1.jpg}"/></li>-->
-    </ul>
-</div>
 <div class="about-wrap">
     <div class="wrap">
-        <img th:src="@{/qt/images/sh_gywm.jpg}" class="fl" height="328px"/>
+        <img th:src="@{/qt/images/sh_gywm.jpg}" src="http://qjcd-1255644238.cos.ap-shanghai.myqcloud.com/zb2.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID9BHpF8WIjIpXHx9ZHuMdky2vdAZnn4oN%26q-sign-time%3D1544684718%3B1544687695%26q-key-time%3D1544684718%3B1544687695%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Daf7285f402127a60cfede897bbb51f6d068462bb" class="fl" height="328px"/>
         <div class="about-content">
             <h3>关于我们</h3>
-            <p id="gywm"></p>
+            <p id="gywm" th:utext="${application.gywm.contentNoHtml}"></p>
             <a href="/index/about">查看更多</a>
         </div>
     </div>
@@ -47,57 +46,9 @@
     </div>
 </div>
 <div th:replace="pages/qt/public/footer :: navbar"></div>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../../../static/qt/magnify/dist/jquery.magnify.js" th:src="@{/qt/magnify/dist/jquery.magnify.js}"></script>
+<script src="../../../static/qt/js/index.js" th:src="@{/qt/js/index.js}"></script>
 
-<script th:inline="javascript">
-    //全局数据
-    var G = {
-        dataListUrl: "/api/productList", // 获取数据接口
-        page: 1,
-        pagesize: 9,
-        count: 0
-    };
-    var gywm = [[${application.gywm.contentNoHtml}]];
-    $(function () {
-        $("#gywm").text(gywm);
-        $.ajax({
-            url: G.dataListUrl,
-            type: "POST",
-            data:{
-                page: G.page,
-                pagesize: G.pagesize,
-            },
-            success:function(result){
-                if(result.code == 1){
-                    $.each(result.data.list, function (index, value) {
-                        $(".product-list").append(html(value));
-                    });
-                }
-            },
-            error:function(){
-            }
-        });
-    });
-    
-    function html(value) {
-        let html = '<li>' +
-            '                <a href="/index/productDetail?id='+value.id+'"  class="aitem">' +
-            '                    <img src="'+value.picture+'" width="270px" height="270px" border="0" title="'+value.title+'"/>' +
-            '                </a>' +
-            '                <span>' +
-            '                <a href="/index/productDetail?id='+value.id+'">' +
-            value.title +
-            '                </a>' +
-            '                </span>' +
-            '            </li>';
-        return html;
-    }
-    
-//    $('.top-banner').bxSlider({
-//        mode: "fade",
-//        auto: true,
-//        controls: false
-//    });
-
-</script>
 </body>
 </html>

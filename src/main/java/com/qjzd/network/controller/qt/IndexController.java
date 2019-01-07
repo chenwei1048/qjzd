@@ -2,6 +2,7 @@ package com.qjzd.network.controller.qt;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qjzd.network.annotation.MyOperation;
+import com.qjzd.network.config.ParamConfig;
 import com.qjzd.network.domain.Newsinformation;
 import com.qjzd.network.domain.Product;
 import com.qjzd.network.domain.ProductType;
@@ -27,10 +28,15 @@ import java.util.List;
 @RequestMapping("/index")
 @Controller
 public class IndexController {
+
+
+
     @Autowired
     private ProductService productService;
+
     @Autowired
     private NewsinformationService newsinformationService;
+
     @MyOperation("前台主页")
     @RequestMapping
     public String index(Model model){
@@ -115,17 +121,5 @@ public class IndexController {
     public String leave(Model model){
         return "pages/qt/leave";
     }
-//
-//    @RequestMapping("/header")
-//    public String header(){
-//        return "pages/qt/public/header";
-//    }
-//
-//    @RequestMapping("/footer")
-//    public String footer(){
-//        return "pages/qt/public/footer";
-//    }
-
-
 
 }

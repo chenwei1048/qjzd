@@ -4,10 +4,12 @@
 <head>
     <title>introduce</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/qt/css/jquery.bxslider.min.css}"/>
+    <script type="text/javascript" th:src="@{/qt/js/jquery.bxslider.min.js}"></script>
 
     <script>
         var _hmt = _hmt || [];
-        (function() {
+        (function () {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?8e91303d263d7a280673f9f26f080c33";
             var s = document.getElementsByTagName("script")[0];
@@ -17,7 +19,7 @@
 
 </head>
 <body>
-<header class="g-header" >
+<header class="g-header">
     <div id="hyfw_bj">
         <div class="hyfw_zj">
             <div class="hyfw_left">
@@ -31,43 +33,32 @@
         </div>
     </div>
     <div id="taitou">
-        <div class="taitou_kz">
-            <!--<form name="form1" action="products_s.html" method="get"  style="margin:0; padding:0;">-->
-                <!--<div id="search_r">-->
-                    <!--<ul>-->
-                        <!--<li th:style="'width:108px; background: url('+@{/qt/images/20161017175927_1577335644.jpg}+') no-repeat; height:28px;)'"><input name="infoname" class="input" id="infoname" size="13" placeholder="请输入关键词"  style=" color:#9e968c; margin:0; padding:0;border:0px solid #c00; margin-left:10px; width:97px; margin-top:2px; height:23px; background:none;"/></li>-->
-                        <!--<li style="width:31px; height:28px; text-align:right;"><input type="image" width="31" height="28" name="imageField" th:src="@{/qt/images/search.jpg}" style="border:none;" alt="搜索"/></li>-->
-                    <!--</ul>-->
-                    <!--<div class="clear"></div>-->
-                <!--</div>-->
-
-            <!--</form>-->
-            <div id="taitou_z" style="font-size: 26px;color: #1e50ae"><a href="/"><img th:src="@{/qt/images/logo.gif}" height="80px"/></a>
-                 <span>上海前敬传动设备有限公司</span>
-            </div>
-            <div id="nav1">
-                <ul>
-                    <li class="a_nav1 bian"><a href="/">网站首页</a></li>
-                    <li id="aa1"><a href="/index/about">关于我们</a></li>
-                    <li id="aa2"><a href="/index/product">产品展示</a></li>
-                    <li id="aa4"><a href="/index/leave">留言中心</a></li>
-                    <li id="aa5"><a href="/index/news">新闻咨询</a></li>
-                    <li id="aa6"><a href="/index/contract">联系我们</a></li>
-                </ul>
-            </div>
+        <div id="taitou_z"><a href="/"><img th:src="@{/qt/images/logo.gif}" height="80px"/></a>
+            <span>上海前敬传动设备有限公司</span>
+        </div>
+        <div id="nav1">
+            <ul>
+                <li id="a1"><a href="/">网站首页</a></li>
+                <li id="a2"><a href="/index/about">关于我们</a></li>
+                <li id="a3"><a href="/index/product">产品展示</a></li>
+                <li id="a4"><a href="/index/leave">留言中心</a></li>
+                <li id="a5"><a href="/index/news">新闻咨询</a></li>
+                <li id="a6"><a href="/index/contract">联系我们</a></li>
+            </ul>
         </div>
     </div>
-            <!--<div class="wrap">-->
-            <!--<h1><a  title="上海前景传动设备有限公司">上海前敬传动设备有限公司</a></h1>-->
-            <!--<ul>-->
-            <!--<li><a href="/" title="首页" class="active">网站首页</a></li>-->
-            <!--<li><a href="about.htm" title="关于我们">关于我们</a></li>-->
-            <!--<li><a href="product.htm" title="产品展示">产品展示</a></li>-->
-            <!--<li><a href="ly.htm" title="留言中心">留言中心</a></li>-->
-            <!--<li><a href="contract.htm" title="联系我们">联系我们</a></li>-->
-            <!--</ul>-->
-            <!--</div>-->
+
 </header>
+<div class="banner-wrap">
+    <ul class="top-banner">
+        <li><img th:src="@{/qt/images/sh_banner1.jpg}"/></li>
+        <li><img th:src="@{/qt/images/sh_banner1.jpg}"/></li>
+        <li><img th:src="@{/qt/images/sh_banner1.jpg}"/></li>
+    </ul>
+</div>
+
+<script src="../../../../static/qt/js/header.js" th:src="@{/qt/js/header.js}"></script>
+
 </body>
 
 </html>
