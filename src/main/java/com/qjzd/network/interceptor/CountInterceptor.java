@@ -8,6 +8,7 @@ import com.qjzd.network.domain.Lookcount;
 import com.qjzd.network.domain.Product;
 import com.qjzd.network.service.LookCountService;
 import com.qjzd.network.util.IpAdrressUtil;
+import com.qjzd.network.util.ThreadPoolUtil;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,8 +46,9 @@ public class CountInterceptor implements HandlerInterceptor {
             lookcount.setUrl(httpServletRequest.getServerName()+"/"+h.getMethodAnnotation(MyOperation.class).value());
             lookcount.setCreatetime(new Date());
             logger.info("ip "+lookcount.getIp()+"\t"+"的用户正在浏览:"+lookcount.getUrl()+"\t");
-//            lookCountService.insert(lookcount);
-            producer.sendData(new ActiveMQQueue(QueueConstant.IP_ADDRESS_QUEUE), JSON.toJSONString(lookcount));
+//            producer.sendData(new ActiveMQQueue(QueueConstant.IP_ADDRESS_QUEUE), JSON.toJSONString(lookcount));
+            ThreadPoolUtil.getPool().execute(new SaveSystemLogThread(lookcount, lookCountService));
+
         }
         return true;
     }
@@ -59,5 +61,22 @@ public class CountInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
 
+    }
+
+
+    private static class SaveSystemLogThread implements Runnable {
+
+        private Lookcount lookcount;
+        private LookCountService lookCountService;
+
+        public SaveSystemLogThread(Lookcount lookcount, LookCountService lookCountService) {
+            this.lookcount = lookcount;
+            this.lookCountService = lookCountService;
+        }
+
+        @Override
+        public void run() {
+            lookCountService.insert(lookcount);
+        }
     }
 }

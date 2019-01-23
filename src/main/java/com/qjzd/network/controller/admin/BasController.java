@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 /**
  * @Author:
@@ -111,13 +113,14 @@ public class BasController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Result update(long type,String content){
+    public Result update(long type, String content, HttpSession httpSession){
         if(CommonUtils.isNull(type)){
             return Result.error(CodeMsg.TYPE_ERROR);
         }
         if(CommonUtils.isNull(content)){
             return Result.error(CodeMsg.CONTEXT_ERROR);
         }
+
         JSONObject param = new JSONObject();
         param.put("type", type);
         BasInformation information = basInformationService.selectByExample(param);
@@ -140,6 +143,11 @@ public class BasController {
             res = basInformationService.update(information);
         }
         if(res>0){
+            if(type == Constant.GYWM.getCode()){
+                BasInformation gywm = (BasInformation) httpSession.getServletContext().getAttribute("gywm");
+                gywm.setContent(information.getContent());
+                gywm.setContentNoHtml(information.getContentNoHtml());
+            }
             return Result.success(null);
         }else {
             return Result.error(CodeMsg.SERVER_ERROR);
