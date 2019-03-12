@@ -17,35 +17,70 @@
     <link rel="stylesheet" href="../../../static/qt/magnify/dist/style.css" th:href="@{/qt/magnify/dist/style.css}" />
 
 </head>
-<body>
+<body >
 <div th:replace="pages/qt/public/header :: navbar"></div>
-<!--<div class="header-img">-->
-<!--</div>-->
+<div id="cpzs" >
+    <a href="products.html">产品展示</a>
+    <!--<br/>-->
+    <!--<img src="https://qjcd-1255644238cpzs_d.cos.ap-shanghai.myqcloud.com/cpzs1.jpg" />-->
+</div>
 
-<div class="about-wrap">
-    <div class="wrap">
-        <img th:src="@{/qt/images/sh_gywm.jpg}" src="http://qjcd-1255644238.cos.ap-shanghai.myqcloud.com/zb2.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID9BHpF8WIjIpXHx9ZHuMdky2vdAZnn4oN%26q-sign-time%3D1544684718%3B1544687695%26q-key-time%3D1544684718%3B1544687695%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Daf7285f402127a60cfede897bbb51f6d068462bb" class="fl" height="328px"/>
-        <div class="about-content">
-            <h3>关于我们</h3>
-            <p id="gywm" th:utext="${application.gywm.contentNoHtml}"></p>
-            <a href="/index/about">查看更多</a>
+<div id="cpzs_kz">
+    <div id="cpzs_zuo">
+        <div id="cpzs_bt">
+            <div class="cpzs_btwz">
+                产品分类
+            </div>
+        </div>
+        <div id="cpzs_fl">
+            <div class="cpzs_d">
+                <table width="96%" border="0" cellpadding="0" cellspacing="0">
+                    <tbody id="type-list">
+
+                    </tbody>
+
+                    ﻿
+                </table>
+            </div>
         </div>
     </div>
-</div>
-<div class="product-wrap">
-    <div class="wrap">
-        <h2>产品展示</h2>
-        <p class="tip">Products</p>
-        <ul class="btn-group">
-            <li class="btn" th:each="type,stat:${types}">
-                <a th:href="@{'/index/product?type='+${type.id}}" th:title="${type.name}" th:text="${type.name}"></a>
-            </li>
-        </ul>
-        <ul class="product-list">
-        </ul>
-        <a href="/index/product" class="more">查看更多</a>
+    <div id="chanp" style="margin-top:2px;">
+        <div id="chanp_d" class="cp">
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tbody id="product-list">
+                </tbody>
+            </table>
+        </div>
     </div>
+    <div class="clear"></div>
 </div>
+    <!--<div class="header-img">-->
+<!--</div>-->
+
+<!--<div class="about-wrap">-->
+    <!--<div class="wrap">-->
+        <!--<img th:src="@{/qt/images/sh_gywm.jpg}" src="http://qjcd-1255644238.cos.ap-shanghai.myqcloud.com/zb2.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID9BHpF8WIjIpXHx9ZHuMdky2vdAZnn4oN%26q-sign-time%3D1544684718%3B1544687695%26q-key-time%3D1544684718%3B1544687695%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Daf7285f402127a60cfede897bbb51f6d068462bb" class="fl" height="328px"/>-->
+        <!--<div class="about-content">-->
+            <!--<h3>关于我们</h3>-->
+            <!--<p id="gywm" th:utext="${application.gywm.contentNoHtml}"></p>-->
+            <!--<a href="/index/about">查看更多</a>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<div class="product-wrap">-->
+    <!--<div class="wrap">-->
+        <!--<h2>产品展示</h2>-->
+        <!--<p class="tip">Products</p>-->
+        <!--<ul class="btn-group">-->
+            <!--<li class="btn" th:each="type,stat:${types}">-->
+                <!--<a th:href="@{'/index/product?type='+${type.id}}" th:title="${type.name}" th:text="${type.name}"></a>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <!--<ul class="product-list">-->
+        <!--</ul>-->
+        <!--<a href="/index/product" class="more">查看更多</a>-->
+    <!--</div>-->
+<!--</div>-->
 <div th:replace="pages/qt/public/footer :: navbar"></div>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="../../../static/qt/magnify/dist/jquery.magnify.js" th:src="@{/qt/magnify/dist/jquery.magnify.js}"></script>
