@@ -5,7 +5,7 @@
   <groupId>com.qjzd.network</groupId>
   <artifactId>qjzd</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -153,6 +153,11 @@
 		  <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
 		  <!--<scope>provided</scope>-->
 	  <!--</dependency>-->
+	  <dependency>
+		  <groupId>com.qiniu</groupId>
+		  <artifactId>qiniu-java-sdk</artifactId>
+		  <version>[7.2.0, 7.2.99]</version>
+	  </dependency>
   </dependencies>
 
 	<build>

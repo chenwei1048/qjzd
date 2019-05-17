@@ -124,7 +124,6 @@
                     isRead: status
                 },
                 success:function(data){
-
                     layer.closeAll();
                     if(data.code == 1){
                         cks.each(function() {
@@ -226,7 +225,7 @@
         return html;
     }
 
-    function render(page, pagesize) {
+    function render(    page, pagesize) {
         if(page==null||page=='undefined'){
             page=G.page;
             pagesize=G.pagesize;

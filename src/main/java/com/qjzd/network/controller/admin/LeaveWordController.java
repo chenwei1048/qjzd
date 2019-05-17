@@ -70,7 +70,7 @@ public class LeaveWordController {
         if(ids==null ||ids.length<1){
             return Result.error(CodeMsg.BIND_ERROR);
         }
-        Leaveword leaveword = null;
+        Leaveword leaveword;
         for(Long id:ids){
             leaveword= new Leaveword();
             leaveword.setId(id);
